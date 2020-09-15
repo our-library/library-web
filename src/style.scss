@@ -1,0 +1,11 @@
+@import "scss/base-scss/base";
+
+
+// ---------------------
+//     pages
+// ---------------------
+
+@import "./src/app/app";
+@import "component/home/nav/nav";
+@import "./src/component/info/info";
+@import "./src/component/register/register";

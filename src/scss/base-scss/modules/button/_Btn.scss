@@ -1,0 +1,94 @@
+%Btn {
+  display: inline-block;
+  font-size: $global-font-size;
+  font-weight: 500;
+  margin: 0 4px;
+  border-radius: 8px;
+  text-align: center;
+  transition: 0.2s background-color;
+}
+
+.Btn-primary {
+  @extend %Btn;
+  background-color: $global-primary1-color;
+
+  &:hover {
+    background-color: darken($global-primary1-color, 7%);
+  }
+
+  &:active {
+    background-color: darken($global-primary1-color, 12%);
+  }
+}
+
+.Btn-default {
+  @extend %Btn;
+  font-weight: 900;
+  background-color: $global-primary1-light-color;
+  color: $global-primary1-color;
+
+  &:hover {
+    background-color: darken($global-primary1-light-color, 7%);
+  }
+
+  &:active {
+    background-color: darken($global-primary1-light-color, 12%);
+  }
+
+  &:disabled {
+    color: $global-subtext-color;
+  }
+}
+
+.Btn-blue {
+  @extend %Btn;
+  background-color: $global-primary2-light-color;
+  color: $global-primary2-color;
+
+  &:hover {
+    background-color: darken($global-primary2-light-color, 7%);
+  }
+
+  &:active {
+    background-color: darken($global-primary2-light-color, 12%);
+  }
+}
+
+// ---------------------------
+// button size
+// ---------------------------
+.Btn-lg {
+  max-width: 35 * $unit;
+  padding: 18px $unit 20px;
+  width: 100%;
+}
+
+.Btn-md {
+  max-width: 27 * $unit;
+  padding: 18px $unit 20px;
+  width: 100%;
+}
+
+.Btn-sm {
+  font-size: 14px;
+  padding: $unit $unit * 3 $unit + 2px;
+}
+
+.Btn-full {
+  width: 100%;
+}
+
+@media (max-width: $tablet-break-point) {
+  .Btn-lg {
+    font-size: 15px;
+    padding: 16px $unit;
+    width: 25 * $unit;
+  }
+
+  .Btn-md {
+    font-size: 15px;
+    padding: 16px $unit;
+  }
+}
+
+

@@ -1,0 +1,31 @@
+.mainNav {
+  color: $global-text-color;
+  height: 100px;
+  width: 100vw;
+  border-bottom: $global-text-color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mainLogo {
+  padding: 0 20px;
+}
+
+
+.mainMenu {
+  display: flex;
+  flex-direction: row;
+
+  li {
+    padding: 20px;
+    &:hover {
+      cursor: pointer;
+      background-color: $color-cool-gray300;
+    }
+  }
+}
+
+.navActive {
+  font-weight: 900;
+}

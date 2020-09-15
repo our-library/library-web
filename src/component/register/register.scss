@@ -1,0 +1,20 @@
+.registerContainer {
+  text-align: center;
+}
+
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputWithBtnWrap {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.registerNav {
+  color: $color-cool-gray900;
+}

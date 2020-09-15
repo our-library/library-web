@@ -1,0 +1,110 @@
+
+// -----------------------------------
+// input label
+// -----------------------------------
+.InputSet__label {
+  font-weight: 700;
+  margin-bottom: 3px;
+  margin-left: 4px;
+  position: relative;
+  text-align: left;
+  width: 100%;
+}
+
+
+// -----------------------------------
+// 유효성 메시지
+// -----------------------------------
+.InputErrorMsg {
+  font-size: 13px;
+  color: $color-red;
+}
+
+
+
+// -----------------------------------
+// type :  text, textarea
+// -----------------------------------
+
+.InputText {
+  padding: 16px 24px;
+  margin-bottom: 8px;
+  border: 1px solid $global-line-color;
+  color: $global-text-color;
+  border-radius: 10px;
+  transition: all 0.2s;
+  width: 100%;
+
+  &::placeholder {
+    color: $global-subtext-color;
+    opacity: 0.5;
+  }
+
+  &:disabled {
+    background: $color-gray50;
+    border: 1px solid $color-gray300;
+    box-shadow: none;
+    color: $global-subtext-color;
+  }
+
+  &:focus {
+    border: 1px solid $global-text-color;
+    background-color: $global-default-hover-color;
+    outline: none;
+  }
+}
+
+.Input-md {
+  max-width: 370px;
+}
+
+.Input-full {
+  width: 100%;
+}
+
+@media (max-width: $tablet-break-point) {
+  .Input-md {
+    max-width: 100%;
+  }
+}
+
+// -----------------------------------
+// 셀렉트박스
+// -----------------------------------
+
+//.InputSet__select-box {
+//  background: $color-white;
+//  display: inline-block;
+//  position: relative;
+//  z-index: 0;
+//
+//  &::before {
+//    border-color: $color-gray800 transparent transparent;
+//    border-style: solid;
+//    border-width: 7px 5px 0;
+//    content: "";
+//    display: block;
+//    height: 0;
+//    position: absolute;
+//    right: 13px;
+//    top: 21px;
+//    width: 0;
+//    z-index: -1;
+//  }
+//}
+//
+//.InputSet__select {
+//  border: 1px solid $color-cool-gray300;
+//  border-radius: 0;
+//  color: $global-text-color;
+//  padding: $unit * 1.5;
+//  transition: all 0.2s;
+//  width: 150px;
+//
+//  &:focus {
+//    background-color: $color-cool-gray20;
+//    box-shadow: 0 0 7px $color-deep-blue;
+//    outline: none;
+//  }
+//}
+
