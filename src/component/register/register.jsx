@@ -7,7 +7,6 @@ import RegisterEntry from '../registerEntry/registerEntry';
 
 function RegisterRoot({match}) {
   const authorization = true;
-
   return (
     <Switch>
       <Route path={`${match.url}/signIn`} component={SignIn}/>

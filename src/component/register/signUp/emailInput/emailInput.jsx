@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Api} from "../../../../store/api";
 
 function EmailErrorMessage() {
   return (
@@ -16,12 +17,14 @@ function EmailExistenceErrorMessage() {
   )
 }
 
-function SignUpEmailInput({ emailAuthId, isAuthenticated, emailValue, setEmailValue }) {
+function SignUpEmailInput({ setEmailAuthId, emailAuthId, emailValue, setEmailValue }) {
   const [emailAuthKey, setEmailAuthKey] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isEmailAuth, setIsEmailAuth] = useState(false);
   const [isEmailExistence, setIsEmailExistence] = useState(false);
   const [disableEmailAuthBtn, setDisableEmailAuthBtn] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
 
   function validateEmail(e) {
     const re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -36,13 +39,33 @@ function SignUpEmailInput({ emailAuthId, isAuthenticated, emailValue, setEmailVa
     setEmailAuthKey(e.target.value);
   }
 
-  async function handleEmailAuth() {
+  function handleEmailAuth() {
     setIsEmailAuth(true);
-    // dispatch(sendEmailAuth({email: emailValue}));
+    Api.fetch({
+      url: 'email-authentications',
+      method: 'post',
+      data: {
+        email: emailValue
+      }
+    }).then(res => {
+      setEmailAuthId(res.emailAuthenticationId);
+      console.log(res.emailAuthenticationId)
+    })
+      .catch(error => console.log(error))
   }
 
-  async function completeEmailAuth() {
-    // dispatch(emailAuthentication({emailAuthenticationId: emailAuthId, authenticationKey: emailAuthKey}));
+  function completeEmailAuth() {
+    Api.fetch({
+      url: `/email-authentications/${emailAuthId}/authenticate`,
+      method: 'post',
+      data: {
+        authenticationKey: emailAuthKey
+      }
+    }).then(() => {
+      setIsAuthenticated(true);
+      console.log('email authorization success')
+    })
+      .catch(error => console.log(error))
   }
 
   return (

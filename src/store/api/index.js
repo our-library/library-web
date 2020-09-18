@@ -1,11 +1,16 @@
 import axios from 'axios';
 
-// interface ApiOptionsInterface {
-//   url: string,
-//   method: 'get' | 'post' | 'put' | 'delete',
-//   data?: object,
-//   query?: any,
-// }
+const mockOptions = {
+  url: 'string',
+  method: 'get' | 'post' | 'put' | 'delete',
+  data: {
+    email: 'string',
+    password: 'string',
+  },
+  query: {
+    ID: 'string'
+  },
+};
 
 export class Api {
   static async fetch(apiOptions) {

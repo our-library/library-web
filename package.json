@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/our-library/library-web#readme",
   "dependencies": {
+    "@babel/polyfill": "^7.11.5",
     "axios": "^0.20.0",
     "classnames": "^2.2.6",
     "js-cookie": "^2.2.1",

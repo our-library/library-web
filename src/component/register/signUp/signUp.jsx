@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 import SignUpEmailInput from './emailInput/emailInput';
@@ -7,25 +6,26 @@ import SignUpPasswordInput from './passwordInput/passwordInput';
 import SignUpNameInput from './nameInput/nameInput';
 import SignUpCheckboxInput from './checkboxInput/checkboxInput';
 import {getToken} from '../../../utils/setToken/setToken';
+import {Api} from "../../../store/api";
 
 function SignUp() {
-  // const dispatch = useDispatch();
-  // const emailAuthId = useSelector(selectEmailAuthId);
-  // const loading = useSelector(selectLoading).toString();
-  // const isAuthenticated = useSelector(selectIsAuthenticated);
   const [nameValue, setNameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
   const [emailAuthId, setEmailAuthId] = useState('');
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   function submitUser() {
-    // dispatch(registerUser({
-    //   name: nameValue,
-    //   email: emailValue,
-    //   password: passwordValue,
-    //   emailAuthenticationId: emailAuthId
-    // }))
+    Api.fetch({
+      url: 'users',
+      method: 'post',
+      data: {
+        name: nameValue,
+        email: emailValue,
+        password: passwordValue,
+        emailAuthenticationId: emailAuthId
+      }
+    }).then(() => console.log('Sign up success'))
+      .catch(error => console.log(error))
   }
 
   useEffect(() => {
@@ -37,8 +37,8 @@ function SignUp() {
       <form action="" className="registerForm">
         <SignUpNameInput setNameValue={setNameValue}/>
         <SignUpEmailInput
-          emailAuthId={emailAuthId}
-          isAuthenticated={isAuthenticated}
+          emailAuthId = {emailAuthId}
+          setEmailAuthId={setEmailAuthId}
           setEmailValue={setEmailValue}
           emailValue={emailValue}
         />
