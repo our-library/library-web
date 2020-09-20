@@ -21,6 +21,17 @@
     "url": "https://github.com/our-library/library-web/issues"
   },
   "homepage": "https://github.com/our-library/library-web#readme",
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint ./src/ --ext .js,.jsx"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run lint"
+    }
+  },
   "dependencies": {
     "@babel/polyfill": "^7.11.5",
     "axios": "^0.20.0",
@@ -53,6 +64,8 @@
     "eslint-plugin-react-hooks": "^4.1.2",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.4.0",
     "prettier": "^2.1.2",
     "sass-loader": "^10.0.1",
     "style-loader": "^1.2.1",
