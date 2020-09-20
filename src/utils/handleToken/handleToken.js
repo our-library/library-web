@@ -10,8 +10,8 @@ export function getToken() {
   return Cookies.get('userToken');
 }
 
-function removeToken(token) {
-  Cookies.remove(token);
+export function removeToken() {
+  Cookies.remove('userToken');
 }
 
 function isTokenValid(token) {
