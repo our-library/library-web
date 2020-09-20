@@ -1,7 +1,5 @@
-import React from 'react';
+// import React from 'react';
 
-function AuthRoute() {
+function AuthRoute() {}
 
-}
-
-export default AuthRoute
+export default AuthRoute;

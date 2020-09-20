@@ -1,11 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 function NameErrorMessage() {
-  return (
-    <div className="InputErrorMsg">
-      이름은 입력해 주세요. (1자 ~ 100자)
-    </div>
-  )
+  return <div className="InputErrorMsg">이름은 입력해 주세요. (1자 ~ 100자)</div>;
 }
 
 function SignUpNameInput({ setNameValue }) {
@@ -28,9 +25,13 @@ function SignUpNameInput({ setNameValue }) {
         onChange={validateName}
         onFocus={() => setIsNameValid(false)}
       />
-      {!isNameValid && <NameErrorMessage/>}
+      {!isNameValid && <NameErrorMessage />}
     </>
-  )
+  );
 }
 
-export default SignUpNameInput
+SignUpNameInput.propTypes = {
+  setNameValue: PropTypes.func.isRequired,
+};
+
+export default SignUpNameInput;

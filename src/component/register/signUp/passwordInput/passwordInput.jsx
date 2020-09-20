@@ -1,11 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 function PasswordErrorMessage() {
-  return (
-    <div className="InputErrorMsg">
-      형식에 맞는 비밀번호를 입력해 주세요.
-    </div>
-  )
+  return <div className="InputErrorMsg">형식에 맞는 비밀번호를 입력해 주세요.</div>;
 }
 
 function SignUpPasswordInput({ setPasswordValue }) {
@@ -27,9 +24,13 @@ function SignUpPasswordInput({ setPasswordValue }) {
         onChange={validatePassword}
         onFocus={() => setIsPasswordValid(false)}
       />
-      {isPasswordValid ? true : <PasswordErrorMessage/>}
+      {isPasswordValid ? true : <PasswordErrorMessage />}
     </>
-  )
+  );
 }
 
-export default SignUpPasswordInput
+SignUpPasswordInput.propTypes = {
+  setPasswordValue: PropTypes.func.isRequired,
+};
+
+export default SignUpPasswordInput;

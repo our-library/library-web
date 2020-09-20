@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import SignUpEmailInput from './emailInput/emailInput';
 import SignUpPasswordInput from './passwordInput/passwordInput';
 import SignUpNameInput from './nameInput/nameInput';
 import SignUpCheckboxInput from './checkboxInput/checkboxInput';
-import {getToken} from '../../../utils/setToken/setToken';
-import {Api} from "../../../store/api";
+import { getToken } from '../../../utils/setToken/setToken';
+import { Api } from '../../../store/api';
 
 function SignUp() {
   const [nameValue, setNameValue] = useState('');
@@ -22,10 +22,11 @@ function SignUp() {
         name: nameValue,
         email: emailValue,
         password: passwordValue,
-        emailAuthenticationId: emailAuthId
-      }
-    }).then(() => console.log('Sign up success'))
-      .catch(error => console.log(error))
+        emailAuthenticationId: emailAuthId,
+      },
+    })
+      .then(() => console.log('Sign up success'))
+      .catch((error) => console.log(error));
   }
 
   useEffect(() => {
@@ -35,27 +36,26 @@ function SignUp() {
   return (
     <div>
       <form action="" className="registerForm">
-        <SignUpNameInput setNameValue={setNameValue}/>
+        <SignUpNameInput setNameValue={setNameValue} />
         <SignUpEmailInput
-          emailAuthId = {emailAuthId}
+          emailAuthId={emailAuthId}
           setEmailAuthId={setEmailAuthId}
           setEmailValue={setEmailValue}
           emailValue={emailValue}
         />
-        <SignUpPasswordInput setPasswordValue={setPasswordValue}/>
-        <SignUpCheckboxInput/>
-        <button
-          disabled={false}
-          className="Btn-default Btn-sm"
-          onClick={submitUser}
-        >회원가입
+        <SignUpPasswordInput setPasswordValue={setPasswordValue} />
+        <SignUpCheckboxInput />
+        <button type="button" disabled={false} className="Btn-default Btn-sm" onClick={submitUser}>
+          회원가입
         </button>
-        <Link to='/forgetPassword'>
-          <button className="TextBtn TextBtn--gray">초대 코드를 가지고 계신가요?</button>
+        <Link to="/forgetPassword">
+          <button type="button" className="TextBtn TextBtn--gray">
+            초대 코드를 가지고 계신가요?
+          </button>
         </Link>
       </form>
     </div>
-  )
+  );
 }
 
 export default SignUp;

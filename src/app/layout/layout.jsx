@@ -1,25 +1,24 @@
 import * as React from 'react';
-import {HashRouter} from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import Nav from '../../component/home/nav/nav';
 import RootRoute from '../../routes/rootRoute';
 
 function Layout() {
   const isAuthorized = true;
-  return(
+  return (
     <>
       <div className="baseContainer">
-        {isAuthorized ?
+        {isAuthorized ? (
           <HashRouter>
-            <Nav/>
-            <RootRoute/>
+            <Nav />
+            <RootRoute />
           </HashRouter>
-          :
+        ) : (
           <div>다른페이지</div>
-        }
+        )}
       </div>
     </>
-  )
-
+  );
 }
 
-export default Layout
+export default Layout;
