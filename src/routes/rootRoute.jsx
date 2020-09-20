@@ -6,6 +6,8 @@ import ForgetPassword from '../component/register/forgetPassword/forgetPassword'
 import NotFound from '../component/notFound/notFound';
 import BookList from '../component/bookList/booList';
 import Register from "../component/register/register";
+import Main from "../component/main/main";
+import RegisterEntry from "../component/registerEntry/registerEntry";
 
 
 function RootRoute() {
@@ -17,8 +19,10 @@ function RootRoute() {
       <Route path="/register" component={Register}/>
       <Route path='/forgetPassword' component={ForgetPassword}/>
       <Route path='/bookList' component={BookList}/>
-      <Redirect path="*" to="/"/>
+      <Route path='/service' component={Main}/>
+      <Route path='/registerEntry' component={RegisterEntry}/>
       <Route component={NotFound}/>
+      <Redirect path="*" to="/"/>
     </Switch>
   )
 }
