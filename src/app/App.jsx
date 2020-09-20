@@ -1,11 +1,15 @@
 import React from 'react';
 import '../style.scss';
-import Layout from './layout/layout';
+import {HashRouter} from 'react-router-dom';
+import RootRoute from "../routes/rootRoute";
+
 
 function App() {
   return (
     <>
-      <Layout />
+      <HashRouter>
+        <RootRoute/>
+      </HashRouter>
     </>
   )
 }
