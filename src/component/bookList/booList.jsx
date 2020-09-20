@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
+import ServiceLayout from "../../app/layout/serviceLayout";
 
 function BookList() {
   return (
-    <>
-      <h2>로그인되었습니다.</h2>
-      <button>로그아웃</button>
-    </>
+    <ServiceLayout>
+      <h2>진화님,</h2>
+      <h2>이번엔 어떤 책을 읽어볼까요?</h2>
+    </ServiceLayout>
   )
 }
 
