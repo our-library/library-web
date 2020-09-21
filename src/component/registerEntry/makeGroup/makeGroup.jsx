@@ -5,7 +5,6 @@ import {useEffect} from "react";
 import {useHistory} from "react-router";
 import MakeGroupNameInput from "./makeGroupNameInput/makeGroupNameInput";
 import JobNameInput from "../jobNameInput/jobNameInput";
-import {csvHandler} from "../../../utils/csvHandler";
 
 function MakeGroup() {
   const history = useHistory();

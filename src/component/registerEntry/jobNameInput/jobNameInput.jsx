@@ -12,7 +12,6 @@ function InviteCodeErrorMessage() {
 function JobNameInput({setJobKey}) {
   const [jobName, setJobName] = useState('');
   const [filterJobList, setFilterJobList] = useState([]);
-
   const [isGroupSearchResult, setIsGroupSearchResult] = useState(false);
 
   function handleJobKey(e) {
@@ -20,10 +19,10 @@ function JobNameInput({setJobKey}) {
     setJobName(target);
     const filterJobList = jobLists.filter((jobList) => {
       if (target && jobList.jobName.includes(target)) {
-        setIsGroupSearchResult(true);
+        setIsGroupSearchResult(false);
         return jobList
       } else {
-        setIsGroupSearchResult(false);
+        setIsGroupSearchResult(true);
       }
     });
     setFilterJobList(filterJobList);
@@ -32,29 +31,32 @@ function JobNameInput({setJobKey}) {
   function handleJobNameList(jobKey, jobName) {
     setJobKey(jobKey);
     setJobName(jobName);
+    setIsGroupSearchResult(false);
   }
-
+  console.log(filterJobList);
 
   return (
     <>
       <input
         type="text"
-        className="InputText Input-sm"
+        className="InputText Input-sm jobNameInput"
         placeholder="직업 이름 (예: CEO, PM, 백엔드 개발자 등)"
         value = {jobName}
         onChange={handleJobKey}
       />
       {isGroupSearchResult &&
-      <ul className="makeGroupSearchResult">
-        {filterJobList.map((jobList, index) => {
-          const {jobKey, jobName} = jobList;
-          return <li
-            onClick={() => handleJobNameList(jobKey, jobName)}
-            key={index}
-            className="filterJobList"
-          > {jobName} </li>
-        })}
-      </ul>
+      <div className="makeGroupSearchResult">
+        <ul>
+          {filterJobList.map((jobList, index) => {
+            const {jobKey, jobName} = jobList;
+            return <li
+              onClick={() => handleJobNameList(jobKey, jobName)}
+              key={index}
+              className="filterJobList"
+            > {jobName} </li>
+          })}
+        </ul>
+      </div>
       }
     </>
   )
