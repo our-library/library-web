@@ -5,7 +5,7 @@ import SignUpEmailInput from './emailInput/emailInput';
 import SignUpPasswordInput from './passwordInput/passwordInput';
 import SignUpNameInput from './nameInput/nameInput';
 import SignUpCheckboxInput from './checkboxInput/checkboxInput';
-import {getToken} from '../../../utils/setToken/setToken';
+import {getToken} from '../../../utils/handleToken/handleToken';
 import {Api} from "../../../store/api";
 
 function SignUp() {
