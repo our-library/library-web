@@ -1,54 +1,17 @@
 import * as React from 'react';
 import {useState} from "react";
-import {getToken, removeToken} from "../../utils/handleToken/handleToken";
-import {Route, Switch, useRouteMatch} from "react-router";
-import BookList from "../bookList/booList";
-import Setting from "../setting/setting";
-import MyRent from "../myRent/myRent";
-import {Link} from "react-router-dom";
-
-const isGroupMaster = false;
-const servicePath = 'service';
-const defaultUserMenu = [
-  {
-    pathname: `service/bookList`,
-    menuValue: '전체 책 목록'
-  },
-  {
-    pathname: `service/myRent`,
-    menuValue: '나의 대여'
-  },
-  {
-    pathname: `service/setting`,
-    menuValue: '설정'
-  },
-];
-const GroupMasterMenu = [
-  '전체 책 목록',
-  '책 등록',
-  '대여중인 책',
-  '문의',
-  '회원관리',
-  '설정'
-];
-
-function ServiceRoot() {
-  const {path} = useRouteMatch();
-  return (
-    <Switch>
-      <Route path={`${path}/bookList`} component={BookList}/>
-      <Route path={`${path}/myRent`} component={MyRent}/>
-      <Route path={`${path}/setting`} component={Setting}/>
-      <Route exact path={path} component={BookList}/>
-    </Switch>
-  )
-}
+import {removeToken} from "../../utils/handleToken/handleToken";
+import {useHistory} from "react-router";
+import {NavLink} from "react-router-dom";
+import {defaultUserMenu} from "./serviceMenu";
 
 function ActionBar() {
+  const history = useHistory();
   const [userMenu, setUserMenu] = useState(defaultUserMenu);
 
   function logout() {
     removeToken();
+    history.replace('/register/signIn');
   }
 
   return (
@@ -81,13 +44,17 @@ function ActionBar() {
           <div className="invitePeople">
             <button
               className="Btn-sm Btn-transparent"
-            >구성원 초대하기</button>
+            >구성원 초대하기
+            </button>
           </div>
-          <ul className="activeMenu">
+          <ul className="serviceMenu">
             {userMenu.map((item, index) => {
               const {pathname, menuValue} = item;
-              return <li key={index}><Link to={pathname}><b>{menuValue}</b></Link></li>
+              return <NavLink to={`/service/${pathname}`} key={index}>
+                <li><span><b>{menuValue}</b></span></li>
+              </NavLink>
             })}
+
           </ul>
         </div>
         <div className="logoutSec">
@@ -101,7 +68,6 @@ function ActionBar() {
       <nav className="mobileActionBarContainer">
         <div>모바일헤더</div>
       </nav>
-      <ServiceRoot />
     </>
   )
 }
