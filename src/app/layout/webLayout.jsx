@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Nav from "../../component/home/nav/nav";
+import Nav from "../../component/nav/nav";
 
 function WebLayout({children}) {
   return (
