@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import WebLayout from "../../app/layout/webLayout";
 
-function Home() {
+function Index() {
   return (
     <WebLayout>
       <div>
@@ -12,4 +12,4 @@ function Home() {
   )
 }
 
-export default Home
+export default Index

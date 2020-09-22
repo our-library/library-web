@@ -4,7 +4,7 @@ import {useRouteMatch} from "react-router";
 import WebLayout from "../../app/layout/webLayout";
 import {RegisterRoute} from "../../routes/registerRoute";
 
-function Register() {
+function Index() {
   const {url} = useRouteMatch();
   return (
     <WebLayout>
@@ -18,4 +18,4 @@ function Register() {
   )
 }
 
-export default Register;
+export default Index;

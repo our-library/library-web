@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Link, NavLink} from 'react-router-dom';
 
-function Nav() {
+function Index() {
 
     return (
         <nav className="mainNav">
@@ -17,4 +17,4 @@ function Nav() {
     )
 }
 
-export default Nav
+export default Index

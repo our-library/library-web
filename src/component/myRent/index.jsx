@@ -1,12 +1,12 @@
 import * as React from 'react';
 import ServiceLayout from "../../app/layout/serviceLayout";
 
-function Setting() {
-  return(
+function Index() {
+  return (
     <ServiceLayout>
-      <h2>세팅페이지</h2>
+      <h2>나의 랜트 페이지.</h2>
     </ServiceLayout>
   )
 }
 
-export default Setting
+export default Index

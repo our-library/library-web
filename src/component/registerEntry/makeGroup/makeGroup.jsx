@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import {useState} from "react";
 import {Api} from "../../../store/api";
 import {useEffect} from "react";
 import {useHistory} from "react-router";
-import MakeGroupNameInput from "./makeGroupNameInput/makeGroupNameInput";
-import JobNameInput from "../jobNameInput/jobNameInput";
+import MakeGroupNameInput from "./makeGroupNameInput";
+import JobNameInput from "../jobNameInput";
 
 function MakeGroup() {
   const history = useHistory();

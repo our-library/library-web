@@ -12,10 +12,9 @@ function SignUpNameInput({ setNameValue }) {
   const [isNameValid, setIsNameValid] = useState(true);
 
   function validateName(e) {
-    if (e.target.value) {
-      const nameValue = e.target.value;
-      (nameValue.length > 1) ? setIsNameValid(true) : setIsNameValid(false);
-      setNameValue(nameValue);
+    const {value: nameValue} = e.target;
+    if (value) {
+      setNameValue(nameValue.length > 1);
     }
   }
 

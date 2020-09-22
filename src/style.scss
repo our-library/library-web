@@ -5,10 +5,10 @@
 //     pages
 // ---------------------
 
-@import "./src/app/app";
-@import "component/nav/nav";
-@import "./src/component/info/info";
-@import "./src/component/register/register";
-@import "./src/component/actionBar/actionBar";
-@import "./src/app/layout/serviceLayout";
-@import "./src/component/registerEntry/registerEntry";
+@import "scss/pages/app/app";
+@import "scss/pages/nav";
+@import "scss/pages/home/info";
+@import "scss/pages/register/register";
+@import "scss/pages/actionBar";
+@import "scss/pages/app/serviceLayout";
+@import "scss/pages/register/registerEntry";

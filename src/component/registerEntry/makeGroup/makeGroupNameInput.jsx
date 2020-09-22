@@ -13,9 +13,8 @@ function MakeGroupNameInput({valueBySelect, setGroupNameValue}) {
   const [isMakeGroupNameValid, setIsMakeGroupNameValid] = useState(true);
 
   function handleMakeGroupName(e) {
-    const groupName = e.target.value;
-    setGroupNameValue(groupName);
-    (groupName.length > 1) ? setIsMakeGroupNameValid(true) : setIsMakeGroupNameValid(false);
+    const {value: groupName} = e.target;
+    setGroupNameValue(groupName.length > 1);
   }
 
   return (

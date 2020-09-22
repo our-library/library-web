@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useHistory, useRouteMatch} from "react-router";
-import InviteCodeInput from "./inviteCodeInput/inviteCodeInput";
-import JobNameInput from "./jobNameInput/jobNameInput";
+import InviteCodeInput from "./inviteCodeInput";
+import JobNameInput from "./jobNameInput";
 import {Api} from "../../store/api";
 
 function RegisterEntry() {

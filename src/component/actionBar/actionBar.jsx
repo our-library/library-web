@@ -1,6 +1,5 @@
-import * as React from 'react';
-import {useState} from "react";
-import {removeToken} from "../../utils/handleToken/handleToken";
+import React, {useState} from 'react';
+import {removeToken} from "../../utils/handleToken";
 import {useHistory} from "react-router";
 import {NavLink} from "react-router-dom";
 import {defaultUserMenu} from "./serviceMenu";

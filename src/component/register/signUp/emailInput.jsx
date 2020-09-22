@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Api} from "../../../../store/api";
+import {Api} from "../../../store/api";
 
 function EmailErrorMessage() {
   return (

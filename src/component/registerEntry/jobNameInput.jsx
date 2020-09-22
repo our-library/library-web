@@ -1,13 +1,5 @@
 import React, {useState} from 'react';
-import {jobLists} from '../makeGroup/jobLists';
-
-function InviteCodeErrorMessage() {
-  return (
-    <div className="InputErrorMsg">
-      초대코드를 입력하세요.
-    </div>
-  )
-}
+import {jobLists} from './makeGroup/jobLists';
 
 function JobNameInput({setJobKey}) {
   const [jobName, setJobName] = useState('');

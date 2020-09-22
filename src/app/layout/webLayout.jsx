@@ -1,11 +1,11 @@
-import * as React from 'react';
-import Nav from "../../component/nav/nav";
+import React from 'react';
+import Index from "../../component/nav";
 
 function WebLayout({children}) {
   return (
     <>
       <div className="webLayoutContainer">
-        <Nav/>
+        <Index/>
         {children}
       </div>
     </>

@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 
-import SignUpEmailInput from './emailInput/emailInput';
-import SignUpPasswordInput from './passwordInput/passwordInput';
-import SignUpNameInput from './nameInput/nameInput';
-import SignUpCheckboxInput from './checkboxInput/checkboxInput';
-import {getToken} from '../../../utils/handleToken/handleToken';
+import SignUpEmailInput from './emailInput';
+import SignUpPasswordInput from './passwordInput';
+import SignUpNameInput from './nameInput';
+import SignUpCheckboxInput from './checkboxInput';
+import {getToken} from '../../../utils/handleToken';
 import {Api} from "../../../store/api";
 
-function SignUp() {
+function Index() {
   const [nameValue, setNameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
@@ -58,4 +58,4 @@ function SignUp() {
   )
 }
 
-export default SignUp;
+export default Index;

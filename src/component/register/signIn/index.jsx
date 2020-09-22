@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Api} from "../../../store/api";
-import {getToken, setToken} from "../../../utils/handleToken/handleToken";
+import {getToken, setToken} from "../../../utils/handleToken";
 import {useHistory, useLocation} from "react-router";
 
 function EmailErrorMessage() {
@@ -20,7 +20,7 @@ function PasswordErrorMessage() {
   )
 }
 
-function SignIn() {
+function Index() {
   const history = useHistory();
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
@@ -104,4 +104,4 @@ function SignIn() {
 
 }
 
-export default SignIn;
+export default Index;

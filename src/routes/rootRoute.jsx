@@ -1,16 +1,16 @@
 import * as React from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom'
-import Home from '../component/home/home';
-import Info from '../component/info/info';
+import Index from '../component/home';
+import Index from '../component/info';
 import ForgetPassword from '../component/register/forgetPassword/forgetPassword';
 import NotFound from '../component/notFound/notFound';
-import BookList from '../component/bookList/booList';
-import Register from "../component/register/register";
+import BookList from '../component/bookList';
+import Index from "../component/register";
 import RegisterEntry from "../component/registerEntry/registerEntry";
-import MyRent from "../component/myRent/myRent";
-import Setting from "../component/setting/setting";
+import Index from "../component/myRent";
+import Index from "../component/setting";
 import MakeGroup from "../component/registerEntry/makeGroup/makeGroup";
-import {getToken} from "../utils/handleToken/handleToken";
+import {getToken} from "../utils/handleToken";
 import {useEffect} from "react";
 import {useState} from "react";
 
@@ -18,10 +18,10 @@ import {useState} from "react";
 function RootRoute() {
   return (
     <Switch>
-      <Route exact path="/" component={Home}/>
-      <Route path="/home" component={Home}/>
-      <Route path="/info" component={Info}/>
-      <Route path="/register" component={Register}/>
+      <Route exact path="/" component={Index}/>
+      <Route path="/home" component={Index}/>
+      <Route path="/info" component={Index}/>
+      <Route path="/register" component={Index}/>
       <Route path='/forgetPassword' component={ForgetPassword}/>
       <ProtectedRoute path='/registerEntry'>
         <RegisterEntry />
@@ -33,10 +33,10 @@ function RootRoute() {
         <BookList />
       </ProtectedRoute>
       <ProtectedRoute path='/service/setting'>
-        <Setting />
+        <Index />
       </ProtectedRoute>
       <ProtectedRoute path='/service/myRent'>
-        <MyRent />
+        <Index />
       </ProtectedRoute>
       <Redirect from='/service' to='/service/bookList'/>
       <Redirect path="*" to="/"/>
