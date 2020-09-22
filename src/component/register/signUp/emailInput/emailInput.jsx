@@ -49,7 +49,6 @@ function SignUpEmailInput({ setEmailAuthId, emailAuthId, emailValue, setEmailVal
       }
     }).then(res => {
       setEmailAuthId(res.emailAuthenticationId);
-      console.log(res.emailAuthenticationId)
     })
       .catch(error => console.log(error))
   }

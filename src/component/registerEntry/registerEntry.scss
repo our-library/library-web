@@ -1,0 +1,73 @@
+.entryContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.entrySec {
+  height: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+
+  &:first-of-type {
+    border-right: 1px solid $global-light-line-color;
+  }
+}
+
+.makeGroupContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.makeGroupSec {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  height: 400px;
+}
+
+.jobNameInput {
+  position: relative;
+}
+
+.makeGroupSearchResult {
+  position: absolute;
+  //left: 0;
+  //transform: translateX(50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+
+  ul {
+    background-color: $color-white;
+    border: 1px solid $global-light-line-color;
+    box-sizing: content-box;
+    border-radius: 16px;
+    width: 300px;
+
+    .filterJobList {
+      cursor: pointer;
+      padding: 8px;
+
+      &:hover {
+        background-color: $global-light-line-color;
+      }
+    }
+  }
+}
+
+

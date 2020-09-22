@@ -58,12 +58,18 @@
   max-width: 370px;
 }
 
+.Input-sm {
+  max-width: 300px;
+}
+
 .Input-full {
   width: 100%;
 }
 
-@media (max-width: $tablet-break-point) {
-  .Input-md {
+@media (max-width: $mobile-break-point) {
+  .Input-md,
+  .Input-sm
+  {
     max-width: 100%;
   }
 }

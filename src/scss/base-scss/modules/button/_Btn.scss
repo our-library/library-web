@@ -11,6 +11,8 @@
 .Btn-primary {
   @extend %Btn;
   background-color: $global-primary1-color;
+  color: $color-white;
+  font-weight: 700;
 
   &:hover {
     background-color: darken($global-primary1-color, 7%);
@@ -51,6 +53,19 @@
 
   &:active {
     background-color: darken($global-primary2-light-color, 12%);
+  }
+}
+
+.Btn-transparent {
+  @extend %Btn;
+  border: 1px solid $global-light-line-color;
+
+  &:hover {
+    background-color: darken($global-light-line-color, 1%);
+  }
+
+  &:active {
+    background-color: darken($global-light-line-color, 5%);
   }
 }
 

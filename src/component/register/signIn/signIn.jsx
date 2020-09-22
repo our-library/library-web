@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Api} from "../../../store/api";
-import {setToken} from "../../../utils/setToken/setToken";
+import {getToken, setToken} from "../../../utils/handleToken/handleToken";
+import {useHistory, useLocation} from "react-router";
 
 function EmailErrorMessage() {
   return (
@@ -20,10 +21,12 @@ function PasswordErrorMessage() {
 }
 
 function SignIn() {
+  const history = useHistory();
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
+  const [isGroupUser, setIsGroupUser] = useState(null);
 
   function validateEmail(e) {
     const re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -40,7 +43,6 @@ function SignIn() {
   }
 
   function requestLogin() {
-    console.log(emailValue, passwordValue);
     Api.fetch({
       url: 'login/oauth',
       method: 'post',
@@ -48,9 +50,22 @@ function SignIn() {
         email: emailValue,
         password: passwordValue
       }
-    }).then(res => {
-      setToken(res.token);
-      console.log('success');
+    }).then(data => {
+      setToken(data.token);
+      //  유저정보 (내 그룹 목록) 들고오기
+        Api.fetch({
+          url: 'groups/me',
+          method: 'get',
+        })
+          .then(groupData => {
+            const userGroupCount = groupData.count;
+            console.log(userGroupCount);
+            if(userGroupCount === 0) {
+              history.replace('/registerEntry');
+            } else {
+              history.replace('/service');
+            }
+          })
     })
       .catch(error => console.log(error))
   }

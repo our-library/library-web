@@ -1,0 +1,10 @@
+.serviceLayoutContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: $mobile-break-point) {
+  .serviceLayoutContainer {
+    flex-direction: column;
+  }
+}

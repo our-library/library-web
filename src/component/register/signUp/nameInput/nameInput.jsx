@@ -13,8 +13,9 @@ function SignUpNameInput({ setNameValue }) {
 
   function validateName(e) {
     if (e.target.value) {
-      setIsNameValid(true);
-      setNameValue(e.target.value);
+      const nameValue = e.target.value;
+      (nameValue.length > 1) ? setIsNameValid(true) : setIsNameValid(false);
+      setNameValue(nameValue);
     }
   }
 
