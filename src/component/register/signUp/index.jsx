@@ -5,47 +5,62 @@ import SignUpEmailInput from './emailInput';
 import SignUpPasswordInput from './passwordInput';
 import SignUpNameInput from './nameInput';
 import SignUpCheckboxInput from './checkboxInput';
-import {getToken} from '../../../utils/handleToken';
-import {Api} from "../../../store/api";
+import {registerUserRequest} from "../../../store/api/registerApi";
 
-function Index() {
+function SignUp() {
   const [nameValue, setNameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
   const [emailAuthId, setEmailAuthId] = useState('');
 
-  function submitUser() {
-    Api.fetch({
-      url: 'users',
-      method: 'post',
-      data: {
-        name: nameValue,
-        email: emailValue,
-        password: passwordValue,
-        emailAuthenticationId: emailAuthId
-      }
-    }).then(() => console.log('Sign up success'))
-      .catch(error => console.log(error))
-  }
+  const [isTermsValid, setIsTermsValid] = useState(false);
+  const [isNameValid, setIsNameValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [signUpDisableBtn, setSignUpDisableBtn] = useState(true);
 
   useEffect(() => {
-    console.log(getToken());
-  });
+    (isNameValid && isPasswordValid && isTermsValid && emailAuthId) && setSignUpDisableBtn(false);
+  }, [isTermsValid, isNameValid, isPasswordValid, emailAuthId]);
+
+
+  function submitUser() {
+    const data = {
+      name: nameValue,
+      email: emailValue,
+      password: passwordValue,
+      emailAuthenticationId: emailAuthId
+    };
+    registerUserRequest(data).then(() => {
+      console.log('register success!');
+    })
+      .catch(e => console.log(e));
+  }
 
   return (
     <div>
       <form action="" className="registerForm">
-        <SignUpNameInput setNameValue={setNameValue}/>
+        <SignUpNameInput
+          isNameValid={isNameValid}
+          setIsNameValid={setIsNameValid}
+          setNameValue={setNameValue}
+        />
         <SignUpEmailInput
-          emailAuthId = {emailAuthId}
+          emailAuthId={emailAuthId}
           setEmailAuthId={setEmailAuthId}
           setEmailValue={setEmailValue}
           emailValue={emailValue}
         />
-        <SignUpPasswordInput setPasswordValue={setPasswordValue}/>
-        <SignUpCheckboxInput/>
+        <SignUpPasswordInput
+          isPasswordValid={isPasswordValid}
+          setIsPasswordValid={setIsPasswordValid}
+          setPasswordValue={setPasswordValue}
+        />
+        <SignUpCheckboxInput
+          isTermsValid={isTermsValid}
+          setIsTermsValid={setIsTermsValid}
+        />
         <button
-          disabled={false}
+          disabled={signUpDisableBtn}
           className="Btn-default Btn-sm"
           onClick={submitUser}
         >회원가입
@@ -58,4 +73,4 @@ function Index() {
   )
 }
 
-export default Index;
+export default SignUp;

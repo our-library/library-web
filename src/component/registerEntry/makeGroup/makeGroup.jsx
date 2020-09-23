@@ -5,6 +5,8 @@ import {useEffect} from "react";
 import {useHistory} from "react-router";
 import MakeGroupNameInput from "./makeGroupNameInput";
 import JobNameInput from "../jobNameInput";
+import {makeGroupRequest} from "../../../store/api/groupApi";
+import {fetchUserProfile} from "../../../store/api/usersApi";
 
 function MakeGroup() {
   const history = useHistory();
@@ -19,27 +21,19 @@ function MakeGroup() {
   }, []);
 
   function getUserName() {
-    Api.fetch({
-      url: '/users/me/profile',
-      method: 'get',
-    }).then(data => setUserName(data.name))
+    fetchUserProfile().then(data => setUserName(data.name))
   }
 
   function handleMakeGroup() {
     const data = {
-      "category": categoryValue,
-      "groupName": groupNameValue,
-      "jobKey": jobKey
+      category: categoryValue,
+      groupName: groupNameValue,
+      jobKey: jobKey
     };
-    Api.fetch({
-      url: '/groups',
-      method: 'post',
-      data: data
-    }).then(result => {
-      const {groupId, memberId} = result;
-      console.log('create Library!');
-      history.replace('/service')
-    });
+    makeGroupRequest(data)
+      .then(() => {
+        history.replace('/service')
+      });
   }
 
   function handleSelectCategory(e) {
