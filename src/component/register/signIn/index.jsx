@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import {Api} from "../../../store/api";
 import {getToken, setToken} from "../../../utils/handleToken";
 import {useHistory, useLocation} from "react-router";
+import {loginRequest} from "../../../store/api/registerApi";
+import {fetchGroupMe} from "../../../store/api/groupApi";
 
 function EmailErrorMessage() {
   return (
@@ -20,7 +22,7 @@ function PasswordErrorMessage() {
   )
 }
 
-function Index() {
+function SignIn() {
   const history = useHistory();
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
@@ -42,66 +44,58 @@ function Index() {
     return setIsPasswordValid(isValid);
   }
 
-  function requestLogin() {
-    Api.fetch({
-      url: 'login/oauth',
-      method: 'post',
-      data: {
-        email: emailValue,
-        password: passwordValue
+  async function requestLogin() {
+    try {
+      const { token } = await loginRequest(emailValue, passwordValue);
+      setToken(token);
+
+      const groupData = await fetchGroupMe();
+      console.log(groupData);
+      const {count: userGroupCount} = groupData;
+
+      if (userGroupCount === 0) {
+        history.replace('/registerEntry');
+      } else {
+        history.replace('/service');
       }
-    }).then(data => {
-      setToken(data.token);
-      //  유저정보 (내 그룹 목록) 들고오기
-        Api.fetch({
-          url: 'groups/me',
-          method: 'get',
-        })
-          .then(groupData => {
-            const userGroupCount = groupData.count;
-            console.log(userGroupCount);
-            if(userGroupCount === 0) {
-              history.replace('/registerEntry');
-            } else {
-              history.replace('/service');
-            }
-          })
-    })
-      .catch(error => console.log(error))
+    } catch (e) {
+      console.log(e);
+    }
   }
 
-  return (
-    <div>
-      <form action="" className="registerForm">
-        <input
-          className="InputText Input-md"
-          type="text"
-          placeholder="이메일@example.com"
-          onChange={validateEmail}
-          onFocus={() => setIsEmailValid(false)}
-        />
-        {!isEmailValid && <EmailErrorMessage/>}
-        <input
-          className="InputText Input-md"
-          type="password"
-          placeholder="영문/숫자 혼용 8자 이상"
-          onChange={validatePassword}
-          onFocus={() => setIsPasswordValid(false)}
-        />
-        {!isPasswordValid && <PasswordErrorMessage/>}
-        <button
-          disabled={!isEmailValid && !isPasswordValid}
-          className="Btn-default Btn-sm"
-          onClick={requestLogin}
-        >로그인
-        </button>
-        <Link to='/forgetPassword'>
-          <button className="TextBtn TextBtn--gray">비밀번호를 잊으셨습니까?</button>
-        </Link>
-      </form>
-    </div>
-  )
+return (
+  <div>
+    <form action="" className="registerForm">
+      <input
+        className="InputText Input-md"
+        type="text"
+        placeholder="이메일@example.com"
+        onChange={validateEmail}
+        onFocus={() => setIsEmailValid(false)}
+      />
+      {!isEmailValid && <EmailErrorMessage/>}
+      <input
+        className="InputText Input-md"
+        type="password"
+        placeholder="영문/숫자 혼용 8자 이상"
+        onChange={validatePassword}
+        onFocus={() => setIsPasswordValid(false)}
+      />
+      {!isPasswordValid && <PasswordErrorMessage/>}
+      <button
+        type="button"
+        disabled={!isEmailValid && !isPasswordValid}
+        className="Btn-default Btn-sm"
+        onClick={requestLogin}
+      >로그인
+      </button>
+      <Link to='/forgetPassword'>
+        <button className="TextBtn TextBtn--gray">비밀번호를 잊으셨습니까?</button>
+      </Link>
+    </form>
+  </div>
+)
 
 }
 
-export default Index;
+export default SignIn;

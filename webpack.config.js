@@ -6,6 +6,7 @@ module.exports = {
   entry: ["@babel/polyfill",'./src/index.jsx'],
   output: {
     path: path.join(__dirname, '/dist'),
+    publicPath: '/',
     filename: 'bundle.js',
   },
   mode: "development",
@@ -51,7 +52,9 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, '/dist'),
     compress: true,
-    port: 9000
+    port: 9000,
+    hot: true,
+    historyApiFallback: true,
   },
   resolve: {
     alias: {

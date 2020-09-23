@@ -1,12 +1,12 @@
-import * as React from 'react';
+import React from 'react';
 import ServiceLayout from "../../app/layout/serviceLayout";
 
-function MyRent() {
+function Inquiry() {
   return (
     <ServiceLayout>
-      <h2>나의 랜트 페이지.</h2>
+      <h2>Inquiry</h2>
     </ServiceLayout>
   )
 }
 
-export default MyRent
+export default Inquiry

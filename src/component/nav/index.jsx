@@ -1,8 +1,7 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Link, NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
-function Index() {
-
+function Nav() {
     return (
         <nav className="mainNav">
             <div className="mainLogo">
@@ -17,4 +16,4 @@ function Index() {
     )
 }
 
-export default Index
+export default Nav

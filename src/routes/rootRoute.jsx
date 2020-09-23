@@ -1,27 +1,29 @@
 import * as React from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom'
-import Index from '../component/home';
-import Index from '../component/info';
 import ForgetPassword from '../component/register/forgetPassword/forgetPassword';
 import NotFound from '../component/notFound/notFound';
 import BookList from '../component/bookList';
-import Index from "../component/register";
-import RegisterEntry from "../component/registerEntry/registerEntry";
-import Index from "../component/myRent";
-import Index from "../component/setting";
+import RegisterEntry from "../component/registerEntry";
 import MakeGroup from "../component/registerEntry/makeGroup/makeGroup";
 import {getToken} from "../utils/handleToken";
-import {useEffect} from "react";
-import {useState} from "react";
-
+import Home from "../component/home";
+import Info from "../component/info";
+import Register from "../component/register";
+import Setting from "../component/setting";
+import MyRent from "../component/myRent";
+import {ROUTE_PATH} from "../constants/path";
+import AddBooks from "../component/addBooks";
+import MemberManagement from "../component/memberManagement";
+import Inquiry from "../component/inquiry";
 
 function RootRoute() {
+  const {SERVICE, SERVICE_BOOK_LIST, SERVICE_ADD_BOOKS, SERVICE_MY_RENT, SERVICE_MEMBER_MANAGEMENT, SERVICE_INQUIRY, SERVICE_SETTING} = ROUTE_PATH;
   return (
     <Switch>
-      <Route exact path="/" component={Index}/>
-      <Route path="/home" component={Index}/>
-      <Route path="/info" component={Index}/>
-      <Route path="/register" component={Index}/>
+      <Route exact path="/" component={Home}/>
+      <Route path="/home" component={Home}/>
+      <Route path="/info" component={Info}/>
+      <Route path="/register" component={Register}/>
       <Route path='/forgetPassword' component={ForgetPassword}/>
       <ProtectedRoute path='/registerEntry'>
         <RegisterEntry />
@@ -29,16 +31,25 @@ function RootRoute() {
       <ProtectedRoute path='/makeGroup'>
         <MakeGroup />
       </ProtectedRoute>
-      <ProtectedRoute path='/service/bookList'>
-        <BookList />
+      <ProtectedRoute path={SERVICE_BOOK_LIST}>
+        <BookList/>
       </ProtectedRoute>
-      <ProtectedRoute path='/service/setting'>
-        <Index />
+      <ProtectedRoute path={SERVICE_ADD_BOOKS}>
+        <AddBooks/>
       </ProtectedRoute>
-      <ProtectedRoute path='/service/myRent'>
-        <Index />
+      <ProtectedRoute path={SERVICE_MY_RENT}>
+        <MyRent />
       </ProtectedRoute>
-      <Redirect from='/service' to='/service/bookList'/>
+      <ProtectedRoute path={SERVICE_INQUIRY}>
+        <Inquiry/>
+      </ProtectedRoute>
+      <ProtectedRoute path={SERVICE_MEMBER_MANAGEMENT}>
+        <MemberManagement/>
+      </ProtectedRoute>
+      <ProtectedRoute path={SERVICE_SETTING}>
+        <Setting />
+      </ProtectedRoute>
+      <Redirect from={SERVICE} to={SERVICE_BOOK_LIST} />
       <Redirect path="*" to="/"/>
       <Route component={NotFound}/>
     </Switch>
@@ -46,17 +57,7 @@ function RootRoute() {
 }
 
 function ProtectedRoute({children, ...rest}) {
-  // const [isAuthenticated, setIsAuthenticated] = useState(null);
   const isAuthenticated = getToken();
-
-  // useEffect(() => {
-  //   const token = getToken();
-  //   console.log(token);
-  //   setIsAuthenticated(token);
-  //   return function cleanup() {
-  //     getToken();
-  //   }
-  // },);
 
   return (
     <Route

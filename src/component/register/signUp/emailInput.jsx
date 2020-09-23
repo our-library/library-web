@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Api} from "../../../store/api";
+import {EmailAuthorizeRequest, fetchEmailAuthorize, fetchEmailExistence} from "../../../store/api/registerApi";
 
 function EmailErrorMessage() {
   return (
@@ -17,7 +18,7 @@ function EmailExistenceErrorMessage() {
   )
 }
 
-function SignUpEmailInput({ setEmailAuthId, emailAuthId, emailValue, setEmailValue }) {
+function SignUpEmailInput({setEmailAuthId, emailAuthId, emailValue, setEmailValue}) {
   const [emailAuthKey, setEmailAuthKey] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isEmailAuth, setIsEmailAuth] = useState(false);
@@ -39,32 +40,29 @@ function SignUpEmailInput({ setEmailAuthId, emailAuthId, emailValue, setEmailVal
     setEmailAuthKey(e.target.value);
   }
 
-  function handleEmailAuth() {
-    setIsEmailAuth(true);
-    Api.fetch({
-      url: 'email-authentications',
-      method: 'post',
-      data: {
-        email: emailValue
+  async function handleEmailAuth() {
+    try {
+      const { existence: isEmailExistence } = await fetchEmailExistence(emailValue);
+      if(!isEmailExistence) {
+        setIsEmailExistence(false);
+        setIsEmailAuth(true);
+        const { emailAuthenticationId } = await EmailAuthorizeRequest(emailValue);
+        console.log(emailAuthenticationId);
+        setEmailAuthId(emailAuthenticationId);
+      } else {
+        setIsEmailExistence(true);
       }
-    }).then(res => {
-      setEmailAuthId(res.emailAuthenticationId);
-    })
-      .catch(error => console.log(error))
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   function completeEmailAuth() {
-    Api.fetch({
-      url: `/email-authentications/${emailAuthId}/authenticate`,
-      method: 'post',
-      data: {
-        authenticationKey: emailAuthKey
-      }
-    }).then(() => {
+    fetchEmailAuthorize(emailAuthId, emailAuthKey).then(() => {
       setIsAuthenticated(true);
       console.log('email authorization success')
     })
-      .catch(error => console.log(error))
+      .catch(e => console.log(e))
   }
 
   return (
@@ -79,13 +77,14 @@ function SignUpEmailInput({ setEmailAuthId, emailAuthId, emailValue, setEmailVal
           onFocus={() => setIsEmailValid(false)}
         />
         <button
+          type="button"
           disabled={disableEmailAuthBtn || isAuthenticated}
           className="Btn-primary Btn-sm"
           onClick={handleEmailAuth}
         >인증하기
         </button>
       </div>
-      {!isEmailExistence && <EmailExistenceErrorMessage />}
+      {isEmailExistence && <EmailExistenceErrorMessage/>}
       {!isEmailValid && <EmailErrorMessage/>}
       {isEmailAuth &&
       <div>
@@ -98,6 +97,7 @@ function SignUpEmailInput({ setEmailAuthId, emailAuthId, emailValue, setEmailVal
         />
         {!isAuthenticated &&
         <button
+          type="button"
           disabled={!emailAuthKey}
           className="Btn-default Btn-sm"
           onClick={completeEmailAuth}

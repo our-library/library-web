@@ -1,5 +1,5 @@
 import React from 'react';
-import ActionBar from "../../component/actionBar/actionBar";
+import ActionBar from "../../component/actionBar";
 
 function ServiceLayout({children}) {
   return (

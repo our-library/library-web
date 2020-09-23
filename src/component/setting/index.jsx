@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ServiceLayout from "../../app/layout/serviceLayout";
 
-function Index() {
+function Setting() {
   return(
     <ServiceLayout>
       <h2>세팅페이지</h2>
@@ -9,4 +9,4 @@ function Index() {
   )
 }
 
-export default Index
+export default Setting

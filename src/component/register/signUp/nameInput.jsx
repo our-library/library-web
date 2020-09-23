@@ -8,14 +8,12 @@ function NameErrorMessage() {
   )
 }
 
-function SignUpNameInput({ setNameValue }) {
-  const [isNameValid, setIsNameValid] = useState(true);
+function SignUpNameInput({isNameValid, setIsNameValid, setNameValue}) {
 
   function validateName(e) {
     const {value: nameValue} = e.target;
-    if (value) {
-      setNameValue(nameValue.length > 1);
-    }
+    setNameValue(nameValue.length > 1);
+    return setIsNameValid(nameValue.length > 1);
   }
 
   return (

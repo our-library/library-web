@@ -8,8 +8,7 @@ function PasswordErrorMessage() {
   )
 }
 
-function SignUpPasswordInput({ setPasswordValue }) {
-  const [isPasswordValid, setIsPasswordValid] = useState(true);
+function SignUpPasswordInput({isPasswordValid, setPasswordValue, setIsPasswordValid}) {
 
   function validatePassword(e) {
     const re = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;

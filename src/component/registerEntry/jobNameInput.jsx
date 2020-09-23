@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {jobLists} from './makeGroup/jobLists';
+import {jobLists} from '../../constants/jobLists';
 
 function JobNameInput({setJobKey}) {
   const [jobName, setJobName] = useState('');
