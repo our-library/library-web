@@ -7,6 +7,8 @@ import MakeGroupNameInput from "./makeGroupNameInput";
 import JobNameInput from "../jobNameInput";
 import {makeGroupRequest} from "../../../store/api/groupApi";
 import {fetchUserProfile} from "../../../store/api/usersApi";
+import {removeToken} from "../../../utils/handleToken";
+import {removeGroupCount} from "../../../utils/handleUser";
 
 function MakeGroup() {
   const history = useHistory();
@@ -22,13 +24,14 @@ function MakeGroup() {
     getUserName().then();
   }, []);
 
+  async function getUserName() {
+    await fetchUserProfile().then(data => setUserName(data.name))
+  }
+
   useEffect(() => {
     setIsMakeBtnDisable(!(categoryValue && groupNameValue && isValidJopNameValue));
-  },[categoryValue, groupNameValue, isValidJopNameValue]);
+  }, [categoryValue, groupNameValue, isValidJopNameValue]);
 
-  async function getUserName() {
-   await fetchUserProfile().then(data => setUserName(data.name))
-  }
 
   async function handleMakeGroup() {
     const data = {
@@ -54,40 +57,56 @@ function MakeGroup() {
     }
   }
 
+  function entryLogout() {
+    removeToken();
+    removeGroupCount();
+    history.replace('/register/signIn');
+  }
+
   return (
-    <div className="makeGroupContainer">
-      <div className="makeGroupSec">
-        <h4>도서관 만들기</h4>
-        <div className="makeGroupInputSec">
-          <select
-            className="InputText Input-sm"
-            placeholder="어디에 사용할 예정인가요?"
-            onChange={handleSelectCategory}
-            defaultValue='default'
+    <>
+      <div className="makeGroupContainer">
+        <div className="makeGroupSec">
+          <h4>도서관 만들기</h4>
+          <div className="makeGroupInputSec">
+            <select
+              className="InputText Input-sm"
+              placeholder="어디에 사용할 예정인가요?"
+              onChange={handleSelectCategory}
+              defaultValue='default'
+            >
+              <option value="default" disabled hidden>어디에 사용할 예정인가요?</option>
+              <option value="company">회사</option>
+              <option value="group">단체</option>
+              <option value="personal">개인(혼자이용)</option>
+            </select>
+            <MakeGroupNameInput
+              valueBySelect={valueBySelect}
+              setGroupNameValue={setGroupNameValue}
+            />
+            <JobNameInput
+              setIsValidJopNameValue={setIsValidJopNameValue}
+              setJobKey={setJobKey}
+            />
+          </div>
+          <button
+            onClick={handleMakeGroup}
+            className="Btn-md Btn-primary"
+            disabled={isMakeBtnDisable}
           >
-            <option value="default" disabled hidden>어디에 사용할 예정인가요?</option>
-            <option value="company">회사</option>
-            <option value="group">단체</option>
-            <option value="personal">개인(혼자이용)</option>
-          </select>
-          <MakeGroupNameInput
-            valueBySelect={valueBySelect}
-            setGroupNameValue={setGroupNameValue}
-          />
-          <JobNameInput
-            setIsValidJopNameValue={setIsValidJopNameValue}
-            setJobKey={setJobKey}
-          />
+            관리자로 도서관 만들기
+          </button>
         </div>
+      </div>
+      <div className="entryLogoutSec">
         <button
-          onClick={handleMakeGroup}
-          className="Btn-md Btn-primary"
-          disabled={isMakeBtnDisable}
+          onClick={entryLogout}
+          className="Btn-transparent Btn-md"
         >
-          관리자로 도서관 만들기
+          로그아웃
         </button>
       </div>
-    </div>
+    </>
   )
 }
 

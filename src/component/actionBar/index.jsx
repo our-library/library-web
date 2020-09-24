@@ -8,6 +8,7 @@ import {fetchUserProfile} from "../../store/api/usersApi";
 import {jobLists} from "../../constants/jobLists";
 import CreateConfirmModal from "../modal/CreateConfirmModal";
 import {MODAL_DATA} from "../../constants/modalData";
+import {removeGroupCount} from "../../utils/handleUser";
 
 function ActionBar() {
   const history = useHistory();
@@ -26,6 +27,7 @@ function ActionBar() {
 
   function logout() {
     removeToken();
+    removeGroupCount();
     history.replace('/register/signIn');
   }
 

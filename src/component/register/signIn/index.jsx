@@ -5,6 +5,7 @@ import {getToken, setToken} from "../../../utils/handleToken";
 import {useHistory, useLocation} from "react-router";
 import {loginRequest} from "../../../store/api/registerApi";
 import {fetchGroupMe} from "../../../store/api/groupApi";
+import {setGroupCount} from "../../../utils/handleUser";
 
 function EmailErrorMessage() {
   return (
@@ -58,6 +59,8 @@ function SignIn() {
 
       const groupData = await fetchGroupMe();
       const {count: userGroupCount} = groupData;
+
+      setGroupCount(userGroupCount);
 
       if (userGroupCount === 0) {
         history.replace('/registerEntry');

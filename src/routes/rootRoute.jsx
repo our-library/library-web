@@ -17,13 +17,14 @@ import MemberManagement from "../component/memberManagement";
 import Inquiry from "../component/inquiry";
 import CreateConfirmModal from "../component/modal/CreateConfirmModal";
 import {useLocation} from "react-router";
+import {fetchGroupMe} from "../store/api/groupApi";
+import {getGroupCount} from "../utils/handleUser";
 
 function RootRoute() {
   const location = useLocation();
   let background = location.state && location.state.background;
-  console.log(location.state);
-
   const {SERVICE, SERVICE_BOOK_LIST, SERVICE_ADD_BOOKS, SERVICE_MY_RENT, SERVICE_MEMBER_MANAGEMENT, SERVICE_INQUIRY, SERVICE_SETTING} = ROUTE_PATH;
+
   return (
     <div>
       <Switch location={background || location}>
@@ -32,39 +33,23 @@ function RootRoute() {
         <Route path="/info" component={Info}/>
         <Route path="/register" component={Register}/>
         <Route path='/forgetPassword' component={ForgetPassword}/>
-        <ProtectedRoute path='/registerEntry'>
-          <RegisterEntry />
-        </ProtectedRoute>
-        <ProtectedRoute path='/makeGroup'>
-          <MakeGroup />
-        </ProtectedRoute>
-        <ProtectedRoute path={SERVICE_BOOK_LIST}>
-          <BookList/>
-        </ProtectedRoute>
-        <ProtectedRoute path={SERVICE_ADD_BOOKS}>
-          <AddBooks/>
-        </ProtectedRoute>
-        <ProtectedRoute path={SERVICE_MY_RENT}>
-          <MyRent />
-        </ProtectedRoute>
-        <ProtectedRoute path={SERVICE_INQUIRY}>
-          <Inquiry/>
-        </ProtectedRoute>
-        <ProtectedRoute path={SERVICE_MEMBER_MANAGEMENT}>
-          <MemberManagement/>
-        </ProtectedRoute>
-        <ProtectedRoute path={SERVICE_SETTING}>
-          <Setting />
-        </ProtectedRoute>
-        <ProtectedRoute path='/service/modal/:id'>
-          <CreateConfirmModal />
-        </ProtectedRoute>
-        <Redirect from={SERVICE} to={SERVICE_BOOK_LIST} />
+
+        <RegisterProtectedPage path='/registerEntry' children={<RegisterEntry/>} />
+        <RegisterProtectedPage path='/makeGroup' children={<MakeGroup />}/>
+
+        <ProtectedRoute path={SERVICE_BOOK_LIST} children={<BookList/>} />
+        <ProtectedRoute path={SERVICE_ADD_BOOKS} children={<AddBooks/>} />
+        <ProtectedRoute path={SERVICE_MY_RENT} children={<MyRent/>} />
+        <ProtectedRoute path={SERVICE_INQUIRY} children={<Inquiry/>} />
+        <ProtectedRoute path={SERVICE_MEMBER_MANAGEMENT} children={<MemberManagement />} />
+        <ProtectedRoute path={SERVICE_SETTING} children={<Setting/>} />
+        <ProtectedRoute path='/service/modal/:id' children={<CreateConfirmModal/>} />
+        <Redirect from={SERVICE} to={SERVICE_BOOK_LIST}/>
         <Redirect path="*" to="/"/>
         <Route component={NotFound}/>
       </Switch>
 
-      {background && <Route path="/service/modal/:id" children={<CreateConfirmModal />} />}
+      {background && <Route path="/service/modal/:id" children={<CreateConfirmModal/>}/>}
 
     </div>
   )
@@ -77,6 +62,20 @@ export function ProtectedRoute({children, ...rest}) {
     <Route
       {...rest}
       render={() => isAuthenticated ? children : <Redirect to='/register/signIn'/>}
+    />
+  )
+}
+
+function RegisterProtectedPage({children, ...rest}) {
+  const isAuthenticated = getToken();
+  const userGroupCount = getGroupCount();
+
+  return (
+    <Route
+      {...rest}
+      render={() =>
+        (isAuthenticated && userGroupCount !== 0) ? children : <Redirect to='/service'/>
+      }
     />
   )
 }

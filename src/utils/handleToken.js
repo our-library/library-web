@@ -14,6 +14,3 @@ export function removeToken() {
   Cookies.remove('userToken');
 }
 
-function isTokenValid(token) {
-
-}

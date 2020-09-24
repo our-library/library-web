@@ -7,7 +7,6 @@ function CreateConfirmModal() {
   const location = useLocation();
   const {title, subTitle, description, isConfirmBtn, isCloseBtn} = location.state.data;
   const {groupInvitationKey} = location.state;
-  const id = useParams();
 
   return (
     <>
