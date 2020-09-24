@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Api} from "../../../store/api";
 import {getToken, setToken} from "../../../utils/handleToken";
@@ -28,29 +28,35 @@ function SignIn() {
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
-  const [isGroupUser, setIsGroupUser] = useState(null);
+  const [isLoginBtnDisable, setIsLoginBtnDisable] = useState(true);
+
+  useEffect(() => {
+    setIsLoginBtnDisable(!(emailValue && passwordValue));
+  },[emailValue, passwordValue]);
 
   function validateEmail(e) {
+    const {value: emailValue} = e.target;
     const re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    const isValid = re.test(e.target.value);
-    setEmailValue(e.target.value);
-    return setIsEmailValid(isValid);
+    const isValid = re.test(emailValue);
+    setEmailValue(emailValue);
+    setIsEmailValid(isValid);
   }
 
   function validatePassword(e) {
+    const {value: passwordValue} = e.target;
     const re = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;
-    const isValid = re.test(e.target.value);
-    setPasswordValue(e.target.value);
-    return setIsPasswordValid(isValid);
+    const isValid = re.test(passwordValue);
+    setPasswordValue(passwordValue);
+    setIsPasswordValid(isValid);
   }
 
   async function requestLogin() {
     try {
       const { token } = await loginRequest(emailValue, passwordValue);
+
       setToken(token);
 
       const groupData = await fetchGroupMe();
-      console.log(groupData);
       const {count: userGroupCount} = groupData;
 
       if (userGroupCount === 0) {
@@ -71,7 +77,7 @@ return (
         type="text"
         placeholder="이메일@example.com"
         onChange={validateEmail}
-        onFocus={() => setIsEmailValid(false)}
+        value={emailValue}
       />
       {!isEmailValid && <EmailErrorMessage/>}
       <input
@@ -79,12 +85,12 @@ return (
         type="password"
         placeholder="영문/숫자 혼용 8자 이상"
         onChange={validatePassword}
-        onFocus={() => setIsPasswordValid(false)}
+        value={passwordValue}
       />
       {!isPasswordValid && <PasswordErrorMessage/>}
       <button
         type="button"
-        disabled={!isEmailValid && !isPasswordValid}
+        disabled={isLoginBtnDisable}
         className="Btn-default Btn-sm"
         onClick={requestLogin}
       >로그인

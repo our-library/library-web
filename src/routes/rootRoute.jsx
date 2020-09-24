@@ -4,7 +4,7 @@ import ForgetPassword from '../component/register/forgetPassword/forgetPassword'
 import NotFound from '../component/notFound/notFound';
 import BookList from '../component/bookList';
 import RegisterEntry from "../component/registerEntry";
-import MakeGroup from "../component/registerEntry/makeGroup/makeGroup";
+import MakeGroup from "../component/registerEntry/makeGroup";
 import {getToken} from "../utils/handleToken";
 import Home from "../component/home";
 import Info from "../component/info";

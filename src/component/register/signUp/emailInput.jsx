@@ -74,7 +74,6 @@ function SignUpEmailInput({setEmailAuthId, emailAuthId, emailValue, setEmailValu
           type="text"
           placeholder="이메일@example.com"
           onChange={validateEmail}
-          onFocus={() => setIsEmailValid(false)}
         />
         <button
           type="button"

@@ -1,22 +1,22 @@
 import React, {useState} from 'react';
 import {jobLists} from '../../constants/jobLists';
 
-function JobNameInput({setJobKey}) {
+function JobNameInput({setJobKey, setIsValidJopNameValue}) {
   const [jobName, setJobName] = useState('');
   const [filterJobList, setFilterJobList] = useState([]);
   const [isGroupSearchResult, setIsGroupSearchResult] = useState(false);
 
   function handleJobKey(e) {
     const target = e.target.value;
-    setJobName(target);
+
     const filterJobList = jobLists.filter((jobList) => {
       if (target && jobList.jobName.includes(target)) {
-        setIsGroupSearchResult(false);
         return jobList
-      } else {
-        setIsGroupSearchResult(true);
       }
     });
+    setIsGroupSearchResult(filterJobList.length > 1);
+    setIsValidJopNameValue(target);
+    setJobName(target);
     setFilterJobList(filterJobList);
   }
 
@@ -25,7 +25,6 @@ function JobNameInput({setJobKey}) {
     setJobName(jobName);
     setIsGroupSearchResult(false);
   }
-  console.log(filterJobList);
 
   return (
     <>

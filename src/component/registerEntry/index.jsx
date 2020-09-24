@@ -9,6 +9,8 @@ function RegisterEntry() {
   const history = useHistory();
   const [jobKey, setJobKey] = useState('');
   const [inviteCode, setInviteCode] = useState('');
+  const [isValidJopNameValue, setIsValidJopNameValue] = useState(false);
+  const [isInvitationBtnDisable, setIsInvitationBtnDisable] = useState(true);
 
   async function handleJoinGroup() {
     joinGroupRequest(inviteCode, jobKey)
@@ -16,6 +18,10 @@ function RegisterEntry() {
         history.push('/service');
       })
   }
+
+  useEffect(() => {
+    setIsInvitationBtnDisable(!(inviteCode && isValidJopNameValue))
+  },[isValidJopNameValue, inviteCode]);
 
   return (
     <div className="entryContainer">
@@ -40,10 +46,14 @@ function RegisterEntry() {
 
         <div>
           <InviteCodeInput setInviteCode={setInviteCode}/>
-          <JobNameInput setJobKey={setJobKey}/>
+          <JobNameInput
+            setIsValidJopNameValue={setIsValidJopNameValue}
+            setJobKey={setJobKey}
+          />
         </div>
         <button
           onClick={handleJoinGroup}
+          disabled={isInvitationBtnDisable}
           className="Btn-md Btn-primary">초대 수락하기
         </button>
       </div>

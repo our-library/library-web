@@ -8,7 +8,7 @@ function PasswordErrorMessage() {
   )
 }
 
-function SignUpPasswordInput({isPasswordValid, setPasswordValue, setIsPasswordValid}) {
+function SignUpPasswordInput({passwordValue, isPasswordValid, setPasswordValue, setIsPasswordValid}) {
 
   function validatePassword(e) {
     const re = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;
@@ -24,7 +24,7 @@ function SignUpPasswordInput({isPasswordValid, setPasswordValue, setIsPasswordVa
         type="password"
         placeholder="비밀번호 영문/숫자 혼용 8자 이상"
         onChange={validatePassword}
-        onFocus={() => setIsPasswordValid(false)}
+        value={passwordValue}
       />
       {isPasswordValid ? true : <PasswordErrorMessage/>}
     </>

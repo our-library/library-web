@@ -8,12 +8,12 @@ function NameErrorMessage() {
   )
 }
 
-function SignUpNameInput({isNameValid, setIsNameValid, setNameValue}) {
+function SignUpNameInput({nameValue, isNameValid, setIsNameValid, setNameValue}) {
 
   function validateName(e) {
     const {value: nameValue} = e.target;
-    setNameValue(nameValue.length > 1);
-    return setIsNameValid(nameValue.length > 1);
+    setNameValue(nameValue);
+    setIsNameValid(nameValue.length > 1);
   }
 
   return (
@@ -24,7 +24,7 @@ function SignUpNameInput({isNameValid, setIsNameValid, setNameValue}) {
         placeholder="이름"
         maxLength={100}
         onChange={validateName}
-        onFocus={() => setIsNameValid(false)}
+        value={nameValue}
       />
       {!isNameValid && <NameErrorMessage/>}
     </>

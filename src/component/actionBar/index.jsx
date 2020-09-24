@@ -35,7 +35,7 @@ function ActionBar() {
       setUserRentals(rentals);
       setUserOverdueRentals(overdueRentals);
     })
-  },[userRentals, userOverdueRentals]);
+  },[userName, userGroupName, userDepartment, userJobName, userRentals, userOverdueRentals]);
 
   function setJobName(jobKey) {
     const jobKeyIndex = jobLists.findIndex((list) => {

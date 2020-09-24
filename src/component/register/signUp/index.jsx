@@ -16,10 +16,10 @@ function SignUp() {
   const [isTermsValid, setIsTermsValid] = useState(false);
   const [isNameValid, setIsNameValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
-  const [signUpDisableBtn, setSignUpDisableBtn] = useState(true);
+  const [isSignUpBtnDisable, setIsSignUpBtnDisable] = useState(true);
 
   useEffect(() => {
-    (isNameValid && isPasswordValid && isTermsValid && emailAuthId) && setSignUpDisableBtn(false);
+    setIsSignUpBtnDisable(!(isNameValid && isPasswordValid && isTermsValid && emailAuthId))
   }, [isTermsValid, isNameValid, isPasswordValid, emailAuthId]);
 
 
@@ -40,6 +40,7 @@ function SignUp() {
     <div>
       <form action="" className="registerForm">
         <SignUpNameInput
+          nameValue={nameValue}
           isNameValid={isNameValid}
           setIsNameValid={setIsNameValid}
           setNameValue={setNameValue}
@@ -51,6 +52,7 @@ function SignUp() {
           emailValue={emailValue}
         />
         <SignUpPasswordInput
+          passwordValue={passwordValue}
           isPasswordValid={isPasswordValid}
           setIsPasswordValid={setIsPasswordValid}
           setPasswordValue={setPasswordValue}
@@ -60,7 +62,7 @@ function SignUp() {
           setIsTermsValid={setIsTermsValid}
         />
         <button
-          disabled={signUpDisableBtn}
+          disabled={isSignUpBtnDisable}
           className="Btn-default Btn-sm"
           onClick={submitUser}
         >회원가입

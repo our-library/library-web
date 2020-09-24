@@ -14,23 +14,29 @@ function MakeGroup() {
   const [groupNameValue, setGroupNameValue] = useState('');
   const [jobKey, setJobKey] = useState('');
   const [valueBySelect, setValueBySelect] = useState('회사 또는 단체 이름');
+  const [isValidJopNameValue, setIsValidJopNameValue] = useState(false);
+  const [isMakeBtnDisable, setIsMakeBtnDisable] = useState(true);
 
   const [userName, setUserName] = useState('');
   useEffect(() => {
-    getUserName();
+    getUserName().then();
   }, []);
 
-  function getUserName() {
-    fetchUserProfile().then(data => setUserName(data.name))
+  useEffect(() => {
+    setIsMakeBtnDisable(!(categoryValue && groupNameValue && isValidJopNameValue));
+  },[categoryValue, groupNameValue, isValidJopNameValue]);
+
+  async function getUserName() {
+   await fetchUserProfile().then(data => setUserName(data.name))
   }
 
-  function handleMakeGroup() {
+  async function handleMakeGroup() {
     const data = {
       category: categoryValue,
       groupName: groupNameValue,
       jobKey: jobKey
     };
-    makeGroupRequest(data)
+    await makeGroupRequest(data)
       .then(() => {
         history.replace('/service')
       });
@@ -38,7 +44,7 @@ function MakeGroup() {
 
   function handleSelectCategory(e) {
     const target = e.target.value;
-    setGroupNameValue(target);
+    setCategoryValue(target);
     if (target === 'company') {
       setValueBySelect('회사 이름');
     } else if (target === 'group') {
@@ -64,12 +70,20 @@ function MakeGroup() {
             <option value="group">단체</option>
             <option value="personal">개인(혼자이용)</option>
           </select>
-          <MakeGroupNameInput valueBySelect={valueBySelect} setGroupNameValue={setGroupNameValue}/>
-          <JobNameInput setJobKey={setJobKey}/>
+          <MakeGroupNameInput
+            valueBySelect={valueBySelect}
+            setGroupNameValue={setGroupNameValue}
+          />
+          <JobNameInput
+            setIsValidJopNameValue={setIsValidJopNameValue}
+            setJobKey={setJobKey}
+          />
         </div>
         <button
           onClick={handleMakeGroup}
-          className="Btn-md Btn-primary">
+          className="Btn-md Btn-primary"
+          disabled={isMakeBtnDisable}
+        >
           관리자로 도서관 만들기
         </button>
       </div>

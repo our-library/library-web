@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
+import {TERMS_LINK} from "../../../constants/termsLink";
 
 function SignUpCheckboxInput({isTermsValid, setIsTermsValid}) {
-
+  const {TERMS_OF_USE, INFO_PROCESSING_POLICY} = TERMS_LINK;
 
   function validateTerms() {
     setIsTermsValid(!isTermsValid);
@@ -19,10 +20,10 @@ function SignUpCheckboxInput({isTermsValid, setIsTermsValid}) {
       className="checkMark"
       />
       <span>(필수) 아워 라이브러리의&nbsp;
-        <a href="https://www.notion.so/v-1-0-0-a795b84197734c63a7d9a58fadeba0ba" target="_blank" className="TextBtn">
+        <a href={TERMS_OF_USE} target="_blank" className="TextBtn">
           이용약관
         </a>,
-        <a href="https://www.notion.so/v-1-0-0-5f7d9b04451747f9938113be7a42e4ad" target="_blank" className="TextBtn">
+        <a href={INFO_PROCESSING_POLICY} target="_blank" className="TextBtn">
           개인정보 처리방침
         </a>
         에 동의합니다.</span>
