@@ -1,5 +1,5 @@
 export const ROUTE_PATH = {
-  SERVICE : '/service',
+  SERVICE: '/service',
   SERVICE_BOOK_LIST: '/service/bookList',
   SERVICE_ADD_BOOKS: '/service/addBooks',
   SERVICE_MY_RENT: '/service/myRent',

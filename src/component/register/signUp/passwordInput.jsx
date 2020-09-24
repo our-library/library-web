@@ -1,15 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 function PasswordErrorMessage() {
-  return (
-    <div className="InputErrorMsg">
-      형식에 맞는 비밀번호를 입력해 주세요.
-    </div>
-  )
+  return <div className="InputErrorMsg">형식에 맞는 비밀번호를 입력해 주세요.</div>;
 }
 
-function SignUpPasswordInput({passwordValue, isPasswordValid, setPasswordValue, setIsPasswordValid}) {
-
+function SignUpPasswordInput({
+  passwordValue,
+  isPasswordValid,
+  setPasswordValue,
+  setIsPasswordValid,
+}) {
   function validatePassword(e) {
     const re = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;
     const isValid = re.test(e.target.value);
@@ -26,9 +26,9 @@ function SignUpPasswordInput({passwordValue, isPasswordValid, setPasswordValue, 
         onChange={validatePassword}
         value={passwordValue}
       />
-      {isPasswordValid ? true : <PasswordErrorMessage/>}
+      {isPasswordValid ? true : <PasswordErrorMessage />}
     </>
-  )
+  );
 }
 
-export default SignUpPasswordInput
+export default SignUpPasswordInput;

@@ -1,15 +1,15 @@
 import React from 'react';
-import Nav from "../../component/nav";
+import Nav from '../../component/nav';
 
-function WebLayout({children}) {
+function WebLayout({ children }) {
   return (
     <>
       <div className="webLayoutContainer">
-        <Nav/>
+        <Nav />
         {children}
       </div>
     </>
-  )
+  );
 }
 
-export default WebLayout
+export default WebLayout;

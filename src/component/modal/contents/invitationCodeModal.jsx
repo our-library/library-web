@@ -1,6 +1,6 @@
-import React, {useRef} from 'react';
+import React, { useRef } from 'react';
 
-function InvitationCodeModal({groupInvitationKey}) {
+function InvitationCodeModal({ groupInvitationKey }) {
   const copyText = useRef(groupInvitationKey);
 
   function copyToClipboard() {
@@ -11,9 +11,13 @@ function InvitationCodeModal({groupInvitationKey}) {
 
   return (
     <div className="invitationCodeBox">
-      <p className="inviteTag"><small><b>초대코드</b></small></p>
+      <p className="inviteTag">
+        <small>
+          <b>초대코드</b>
+        </small>
+      </p>
       <textarea
-        name='invitationCodeInput'
+        name="invitationCodeInput"
         className="invitationCodeInput"
         value={groupInvitationKey}
         rows={1}
@@ -21,10 +25,9 @@ function InvitationCodeModal({groupInvitationKey}) {
         readOnly
       />
 
-      <button onClick={copyToClipboard}>복사
-      </button>
+      <button type="button" onClick={copyToClipboard}>복사</button>
     </div>
-  )
+  );
 }
 
-export default InvitationCodeModal
+export default InvitationCodeModal;

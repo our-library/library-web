@@ -1,19 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 function NameErrorMessage() {
-  return (
-    <div className="InputErrorMsg">
-      이름은 입력해 주세요. (1자 ~ 100자)
-    </div>
-  )
+  return <div className="InputErrorMsg">이름은 입력해 주세요. (1자 ~ 100자)</div>;
 }
 
-function SignUpNameInput({nameValue, isNameValid, setIsNameValid, setNameValue}) {
-
+function SignUpNameInput({ nameValue, isNameValid, setIsNameValid, setNameValue }) {
   function validateName(e) {
-    const {value: nameValue} = e.target;
-    setNameValue(nameValue);
-    setIsNameValid(nameValue.length > 1);
+    const { value } = e.target;
+    setNameValue(value);
+    setIsNameValid(value.length > 1);
   }
 
   return (
@@ -26,9 +21,9 @@ function SignUpNameInput({nameValue, isNameValid, setIsNameValid, setNameValue})
         onChange={validateName}
         value={nameValue}
       />
-      {!isNameValid && <NameErrorMessage/>}
+      {!isNameValid && <NameErrorMessage />}
     </>
-  )
+  );
 }
 
-export default SignUpNameInput
+export default SignUpNameInput;

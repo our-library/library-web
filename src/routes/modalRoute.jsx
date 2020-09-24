@@ -1,21 +1,25 @@
 import React from 'react';
-import {Route, Switch, useLocation} from "react-router";
-import {ProtectedRoute} from "./rootRoute";
-import CreateConfirmModal from "../component/modal/CreateConfirmModal";
+import { Route, Switch, useLocation } from 'react-router';
+import { ProtectedRoute } from './rootRoute';
+import CreateConfirmModal from '../component/modal/CreateConfirmModal';
 
 function ModalRoute() {
   const location = useLocation();
-  let background = location.state && location.state.background;
+  const background = location.state && location.state.background;
 
-  return(
+  return (
     <div>
       <Switch location={background || location}>
-        <ProtectedRoute path='/service/modal/:id'>
+        <ProtectedRoute path="/service/modal/:id">
           <CreateConfirmModal />
         </ProtectedRoute>
       </Switch>
-      {background && <Route path="/service/modal/:id" children={<CreateConfirmModal />} />}
+      {background && (
+        <Route path="/service/modal/:id">
+          <CreateConfirmModal />
+        </Route>
+      )}
     </div>
-  )
+  );
 }
-export default ModalRoute
+export default ModalRoute;
