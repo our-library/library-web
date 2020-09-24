@@ -45,7 +45,7 @@ function ActionBar() {
       setUserOverdueRentals(overdueRentals);
       setGroupInvitationKey(invitationKey);
     })
-  }, [userName, userGroupName, userDepartment, userJobName, userRentals, userOverdueRentals]);
+  }, []);
 
   function setJobName(jobKey) {
     const jobKeyIndex = jobLists.findIndex((list) => {
