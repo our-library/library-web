@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom'
+import ActionBar from "../component/actionBar"
 import ForgetPassword from '../component/register/forgetPassword/forgetPassword';
 import NotFound from '../component/notFound/notFound';
 import BookList from '../component/bookList';
@@ -21,30 +22,17 @@ import ServiceMain from "../component/serviceMain";
 function ServiceRoute() {
   const {SERVICE, SERVICE_BOOK_LIST, SERVICE_ADD_BOOKS, SERVICE_MY_RENT, SERVICE_MEMBER_MANAGEMENT, SERVICE_INQUIRY, SERVICE_SETTING} = ROUTE_PATH;
   return (
-    <Switch>
-      <ProtectedRoute path={SERVICE}>
-        <ServiceMain />
-      </ProtectedRoute>
-      {/*<ProtectedRoute path={SERVICE_BOOK_LIST}>*/}
-      {/*  <BookList/>*/}
-      {/*</ProtectedRoute>*/}
-      {/*<ProtectedRoute path={SERVICE_ADD_BOOKS}>*/}
-      {/*  <AddBooks/>*/}
-      {/*</ProtectedRoute>*/}
-      {/*<ProtectedRoute path={SERVICE_MY_RENT}>*/}
-      {/*  <MyRent />*/}
-      {/*</ProtectedRoute>*/}
-      {/*<ProtectedRoute path={SERVICE_INQUIRY}>*/}
-      {/*  <Inquiry/>*/}
-      {/*</ProtectedRoute>*/}
-      {/*<ProtectedRoute path={SERVICE_MEMBER_MANAGEMENT}>*/}
-      {/*  <MemberManagement/>*/}
-      {/*</ProtectedRoute>*/}
-      {/*<ProtectedRoute path={SERVICE_SETTING}>*/}
-      {/*  <Setting />*/}
-      {/*</ProtectedRoute>*/}
-      {/*<Redirect from={SERVICE} to={SERVICE_BOOK_LIST} />*/}
-    </Switch>
+    <div className="serviceLayoutContainer">
+      <ActionBar />
+      <Switch>
+        <Route path={SERVICE_BOOK_LIST} component={BookList} />
+        <Route path={SERVICE_ADD_BOOKS} component={AddBooks} />
+        <Route path={SERVICE_MY_RENT} component={MyRent} />
+        <Route path={SERVICE_INQUIRY} component={Inquiry} />
+        <Route path={SERVICE_MEMBER_MANAGEMENT} component={MemberManagement} />
+        <Route path={SERVICE_SETTING} children={<Setting/>} />
+      </Switch>
+    </div>
   )
 }
 

@@ -19,6 +19,7 @@ import CreateConfirmModal from "../component/modal/CreateConfirmModal";
 import {useLocation} from "react-router";
 import {fetchGroupMe} from "../store/api/groupApi";
 import {getGroupCount} from "../utils/handleUser";
+import ServiceRoute from '../routes/serviceRoute';
 
 function RootRoute() {
   const location = useLocation();
@@ -37,13 +38,8 @@ function RootRoute() {
         <RegisterProtectedPage path='/registerEntry' children={<RegisterEntry/>} />
         <RegisterProtectedPage path='/makeGroup' children={<MakeGroup />}/>
 
-        <ProtectedRoute path={SERVICE_BOOK_LIST} children={<BookList/>} />
-        <ProtectedRoute path={SERVICE_ADD_BOOKS} children={<AddBooks/>} />
-        <ProtectedRoute path={SERVICE_MY_RENT} children={<MyRent/>} />
-        <ProtectedRoute path={SERVICE_INQUIRY} children={<Inquiry/>} />
-        <ProtectedRoute path={SERVICE_MEMBER_MANAGEMENT} children={<MemberManagement />} />
-        <ProtectedRoute path={SERVICE_SETTING} children={<Setting/>} />
-        <ProtectedRoute path='/service/modal/:id' children={<CreateConfirmModal/>} />
+        <Route path="/service" component={ServiceRoute} />
+        <Route path='/service/modal/:id' children={<CreateConfirmModal/>} />
         <Redirect from={SERVICE} to={SERVICE_BOOK_LIST}/>
         <Redirect path="*" to="/"/>
         <Route component={NotFound}/>
