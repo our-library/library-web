@@ -1,24 +1,24 @@
-import {Api} from "./index";
+import { Api } from './index';
 
 export function fetchGroupMe() {
   return Api.fetch({
     url: 'groups/me',
     method: 'get',
-  })
+  });
 }
 
 export function joinGroupRequest(invitationKey, jobKey) {
-  return  Api.fetch({
+  return Api.fetch({
     url: '/groups/join',
     method: 'post',
-    data: { invitationKey, jobKey }
-  })
+    data: { invitationKey, jobKey },
+  });
 }
 
-export function makeGroupRequest({category, groupName, jobKey}) {
+export function makeGroupRequest({ category, groupName, jobKey }) {
   return Api.fetch({
     url: '/groups',
     method: 'post',
-    data: {category, groupName, jobKey}
-  })
+    data: { category, groupName, jobKey },
+  });
 }

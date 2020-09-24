@@ -1,9 +1,8 @@
-import React, {useState, useEffect} from 'react';
-import {useHistory, useRouteMatch} from "react-router";
-import InviteCodeInput from "./inviteCodeInput";
-import JobNameInput from "./jobNameInput";
-import {Api} from "../../store/api";
-import {joinGroupRequest} from "../../store/api/groupApi";
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
+import InviteCodeInput from './inviteCodeInput';
+import JobNameInput from './jobNameInput';
+import { joinGroupRequest } from '../../store/api/groupApi';
 
 function RegisterEntry() {
   const history = useHistory();
@@ -13,52 +12,53 @@ function RegisterEntry() {
   const [isInvitationBtnDisable, setIsInvitationBtnDisable] = useState(true);
 
   async function handleJoinGroup() {
-    joinGroupRequest(inviteCode, jobKey)
-      .then(() => {
-        history.push('/service');
-      })
+    joinGroupRequest(inviteCode, jobKey).then(() => {
+      history.push('/service');
+    });
   }
 
   useEffect(() => {
-    setIsInvitationBtnDisable(!(inviteCode && isValidJopNameValue))
-  },[isValidJopNameValue, inviteCode]);
+    setIsInvitationBtnDisable(!(inviteCode && isValidJopNameValue));
+  }, [isValidJopNameValue, inviteCode]);
 
   return (
     <div className="entryContainer">
       <div className="entrySec">
         <h4>도서관 만들기</h4>
-        <p>양진화님! <br/>
+        <p>
+          양진화님!
+          <br />
           나만의 도서관을 만들어 보세요!
         </p>
-        <button
-          onClick={() => history.replace('/makeGroup')}
-          className="Btn-md Btn-primary">
+        <button type="button" onClick={() => history.replace('/makeGroup')} className="Btn-md Btn-primary">
           도서관 만들기
         </button>
       </div>
 
       <div className="entrySec">
         <h4>초대 수락하기</h4>
-        <p>양진화님! <br/>
-          초대를 받으셨나요? <br/>
+        <p>
+          양진화님!
+          <br />
+          초대를 받으셨나요? <br />
           받으신 초대코드를 입력하세요!
         </p>
 
         <div>
-          <InviteCodeInput setInviteCode={setInviteCode}/>
-          <JobNameInput
-            setIsValidJopNameValue={setIsValidJopNameValue}
-            setJobKey={setJobKey}
-          />
+          <InviteCodeInput setInviteCode={setInviteCode} />
+          <JobNameInput setIsValidJopNameValue={setIsValidJopNameValue} setJobKey={setJobKey} />
         </div>
         <button
+          type="button"
           onClick={handleJoinGroup}
           disabled={isInvitationBtnDisable}
-          className="Btn-md Btn-primary">초대 수락하기
+          className="Btn-md Btn-primary"
+        >
+          초대 수락하기
         </button>
       </div>
     </div>
-  )
+  );
 }
 
-export default RegisterEntry
+export default RegisterEntry;

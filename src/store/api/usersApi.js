@@ -1,9 +1,8 @@
-import {Api} from "./index";
-
+import { Api } from './index';
 
 export function fetchUserProfile() {
   return Api.fetch({
     url: '/users/me/profile',
     method: 'get',
-  })
+  });
 }

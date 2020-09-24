@@ -1,12 +1,12 @@
 import * as React from 'react';
-import ServiceLayout from "../../app/layout/serviceLayout";
+import ServiceLayout from '../../app/layout/serviceLayout';
 
 function Setting() {
-  return(
+  return (
     <ServiceLayout>
       <h2>세팅페이지</h2>
     </ServiceLayout>
-  )
+  );
 }
 
-export default Setting
+export default Setting;

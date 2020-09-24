@@ -1,14 +1,13 @@
-import React from 'react';
-import {useState} from "react";
-import {Api} from "../../../store/api";
-import {useEffect} from "react";
-import {useHistory} from "react-router";
-import MakeGroupNameInput from "./makeGroupNameInput";
-import JobNameInput from "../jobNameInput";
-import {makeGroupRequest} from "../../../store/api/groupApi";
-import {fetchUserProfile} from "../../../store/api/usersApi";
-import {removeToken} from "../../../utils/handleToken";
-import {removeGroupCount} from "../../../utils/handleUser";
+import React, { useState, useEffect } from 'react';
+
+import { useHistory } from 'react-router';
+
+import MakeGroupNameInput from './makeGroupNameInput';
+import JobNameInput from '../jobNameInput';
+import { makeGroupRequest } from '../../../store/api/groupApi';
+import { fetchUserProfile } from '../../../store/api/usersApi';
+import { removeToken } from '../../../utils/handleToken';
+import { removeGroupCount } from '../../../utils/handleUser';
 
 function MakeGroup() {
   const history = useHistory();
@@ -25,24 +24,22 @@ function MakeGroup() {
   }, []);
 
   async function getUserName() {
-    await fetchUserProfile().then(data => setUserName(data.name))
+    await fetchUserProfile().then((data) => setUserName(data.name));
   }
 
   useEffect(() => {
     setIsMakeBtnDisable(!(categoryValue && groupNameValue && isValidJopNameValue));
   }, [categoryValue, groupNameValue, isValidJopNameValue]);
 
-
   async function handleMakeGroup() {
     const data = {
       category: categoryValue,
       groupName: groupNameValue,
-      jobKey: jobKey
+      jobKey,
     };
-    await makeGroupRequest(data)
-      .then(() => {
-        history.replace('/service')
-      });
+    await makeGroupRequest(data).then(() => {
+      history.replace('/service');
+    });
   }
 
   function handleSelectCategory(e) {
@@ -73,9 +70,11 @@ function MakeGroup() {
               className="InputText Input-sm"
               placeholder="어디에 사용할 예정인가요?"
               onChange={handleSelectCategory}
-              defaultValue='default'
+              defaultValue="default"
             >
-              <option value="default" disabled hidden>어디에 사용할 예정인가요?</option>
+              <option value="default" disabled hidden>
+                어디에 사용할 예정인가요?
+              </option>
               <option value="company">회사</option>
               <option value="group">단체</option>
               <option value="personal">개인(혼자이용)</option>
@@ -84,12 +83,10 @@ function MakeGroup() {
               valueBySelect={valueBySelect}
               setGroupNameValue={setGroupNameValue}
             />
-            <JobNameInput
-              setIsValidJopNameValue={setIsValidJopNameValue}
-              setJobKey={setJobKey}
-            />
+            <JobNameInput setIsValidJopNameValue={setIsValidJopNameValue} setJobKey={setJobKey} />
           </div>
           <button
+            type="button"
             onClick={handleMakeGroup}
             className="Btn-md Btn-primary"
             disabled={isMakeBtnDisable}
@@ -99,15 +96,12 @@ function MakeGroup() {
         </div>
       </div>
       <div className="entryLogoutSec">
-        <button
-          onClick={entryLogout}
-          className="Btn-transparent Btn-md"
-        >
+        <button type="button" onClick={entryLogout} className="Btn-transparent Btn-md">
           로그아웃
         </button>
       </div>
     </>
-  )
+  );
 }
 
-export default MakeGroup
+export default MakeGroup;

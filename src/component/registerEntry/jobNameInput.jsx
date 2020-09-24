@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import {jobLists} from '../../constants/jobLists';
+import React, { useState } from 'react';
+import { jobLists } from '../../constants/jobLists';
 
-function JobNameInput({setJobKey, setIsValidJopNameValue}) {
+function JobNameInput({ setJobKey, setIsValidJopNameValue }) {
   const [jobName, setJobName] = useState('');
   const [filterJobList, setFilterJobList] = useState([]);
   const [isGroupSearchResult, setIsGroupSearchResult] = useState(false);
@@ -9,20 +9,21 @@ function JobNameInput({setJobKey, setIsValidJopNameValue}) {
   function handleJobKey(e) {
     const target = e.target.value;
 
-    const filterJobList = jobLists.filter((jobList) => {
+    const nextFilterJobList = jobLists.filter((jobList) => {
       if (target && jobList.jobName.includes(target)) {
-        return jobList
+        return jobList;
       }
+      return false;
     });
-    setIsGroupSearchResult(filterJobList.length > 1);
+    setIsGroupSearchResult(nextFilterJobList.length > 1);
     setIsValidJopNameValue(target);
     setJobName(target);
-    setFilterJobList(filterJobList);
+    setFilterJobList(nextFilterJobList);
   }
 
-  function handleJobNameList(jobKey, jobName) {
+  function handleJobNameList(jobKey, nextJobName) {
     setJobKey(jobKey);
-    setJobName(jobName);
+    setJobName(nextJobName);
     setIsGroupSearchResult(false);
   }
 
@@ -32,25 +33,31 @@ function JobNameInput({setJobKey, setIsValidJopNameValue}) {
         type="text"
         className="InputText Input-sm jobNameInput"
         placeholder="직업 이름 (예: CEO, PM, 백엔드 개발자 등)"
-        value = {jobName}
+        value={jobName}
         onChange={handleJobKey}
       />
-      {isGroupSearchResult &&
-      <div className="makeGroupSearchResult">
-        <ul>
-          {filterJobList.map((jobList, index) => {
-            const {jobKey, jobName} = jobList;
-            return <li
-              onClick={() => handleJobNameList(jobKey, jobName)}
-              key={index}
-              className="filterJobList"
-            > {jobName} </li>
-          })}
-        </ul>
-      </div>
-      }
+      {isGroupSearchResult && (
+        <div className="makeGroupSearchResult">
+          <ul>
+            {filterJobList.map((jobList, index) => {
+              const { jobKey, jobName: name } = jobList;
+              return (
+                <li
+                  onClick={() => handleJobNameList(jobKey, name)}
+                  key={index}
+                  className="filterJobList"
+                >
+                  {' '}
+                  {name}
+                  {' '}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
     </>
-  )
+  );
 }
 
-export default JobNameInput
+export default JobNameInput;

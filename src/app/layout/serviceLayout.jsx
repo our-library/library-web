@@ -1,7 +1,7 @@
 import React from 'react';
-import ActionBar from "../../component/actionBar";
+import ActionBar from '../../component/actionBar';
 
-function ServiceLayout({children}) {
+function ServiceLayout({ children }) {
   return (
     <>
       <div className="serviceLayoutContainer">
@@ -9,7 +9,7 @@ function ServiceLayout({children}) {
         {children}
       </div>
     </>
-  )
+  );
 }
 
-export default ServiceLayout
+export default ServiceLayout;

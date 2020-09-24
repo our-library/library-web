@@ -1,38 +1,33 @@
 import axios from 'axios';
-import {getToken} from "../../utils/handleToken";
+import { getToken } from '../../utils/handleToken';
 
-const mockOptions = {
-  url: 'string',
-  method: 'get' | 'post' | 'put' | 'delete',
-  data: {
-    email: 'string',
-    password: 'string',
-  },
-  query: {
-    ID: 'string'
-  },
-};
+// const mockOptions = {
+//   url: 'string',
+//   method: 'get' | 'post' | 'put' | 'delete',
+//   data: {
+//     email: 'string',
+//     password: 'string',
+//   },
+//   query: {
+//     ID: 'string',
+//   },
+// };
 
 export class Api {
   static async fetch(apiOptions) {
-    const access_token = getToken();
+    const accessToken = getToken();
     const axiosConfig = {
-      baseURL: "http://api.ourlibrary.co.kr/",
+      baseURL: 'http://api.ourlibrary.co.kr/',
       ...apiOptions,
     };
 
-    if(access_token) {
+    if (accessToken) {
       axiosConfig.headers = {
-        'Authorization': `Bearer ${access_token}`
-      }
+        Authorization: `Bearer ${accessToken}`,
+      };
     }
 
     const { data } = await axios.request(axiosConfig);
-    return data
+    return data;
   }
 }
-
-
-
-
-

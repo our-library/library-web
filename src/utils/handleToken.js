@@ -1,9 +1,9 @@
 import Cookies from 'js-cookie';
 
-const baseUrl = 'http://api.ourlibrary.co.kr/';
+// const baseUrl = 'http://api.ourlibrary.co.kr/';
 
 export function setToken(token) {
-  Cookies.set('userToken', token, {expires: 1})
+  Cookies.set('userToken', token, { expires: 1 });
 }
 
 export function getToken() {
@@ -13,4 +13,3 @@ export function getToken() {
 export function removeToken() {
   Cookies.remove('userToken');
 }
-
