@@ -1,4 +1,4 @@
-@import "scss/base-scss/base";
+@import "scss/base-scss/index";
 
 
 // ---------------------
@@ -12,3 +12,7 @@
 @import "scss/pages/actionBar";
 @import "scss/pages/app/serviceLayout";
 @import "scss/pages/register/registerEntry";
+
+
+// modal
+@import "scss/pages/modal/invitationCodeModal";

@@ -1,14 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import {removeToken} from "../../utils/handleToken";
-import {useHistory} from "react-router";
-import {NavLink} from "react-router-dom";
+import {useHistory, useLocation} from "react-router";
+import {Link, NavLink} from "react-router-dom";
 import {defaultUserMenu, GroupMasterMenu} from "./serviceMenu";
 import {fetchGroupMe} from "../../store/api/groupApi";
 import {fetchUserProfile} from "../../store/api/usersApi";
 import {jobLists} from "../../constants/jobLists";
+import CreateConfirmModal from "../modal/CreateConfirmModal";
+import {MODAL_DATA} from "../../constants/modalData";
 
 function ActionBar() {
   const history = useHistory();
+  const location = useLocation();
+
+  const {INVITE_PEOPLE_MODAL} = MODAL_DATA;
   const [userMenu, setUserMenu] = useState(GroupMasterMenu);
   const [userName, setUserName] = useState('');
   const [userGroupName, setUserGroupName] = useState('');
@@ -16,6 +21,8 @@ function ActionBar() {
   const [userJobName, setUserJobName] = useState('');
   const [userRentals, setUserRentals] = useState(0);
   const [userOverdueRentals, setUserOverdueRentals] = useState(0);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [groupInvitationKey, setGroupInvitationKey] = useState('');
 
   function logout() {
     removeToken();
@@ -28,14 +35,15 @@ function ActionBar() {
       setUserName(name);
     });
     fetchGroupMe().then(data => {
-      const {name: groupName, department, jobKey, rentals, overdueRentals} = data.results[0];
+      const {name: groupName, department, jobKey, rentals, overdueRentals, invitationKey} = data.results[0];
       setUserGroupName(groupName);
       setUserDepartment(department || '부서명');
       setJobName(jobKey);
       setUserRentals(rentals);
       setUserOverdueRentals(overdueRentals);
+      setGroupInvitationKey(invitationKey);
     })
-  },[userName, userGroupName, userDepartment, userJobName, userRentals, userOverdueRentals]);
+  }, [userName, userGroupName, userDepartment, userJobName, userRentals, userOverdueRentals]);
 
   function setJobName(jobKey) {
     const jobKeyIndex = jobLists.findIndex((list) => {
@@ -43,6 +51,10 @@ function ActionBar() {
     });
     const userJobName = jobLists[jobKeyIndex].jobName;
     setUserJobName(userJobName);
+  }
+
+  function handleInvitationCodeModal() {
+    setIsOpenModal(true)
   }
 
   return (
@@ -73,10 +85,21 @@ function ActionBar() {
             </div>
           </div>
           <div className="invitePeople">
-            <button
-              className="Btn-sm Btn-transparent"
-            >구성원 초대하기
-            </button>
+            <Link to={{
+              pathname: '/service/modal/invitePeople',
+              state: {
+                background: location,
+                data: INVITE_PEOPLE_MODAL,
+                groupInvitationKey: groupInvitationKey
+              }
+            }}>
+              <button
+                type="button"
+                className="Btn-sm Btn-transparent"
+              >
+                구성원 초대하기
+              </button>
+            </Link>
           </div>
           <ul className="serviceMenu">
             {userMenu.map((item, index) => {
