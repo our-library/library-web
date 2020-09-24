@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {getToken} from "../../utils/handleToken/handleToken";
+import {getToken} from "../../utils/handleToken";
 
 const mockOptions = {
   url: 'string',

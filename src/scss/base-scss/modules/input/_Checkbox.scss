@@ -1,0 +1,57 @@
+// -----------------------------------
+//           custom checkbox
+//  label(Group) > input(checkbox) > span(checkMark)
+// -----------------------------------
+.checkboxGroup {
+  cursor: pointer;
+  display: inline-block;
+  user-select: none;
+  position: relative;
+  padding: 3px 8px 8px 30px;
+  z-index: 1;
+
+  .checkbox {
+    height: 0;
+    width: 0;
+    opacity: 0;
+    position: absolute;
+
+    &:checked ~ .checkMark{
+      background-color: #000000;
+
+      &::after {
+        display: block;
+      }
+    }
+  }
+
+  .checkMark {
+    border: 1px solid #000000;
+    background-color: #ffffff;
+    left: 0;
+    top: 0;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+
+
+    &::after {
+      border: solid #ffffff;
+      border-width: 0 3px 3px 0;
+      content: "";
+      display: none;
+      height: 10px;
+      left: 5px;
+      position: absolute;
+      top: 1px;
+      transform: rotate(45deg);
+      width: 5px;
+    }
+
+    &:hover {
+      background-color: #e2e2e2;
+    }
+  }
+}
+
+

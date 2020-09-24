@@ -1,0 +1,21 @@
+.invitationCodeBox {
+  width: 100%;
+  padding: 12px 0;
+  border-top: 1px solid $global-light-line-color;
+  border-bottom: 1px solid $global-light-line-color;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.inviteTag {
+  color: $global-subtext-color;
+}
+
+.invitationCodeInput {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 700;
+  outline: none;
+  resize: none;
+  text-align: center;
+}

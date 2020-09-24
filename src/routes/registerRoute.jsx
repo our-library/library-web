@@ -1,7 +1,7 @@
 import {Route, Switch, useRouteMatch} from "react-router";
 import React from "react";
-import SignIn from "../component/register/signIn/signIn";
-import SignUp from "../component/register/signUp/signUp";
+import SignIn from "../component/register/signIn";
+import SignUp from "../component/register/signUp";
 
 export function RegisterRoute() {
   const {path} = useRouteMatch();
