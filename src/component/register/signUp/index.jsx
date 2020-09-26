@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import SignUpEmailInput from './emailInput';
 import SignUpPasswordInput from './passwordInput';
 import SignUpNameInput from './nameInput';
@@ -82,6 +83,11 @@ function SignUp() {
         >
           회원가입
         </button>
+        <Link to="/forgetPassword">
+          <button type="button" className="TextBtn TextBtn--gray">
+            초대 코드를 가지고 계신가요?
+          </button>
+        </Link>
       </form>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 
 import { makeGroupRequest } from '../../../store/api/groupApi';
-import { fetchUserName } from '../../../store/api/usersApi';
+import { fetchUserProfile } from '../../../store/api/usersApi';
 import { logout } from '../../../store/api/registerApi';
 import MakeGroupNameInput from './makeGroupNameInput';
 import JobNameInput from '../jobNameInput';
@@ -22,8 +22,8 @@ function MakeGroup() {
   }, []);
 
   async function getUserName() {
-    const name = await fetchUserName();
-    setUserName(name);
+    const data = await fetchUserProfile();
+    setUserName(data.name);
   }
 
   useEffect(() => {
