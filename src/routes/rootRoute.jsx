@@ -17,7 +17,7 @@ import CreateConfirmModal from '../component/modal/CreateConfirmModal';
 function RootRoute() {
   const location = useLocation();
   const background = location.state && location.state.background;
-  const { SERVICE } = ROUTE_PATH;
+  const { SERVICE, REGISTER, MAKE_GROUP, REGISTER_ENTRY, FORGET_PASSWORD } = ROUTE_PATH;
 
   return (
     <div>
@@ -25,13 +25,13 @@ function RootRoute() {
         <Route exact path="/" component={Home} />
         <Route path="/home" component={Home} />
         <Route path="/info" component={Info} />
-        <Route path="/register" component={Register} />
-        <Route path="/forgetPassword" component={ForgetPassword} />
+        <Route path={REGISTER} component={Register} />
+        <Route path={FORGET_PASSWORD} component={ForgetPassword} />
 
-        <RegisterProtectedPage path="/registerEntry">
+        <RegisterProtectedPage path={REGISTER_ENTRY}>
           <RegisterEntry />
         </RegisterProtectedPage>
-        <RegisterProtectedPage path="/makeGroup">
+        <RegisterProtectedPage path={MAKE_GROUP}>
           <MakeGroup />
         </RegisterProtectedPage>
 

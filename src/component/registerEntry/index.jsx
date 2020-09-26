@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
+
 import InviteCodeInput from './inviteCodeInput';
 import JobNameInput from './jobNameInput';
 import { joinGroupRequest } from '../../store/api/groupApi';
 import { fetchUserName } from '../../store/api/usersApi';
+import { ROUTE_PATH } from '../../constants/path';
 
 function RegisterEntry() {
   const history = useHistory();
+  const { MAKE_GROUP, SERVICE } = ROUTE_PATH;
   const [jobKey, setJobKey] = useState('');
   const [inviteCode, setInviteCode] = useState('');
   const [isValidJopNameValue, setIsValidJopNameValue] = useState(false);
@@ -23,7 +26,7 @@ function RegisterEntry() {
 
   async function handleJoinGroup() {
     await joinGroupRequest(inviteCode, jobKey);
-    history.push('/service');
+    history.push(SERVICE);
   }
 
   useEffect(() => {
@@ -41,7 +44,7 @@ function RegisterEntry() {
         </p>
         <button
           type="button"
-          onClick={() => history.replace('/makeGroup')}
+          onClick={() => history.replace(MAKE_GROUP)}
           className="Btn-md Btn-primary"
         >
           도서관 만들기

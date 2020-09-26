@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 
 import { makeGroupRequest } from '../../../store/api/groupApi';
-import { fetchUserProfile } from '../../../store/api/usersApi';
+import { fetchUserName } from '../../../store/api/usersApi';
 import { logout } from '../../../store/api/registerApi';
 import MakeGroupNameInput from './makeGroupNameInput';
 import JobNameInput from '../jobNameInput';
+import { ROUTE_PATH } from '../../../constants/path';
 
 function MakeGroup() {
   const history = useHistory();
+  const { SERVICE, SIGN_IN } = ROUTE_PATH;
   const [categoryValue, setCategoryValue] = useState('');
   const [groupNameValue, setGroupNameValue] = useState('');
   const [jobKey, setJobKey] = useState('');
@@ -22,8 +24,8 @@ function MakeGroup() {
   }, []);
 
   async function getUserName() {
-    const data = await fetchUserProfile();
-    setUserName(data.name);
+    const name = await fetchUserName();
+    setUserName(name);
   }
 
   useEffect(() => {
@@ -38,7 +40,7 @@ function MakeGroup() {
         jobKey,
       };
       await makeGroupRequest(data);
-      history.replace('/service');
+      history.replace(SERVICE);
     } catch (e) {
       setIsJobNameKeyValid(true); //eslint-disable-line
     }
@@ -58,7 +60,7 @@ function MakeGroup() {
 
   async function entryLogout() {
     await logout();
-    history.replace('/register/signIn');
+    history.replace(SIGN_IN);
   }
 
   return (

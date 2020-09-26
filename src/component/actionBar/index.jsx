@@ -6,7 +6,7 @@ import { GroupMasterMenu } from './serviceMenu';
 import { fetchGroupMe } from '../../store/api/groupApi';
 import { fetchUserProfile } from '../../store/api/usersApi';
 import { jobLists } from '../../constants/jobLists';
-import { MODAL_DATA } from '../../constants/modalData';
+import { MODAL_DATA } from '../../constants/modal';
 import { removeGroupCount } from '../../utils/handleUser';
 
 function ActionBar() {
