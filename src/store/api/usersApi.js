@@ -6,3 +6,9 @@ export function fetchUserProfile() {
     method: 'get',
   });
 }
+
+export async function fetchUserName() {
+  const data = await fetchUserProfile();
+  const { name } = data;
+  return name;
+}

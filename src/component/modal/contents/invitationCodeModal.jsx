@@ -25,7 +25,9 @@ function InvitationCodeModal({ groupInvitationKey }) {
         readOnly
       />
 
-      <button type="button" onClick={copyToClipboard}>복사</button>
+      <button type="button" onClick={copyToClipboard}>
+        복사
+      </button>
     </div>
   );
 }

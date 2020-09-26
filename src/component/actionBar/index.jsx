@@ -34,6 +34,7 @@ function ActionBar() {
       const { name } = data;
       setUserName(name);
     });
+
     fetchGroupMe().then((data) => {
       const {
         name: groupName,

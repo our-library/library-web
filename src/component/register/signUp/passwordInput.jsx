@@ -22,7 +22,8 @@ function SignUpPasswordInput({
       <input
         className="InputText Input-md"
         type="password"
-        placeholder="비밀번호 영문/숫자 혼용 8자 이상"
+        placeholder="비밀번호(영문/숫자/특수문자 혼합 8자 이상)"
+        maxLength={30}
         onChange={validatePassword}
         value={passwordValue}
       />

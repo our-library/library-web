@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-
 import { useHistory } from 'react-router';
 
+import { makeGroupRequest } from '../../../store/api/groupApi';
+import { fetchUserName } from '../../../store/api/usersApi';
+import { logout } from '../../../store/api/registerApi';
 import MakeGroupNameInput from './makeGroupNameInput';
 import JobNameInput from '../jobNameInput';
-import { makeGroupRequest } from '../../../store/api/groupApi';
-import { fetchUserProfile } from '../../../store/api/usersApi';
-import { removeToken } from '../../../utils/handleToken';
-import { removeGroupCount } from '../../../utils/handleUser';
 
 function MakeGroup() {
   const history = useHistory();
@@ -15,16 +13,17 @@ function MakeGroup() {
   const [groupNameValue, setGroupNameValue] = useState('');
   const [jobKey, setJobKey] = useState('');
   const [valueBySelect, setValueBySelect] = useState('회사 또는 단체 이름');
-  const [isValidJopNameValue, setIsValidJopNameValue] = useState(false);
+  const [isValidJopNameValue, setIsValidJopNameValue] = useState('');
   const [isMakeBtnDisable, setIsMakeBtnDisable] = useState(true);
-
+  const [isJobNameKeyValid, setIsJobNameKeyValid] = useState(false);
   const [userName, setUserName] = useState('');
   useEffect(() => {
     getUserName().then();
   }, []);
 
   async function getUserName() {
-    await fetchUserProfile().then((data) => setUserName(data.name));
+    const name = await fetchUserName();
+    setUserName(name);
   }
 
   useEffect(() => {
@@ -32,14 +31,17 @@ function MakeGroup() {
   }, [categoryValue, groupNameValue, isValidJopNameValue]);
 
   async function handleMakeGroup() {
-    const data = {
-      category: categoryValue,
-      groupName: groupNameValue,
-      jobKey,
-    };
-    await makeGroupRequest(data).then(() => {
+    try {
+      const data = {
+        category: categoryValue,
+        groupName: groupNameValue,
+        jobKey,
+      };
+      await makeGroupRequest(data);
       history.replace('/service');
-    });
+    } catch (e) {
+      setIsJobNameKeyValid(true); //eslint-disable-line
+    }
   }
 
   function handleSelectCategory(e) {
@@ -54,9 +56,8 @@ function MakeGroup() {
     }
   }
 
-  function entryLogout() {
-    removeToken();
-    removeGroupCount();
+  async function entryLogout() {
+    await logout();
     history.replace('/register/signIn');
   }
 
@@ -83,7 +84,11 @@ function MakeGroup() {
               valueBySelect={valueBySelect}
               setGroupNameValue={setGroupNameValue}
             />
-            <JobNameInput setIsValidJopNameValue={setIsValidJopNameValue} setJobKey={setJobKey} />
+            <JobNameInput
+              setIsValidJopNameValue={setIsValidJopNameValue}
+              setJobKey={setJobKey}
+              isJobNameKeyValid={isJobNameKeyValid}
+            />
           </div>
           <button
             type="button"

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
+import { useHistory } from 'react-router';
 import SignUpEmailInput from './emailInput';
 import SignUpPasswordInput from './passwordInput';
 import SignUpNameInput from './nameInput';
 import SignUpCheckboxInput from './checkboxInput';
-import { registerUserRequest } from '../../../store/api/registerApi';
+import { fetchLoginUser, registerUserRequest } from '../../../store/api/registerApi';
 
 function SignUp() {
+  const history = useHistory();
   const [nameValue, setNameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
@@ -22,18 +23,32 @@ function SignUp() {
     setIsSignUpBtnDisable(!(isNameValid && isPasswordValid && isTermsValid && emailAuthId));
   }, [isTermsValid, isNameValid, isPasswordValid, emailAuthId]);
 
-  function submitUser() {
-    const data = {
-      name: nameValue,
-      email: emailValue,
-      password: passwordValue,
-      emailAuthenticationId: emailAuthId,
-    };
-    registerUserRequest(data)
-      .then(() => {
-        console.log('register success!');
-      })
-      .catch((e) => console.log(e));
+  async function submitUser() {
+    try {
+      const submitUserData = {
+        name: nameValue,
+        email: emailValue,
+        password: passwordValue,
+        emailAuthenticationId: emailAuthId,
+      };
+      await registerUserRequest(submitUserData);
+
+      const userGroupCount = await fetchLoginUser(emailValue, passwordValue);
+
+      if (userGroupCount === 0) {
+        history.replace('/registerEntry');
+      } else {
+        history.replace('/service');
+      }
+    } catch (e) {
+      window.alert(e.message);
+    }
+  }
+
+  function handleEnterKeyPress(e) {
+    if (e.key === 'Enter') {
+      submitUser().then();
+    }
   }
 
   return (
@@ -56,14 +71,17 @@ function SignUp() {
           isPasswordValid={isPasswordValid}
           setIsPasswordValid={setIsPasswordValid}
           setPasswordValue={setPasswordValue}
+          onKeyPress={handleEnterKeyPress}
         />
         <SignUpCheckboxInput isTermsValid={isTermsValid} setIsTermsValid={setIsTermsValid} />
-        <button type="button" disabled={isSignUpBtnDisable} className="Btn-default Btn-sm" onClick={submitUser}>
+        <button
+          type="button"
+          disabled={isSignUpBtnDisable}
+          className="Btn-default Btn-sm"
+          onClick={submitUser}
+        >
           회원가입
         </button>
-        <Link to="/forgetPassword">
-          <button type="button" className="TextBtn TextBtn--gray">초대 코드를 가지고 계신가요?</button>
-        </Link>
       </form>
     </div>
   );

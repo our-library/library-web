@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { jobLists } from '../../constants/jobLists';
 
-function JobNameInput({ setJobKey, setIsValidJopNameValue }) {
+function JobNameNoKeyErrorMessage() {
+  return <div className="InputErrorMsg">직업 이름을 선택해 주세요.</div>;
+}
+
+function JobNameInput({ setJobKey, setIsValidJopNameValue, isJobNameKeyValid }) {
   const [jobName, setJobName] = useState('');
   const [filterJobList, setFilterJobList] = useState([]);
   const [isGroupSearchResult, setIsGroupSearchResult] = useState(false);
@@ -48,14 +52,14 @@ function JobNameInput({ setJobKey, setIsValidJopNameValue }) {
                   className="filterJobList"
                 >
                   {' '}
-                  {name}
-                  {' '}
+                  {name}{' '}
                 </li>
               );
             })}
           </ul>
         </div>
       )}
+      {isJobNameKeyValid && <JobNameNoKeyErrorMessage />}
     </>
   );
 }

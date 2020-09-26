@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import InviteCodeInput from './inviteCodeInput';
 import JobNameInput from './jobNameInput';
 import { joinGroupRequest } from '../../store/api/groupApi';
+import { fetchUserName } from '../../store/api/usersApi';
 
 function RegisterEntry() {
   const history = useHistory();
@@ -11,10 +12,19 @@ function RegisterEntry() {
   const [isValidJopNameValue, setIsValidJopNameValue] = useState(false);
   const [isInvitationBtnDisable, setIsInvitationBtnDisable] = useState(true);
 
+  const [userName, setUserName] = useState('');
+  useEffect(() => {
+    getUserName().then();
+  }, []);
+
+  async function getUserName() {
+    const name = await fetchUserName();
+    setUserName(name);
+  }
+
   async function handleJoinGroup() {
-    joinGroupRequest(inviteCode, jobKey).then(() => {
-      history.push('/service');
-    });
+    await joinGroupRequest(inviteCode, jobKey);
+    history.push('/service');
   }
 
   useEffect(() => {
@@ -26,11 +36,15 @@ function RegisterEntry() {
       <div className="entrySec">
         <h4>도서관 만들기</h4>
         <p>
-          양진화님!
+          {userName}님,
           <br />
           나만의 도서관을 만들어 보세요!
         </p>
-        <button type="button" onClick={() => history.replace('/makeGroup')} className="Btn-md Btn-primary">
+        <button
+          type="button"
+          onClick={() => history.replace('/makeGroup')}
+          className="Btn-md Btn-primary"
+        >
           도서관 만들기
         </button>
       </div>
@@ -38,7 +52,7 @@ function RegisterEntry() {
       <div className="entrySec">
         <h4>초대 수락하기</h4>
         <p>
-          양진화님!
+          {userName}님,
           <br />
           초대를 받으셨나요? <br />
           받으신 초대코드를 입력하세요!

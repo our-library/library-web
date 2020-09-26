@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
-import { setToken } from '../../../utils/handleToken';
-import { loginRequest } from '../../../store/api/registerApi';
-import { fetchGroupMe } from '../../../store/api/groupApi';
-import { setGroupCount } from '../../../utils/handleUser';
+import { fetchLoginUser } from '../../../store/api/registerApi';
+import ErrorModal from '../../modal/ErrorModal';
+import { ERROR_MODAL_DATA } from '../../../constants/modalData';
 
 function EmailErrorMessage() {
   return <div className="InputErrorMsg">올바른 이메일 형식을 입력해 주세요.</div>;
@@ -15,15 +14,17 @@ function PasswordErrorMessage() {
 }
 
 function SignIn() {
+  const { LOGIN_ERROR } = ERROR_MODAL_DATA;
   const history = useHistory();
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [isLoginBtnDisable, setIsLoginBtnDisable] = useState(true);
+  const [openLoginErrorModal, setOpenLoginErrorModal] = useState(false);
 
   useEffect(() => {
-    setIsLoginBtnDisable(!(emailValue && passwordValue));
+    setIsLoginBtnDisable(!(isEmailValid && isPasswordValid && emailValue && passwordValue));
   }, [emailValue, passwordValue]);
 
   function validateEmail(e) {
@@ -44,14 +45,7 @@ function SignIn() {
 
   async function requestLogin() {
     try {
-      const { token } = await loginRequest(emailValue, passwordValue);
-
-      setToken(token);
-
-      const groupData = await fetchGroupMe();
-      const { count: userGroupCount } = groupData;
-
-      setGroupCount(userGroupCount);
+      const userGroupCount = await fetchLoginUser(emailValue, passwordValue);
 
       if (userGroupCount === 0) {
         history.replace('/registerEntry');
@@ -59,7 +53,13 @@ function SignIn() {
         history.replace('/service');
       }
     } catch (e) {
-      console.log(e);
+      setOpenLoginErrorModal(true);
+    }
+  }
+
+  function handleEnterKeyPress(e) {
+    if (e.key === 'Enter') {
+      requestLogin().then();
     }
   }
 
@@ -77,9 +77,11 @@ function SignIn() {
         <input
           className="InputText Input-md"
           type="password"
-          placeholder="영문/숫자 혼용 8자 이상"
+          placeholder="비밀번호(영문/숫자/특수문자 혼합 8자 이상)"
+          maxLength={30}
           onChange={validatePassword}
           value={passwordValue}
+          onKeyPress={handleEnterKeyPress}
         />
         {!isPasswordValid && <PasswordErrorMessage />}
         <button
@@ -91,9 +93,14 @@ function SignIn() {
           로그인
         </button>
         <Link to="/forgetPassword">
-          <button type="button" className="TextBtn TextBtn--gray">비밀번호를 잊으셨습니까?</button>
+          <button type="button" className="TextBtn TextBtn--gray">
+            비밀번호를 잊으셨습니까?
+          </button>
         </Link>
       </form>
+      {openLoginErrorModal && (
+        <ErrorModal errorType={LOGIN_ERROR} setIsOpenModal={setOpenLoginErrorModal} />
+      )}
     </div>
   );
 }
