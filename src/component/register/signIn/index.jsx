@@ -5,6 +5,7 @@ import { fetchLoginUser } from '../../../store/api/registerApi';
 import ErrorModal from '../../modal/ErrorModal';
 import { ERROR_MODAL_DATA } from '../../../constants/modal';
 import { ROUTE_PATH } from '../../../constants/path';
+import { KEY_CODE } from '../../../constants/keyCode';
 
 function EmailErrorMessage() {
   return <div className="InputErrorMsg">올바른 이메일 형식을 입력해 주세요.</div>;
@@ -18,6 +19,7 @@ function SignIn() {
   const history = useHistory();
   const { LOGIN_ERROR } = ERROR_MODAL_DATA;
   const { REGISTER_ENTRY, SERVICE } = ROUTE_PATH;
+  const { ENTER } = KEY_CODE;
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [emailValue, setEmailValue] = useState('');
@@ -60,8 +62,8 @@ function SignIn() {
   }
 
   function handleEnterKeyPress(e) {
-    if (e.key === 'Enter') {
-      requestLogin().then();
+    if (e.key === ENTER) {
+      requestLogin();
     }
   }
 

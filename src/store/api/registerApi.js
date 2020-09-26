@@ -1,7 +1,7 @@
 import { Api } from './index';
 import { removeToken, setToken } from '../../utils/handleToken';
-import { removeGroupCount, setGroupCount } from '../../utils/handleUser';
-import { fetchGroupMe } from './groupApi';
+import { removeGroupCount } from '../../utils/handleUser';
+import { fetchGroupCount } from './groupApi';
 
 function loginRequest(email, password) {
   return Api.fetch({
@@ -15,9 +15,7 @@ export async function fetchLoginUser(email, password) {
   const { token } = await loginRequest(email, password);
   setToken(token);
 
-  const groupData = await fetchGroupMe();
-  const { count: userGroupCount } = groupData;
-  setGroupCount(userGroupCount);
+  const userGroupCount = await fetchGroupCount();
 
   return userGroupCount;
 }

@@ -17,14 +17,14 @@ import CreateConfirmModal from '../component/modal/CreateConfirmModal';
 function RootRoute() {
   const location = useLocation();
   const background = location.state && location.state.background;
-  const { SERVICE, REGISTER, MAKE_GROUP, REGISTER_ENTRY, FORGET_PASSWORD } = ROUTE_PATH;
+  const { SERVICE, REGISTER, MAKE_GROUP, REGISTER_ENTRY, FORGET_PASSWORD, HOME, INFO } = ROUTE_PATH;
 
   return (
     <div>
       <Switch location={background || location}>
         <Route exact path="/" component={Home} />
-        <Route path="/home" component={Home} />
-        <Route path="/info" component={Info} />
+        <Route path={HOME} component={Home} />
+        <Route path={INFO} component={Info} />
         <Route path={REGISTER} component={Register} />
         <Route path={FORGET_PASSWORD} component={ForgetPassword} />
 

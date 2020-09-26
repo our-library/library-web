@@ -12,4 +12,6 @@ export const ROUTE_PATH = {
   REGISTER_ENTRY: '/register-entry',
   MAKE_GROUP: '/make-group',
   REGISTER: '/register',
+  HOME: '/home',
+  INFO: '/info',
 };

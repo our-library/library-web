@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Redirect, Route } from 'react-router';
 
 import { getToken } from '../utils/handleToken';
-import { getGroupCount } from '../utils/handleUser';
 import { ROUTE_PATH } from '../constants/path';
+import { fetchGroupCount } from '../store/api/groupApi';
 
 export function ProtectedRoute({ children, ...rest }) {
   const isAuthenticated = getToken();
@@ -18,18 +18,24 @@ export function ProtectedRoute({ children, ...rest }) {
 
 export function RegisterProtectedPage({ children, ...rest }) {
   const isAuthenticated = getToken();
-  const userGroupCount = getGroupCount();
   const { SERVICE } = ROUTE_PATH;
+  const [groupCount, setGroupCount] = useState(0);
+  getUserGroupCount().then((result) => setGroupCount(result));
 
   return (
     <Route
       {...rest}
       render={() => {
-        if (isAuthenticated && userGroupCount === 0) {
+        if (isAuthenticated && groupCount === 0) {
           return children;
         }
         return <Redirect to={SERVICE} />;
       }}
     />
   );
+}
+
+async function getUserGroupCount() {
+  const result = await fetchGroupCount();
+  return result;
 }

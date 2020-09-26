@@ -8,10 +8,12 @@ import SignUpNameInput from './nameInput';
 import SignUpCheckboxInput from './checkboxInput';
 import { fetchLoginUser, registerUserRequest } from '../../../store/api/registerApi';
 import { ROUTE_PATH } from '../../../constants/path';
+import { KEY_CODE } from '../../../constants/keyCode';
 
 function SignUp() {
   const history = useHistory();
   const { REGISTER_ENTRY, SERVICE } = ROUTE_PATH;
+  const { ENTER } = KEY_CODE;
   const [nameValue, setNameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
@@ -27,30 +29,26 @@ function SignUp() {
   }, [isTermsValid, isNameValid, isPasswordValid, emailAuthId]);
 
   async function submitUser() {
-    try {
-      const submitUserData = {
-        name: nameValue,
-        email: emailValue,
-        password: passwordValue,
-        emailAuthenticationId: emailAuthId,
-      };
-      await registerUserRequest(submitUserData);
+    const submitUserData = {
+      name: nameValue,
+      email: emailValue,
+      password: passwordValue,
+      emailAuthenticationId: emailAuthId,
+    };
+    await registerUserRequest(submitUserData);
 
-      const userGroupCount = await fetchLoginUser(emailValue, passwordValue);
+    const userGroupCount = await fetchLoginUser(emailValue, passwordValue);
 
-      if (userGroupCount === 0) {
-        history.replace(REGISTER_ENTRY);
-      } else {
-        history.replace(SERVICE);
-      }
-    } catch (e) {
-      window.alert(e.message);
+    if (userGroupCount === 0) {
+      history.replace(REGISTER_ENTRY);
+    } else {
+      history.replace(SERVICE);
     }
   }
 
   function handleEnterKeyPress(e) {
-    if (e.key === 'Enter') {
-      submitUser().then();
+    if (e.key === ENTER) {
+      submitUser();
     }
   }
 

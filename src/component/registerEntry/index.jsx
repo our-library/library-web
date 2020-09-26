@@ -10,13 +10,14 @@ import { ROUTE_PATH } from '../../constants/path';
 function RegisterEntry() {
   const history = useHistory();
   const { MAKE_GROUP, SERVICE } = ROUTE_PATH;
+
   const [jobKey, setJobKey] = useState('');
   const [inviteCode, setInviteCode] = useState('');
   const [isValidJopNameValue, setIsValidJopNameValue] = useState(false);
   const [isInvitationBtnDisable, setIsInvitationBtnDisable] = useState(true);
   const [userName, setUserName] = useState('');
   useEffect(() => {
-    getUserName().then();
+    getUserName();
   }, []);
 
   async function getUserName() {
@@ -25,8 +26,12 @@ function RegisterEntry() {
   }
 
   async function handleJoinGroup() {
-    await joinGroupRequest(inviteCode, jobKey);
-    history.push(SERVICE);
+    try {
+      await joinGroupRequest(inviteCode, jobKey);
+      history.push(SERVICE);
+    } catch (e) {
+      setIsValidJopNameValue(true);
+    }
   }
 
   useEffect(() => {
