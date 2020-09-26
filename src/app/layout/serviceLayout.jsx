@@ -3,6 +3,7 @@ import ActionBar from '../../component/actionBar';
 
 function ServiceLayout({ children }) {
   return (
+<<<<<<< Updated upstream
     <>
       <div className="serviceLayoutContainer">
         <ActionBar />
@@ -10,6 +11,13 @@ function ServiceLayout({ children }) {
       </div>
     </>
   );
+=======
+    <div className="serviceLayoutContainer">
+      <ActionBar/>
+      {children}
+    </div>
+  )
+>>>>>>> Stashed changes
 }
 
 export default ServiceLayout;

@@ -1,36 +1,24 @@
 import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { useLocation } from 'react-router';
+import { ROUTE_PATH } from '../constants/path';
+import { getGroupCount } from '../utils/handleUser';
+
+import { getToken } from '../utils/handleToken';
 import ForgetPassword from '../component/register/forgetPassword/forgetPassword';
 import NotFound from '../component/notFound/notFound';
-import BookList from '../component/bookList';
 import RegisterEntry from '../component/registerEntry';
 import MakeGroup from '../component/registerEntry/makeGroup';
-import { getToken } from '../utils/handleToken';
 import Home from '../component/home';
 import Info from '../component/info';
 import Register from '../component/register';
-import Setting from '../component/setting';
-import MyRent from '../component/myRent';
-import { ROUTE_PATH } from '../constants/path';
-import AddBooks from '../component/addBooks';
-import MemberManagement from '../component/memberManagement';
-import Inquiry from '../component/inquiry';
+import ServiceMain from "../component/serviceMain";
 import CreateConfirmModal from '../component/modal/CreateConfirmModal';
-import { getGroupCount } from '../utils/handleUser';
 
 function RootRoute() {
   const location = useLocation();
   const background = location.state && location.state.background;
-  const {
-    SERVICE,
-    SERVICE_BOOK_LIST,
-    SERVICE_ADD_BOOKS,
-    SERVICE_MY_RENT,
-    SERVICE_MEMBER_MANAGEMENT,
-    SERVICE_INQUIRY,
-    SERVICE_SETTING,
-  } = ROUTE_PATH;
+  const { SERVICE } = ROUTE_PATH;
 
   return (
     <div>
@@ -41,49 +29,23 @@ function RootRoute() {
         <Route path="/register" component={Register} />
         <Route path="/forgetPassword" component={ForgetPassword} />
 
-        <RegisterProtectedPage path="/registerEntry">
-          <RegisterEntry />
-        </RegisterProtectedPage>
-        <RegisterProtectedPage path="/makeGroup">
-          <MakeGroup />
-        </RegisterProtectedPage>
+        <RegisterProtectedPage path="/registerEntry" children={<RegisterEntry />} />
+        <RegisterProtectedPage path="/makeGroup" children={<MakeGroup/>} />
 
-        <ProtectedRoute path={SERVICE_BOOK_LIST}>
-          <BookList />
-        </ProtectedRoute>
-        <ProtectedRoute path={SERVICE_ADD_BOOKS}>
-          <AddBooks />
-        </ProtectedRoute>
-        <ProtectedRoute path={SERVICE_MY_RENT}>
-          <MyRent />
-        </ProtectedRoute>
-        <ProtectedRoute path={SERVICE_INQUIRY}>
-          <Inquiry />
-        </ProtectedRoute>
-        <ProtectedRoute path={SERVICE_MEMBER_MANAGEMENT}>
-          <MemberManagement />
-        </ProtectedRoute>
-        <ProtectedRoute path={SERVICE_SETTING}>
-          <Setting />
-        </ProtectedRoute>
-        <ProtectedRoute path="/service/modal/:id">
-          <CreateConfirmModal />
-        </ProtectedRoute>
-        <Redirect from={SERVICE} to={SERVICE_BOOK_LIST} />
-        <Redirect path="*" to="/" />
-        <Route component={NotFound} />
+        <ProtectedRoute path={SERVICE} children={<ServiceMain />} />
+        <ProtectedRoute path="/service/modal/:id" children={<CreateConfirmModal />} />
+        <Redirect path="*" to="/"/>
+        <Route component={NotFound}/>
       </Switch>
 
       {background && (
-        <Route path="/service/modal/:id">
-          <CreateConfirmModal />
-        </Route>
+        <Route path="/service/modal/:id" children={<CreateConfirmModal />} />
       )}
     </div>
   );
 }
 
-export function ProtectedRoute({ children, ...rest }) {
+export function ProtectedRoute({children, ...rest}) {
   const isAuthenticated = getToken();
 
   return (
@@ -94,15 +56,16 @@ export function ProtectedRoute({ children, ...rest }) {
   );
 }
 
-function RegisterProtectedPage({ children, ...rest }) {
+function RegisterProtectedPage({children, ...rest}) {
   const isAuthenticated = getToken();
   const userGroupCount = getGroupCount();
 
-  if (isAuthenticated && userGroupCount !== 0) {
-    return <Route {...rest}>{children}</Route>;
-  }
-
-  return <Redirect to="/service" />;
+  return (
+    <Route
+      {...rest}
+      render={() => (isAuthenticated && userGroupCount === 0) ? children : <Redirect to="/service" />}
+    />
+    )
 }
 
 export default RootRoute;
