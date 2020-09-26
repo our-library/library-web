@@ -1,20 +1,21 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useRouteMatch } from 'react-router';
 import WebLayout from '../../app/layout/webLayout';
 import { RegisterRoute } from '../../routes/registerRoute';
+import { REGISTER_ROUTE_PATH } from "../../constants/path";
 
 function Register() {
-  const { url } = useRouteMatch();
+  const { SIGN_IN, SIGN_UP } = REGISTER_ROUTE_PATH;
+
   return (
     <WebLayout>
       <div className="registerContainer">
         <h2 className="registerNav">
-          <NavLink to={`${url}/signIn`} activeClassName="navActive">
+          <NavLink to={SIGN_IN} activeClassName="navActive">
             로그인
           </NavLink>
           /
-          <NavLink to={`${url}/signUp`} activeClassName="navActive">
+          <NavLink to={SIGN_UP} activeClassName="navActive">
             회원가입
           </NavLink>
         </h2>
