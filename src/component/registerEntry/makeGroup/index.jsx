@@ -24,7 +24,8 @@ function MakeGroup() {
   }, []);
 
   async function getUserName() {
-    await fetchUserProfile().then((data) => setUserName(data.name));
+    const data = await fetchUserProfile();
+    setUserName(data.name);
   }
 
   useEffect(() => {

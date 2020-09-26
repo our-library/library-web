@@ -30,7 +30,11 @@ function RegisterEntry() {
           <br />
           나만의 도서관을 만들어 보세요!
         </p>
-        <button type="button" onClick={() => history.replace('/makeGroup')} className="Btn-md Btn-primary">
+        <button
+          type="button"
+          onClick={() => history.replace('/makeGroup')}
+          className="Btn-md Btn-primary"
+        >
           도서관 만들기
         </button>
       </div>

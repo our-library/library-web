@@ -58,11 +58,18 @@ function SignUp() {
           setPasswordValue={setPasswordValue}
         />
         <SignUpCheckboxInput isTermsValid={isTermsValid} setIsTermsValid={setIsTermsValid} />
-        <button type="button" disabled={isSignUpBtnDisable} className="Btn-default Btn-sm" onClick={submitUser}>
+        <button
+          type="button"
+          disabled={isSignUpBtnDisable}
+          className="Btn-default Btn-sm"
+          onClick={submitUser}
+        >
           회원가입
         </button>
         <Link to="/forgetPassword">
-          <button type="button" className="TextBtn TextBtn--gray">초대 코드를 가지고 계신가요?</button>
+          <button type="button" className="TextBtn TextBtn--gray">
+            초대 코드를 가지고 계신가요?
+          </button>
         </Link>
       </form>
     </div>

@@ -48,8 +48,7 @@ function JobNameInput({ setJobKey, setIsValidJopNameValue }) {
                   className="filterJobList"
                 >
                   {' '}
-                  {name}
-                  {' '}
+                  {name}{' '}
                 </li>
               );
             })}

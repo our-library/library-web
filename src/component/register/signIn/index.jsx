@@ -91,7 +91,9 @@ function SignIn() {
           로그인
         </button>
         <Link to="/forgetPassword">
-          <button type="button" className="TextBtn TextBtn--gray">비밀번호를 잊으셨습니까?</button>
+          <button type="button" className="TextBtn TextBtn--gray">
+            비밀번호를 잊으셨습니까?
+          </button>
         </Link>
       </form>
     </div>
