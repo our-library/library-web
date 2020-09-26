@@ -1,53 +1,41 @@
-import { SERVICE_ROUTE_PATH } from '../../constants/path';
-
-const {
-  SERVICE,
-  SERVICE_BOOK_LIST,
-  SERVICE_ADD_BOOKS,
-  SERVICE_MY_RENT,
-  SERVICE_MEMBER_MANAGEMENT,
-  SERVICE_INQUIRY,
-  SERVICE_SETTING,
-} = SERVICE_ROUTE_PATH;
-
 export const defaultUserMenu = [
   {
-    pathname: SERVICE_BOOK_LIST,
+    pathname: 'bookList',
     menuValue: '전체 책 목록',
   },
   {
-    pathname: SERVICE_MY_RENT,
+    pathname: 'myRent',
     menuValue: '나의 대여',
   },
   {
-    pathname: SERVICE_SETTING,
+    pathname: 'setting',
     menuValue: '설정',
   },
 ];
 
 export const GroupMasterMenu = [
   {
-    pathname: SERVICE_BOOK_LIST,
+    pathname: 'bookList',
     menuValue: '전체 책 목록',
   },
   {
-    pathname: SERVICE_ADD_BOOKS,
+    pathname: 'addBooks',
     menuValue: '책 등록',
   },
   {
-    pathname: SERVICE_MY_RENT,
+    pathname: 'myRent',
     menuValue: '나의 대여',
   },
   {
-    pathname: SERVICE_MEMBER_MANAGEMENT,
+    pathname: 'memberManagement',
     menuValue: '회원관리',
   },
   {
-    pathname: SERVICE_INQUIRY,
+    pathname: 'inquiry',
     menuValue: '문의',
   },
   {
-    pathname: SERVICE_SETTING,
+    pathname: 'setting',
     menuValue: '설정',
   },
 ];

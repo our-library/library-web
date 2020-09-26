@@ -12,7 +12,7 @@ import Info from '../component/info';
 import Register from '../component/register';
 import Setting from '../component/setting';
 import MyRent from '../component/myRent';
-import {REGISTER_ROUTE_PATH, SERVICE_ROUTE_PATH} from '../constants/path';
+import { ROUTE_PATH } from '../constants/path';
 import AddBooks from '../component/addBooks';
 import MemberManagement from '../component/memberManagement';
 import Inquiry from '../component/inquiry';
@@ -30,8 +30,7 @@ function RootRoute() {
     SERVICE_MEMBER_MANAGEMENT,
     SERVICE_INQUIRY,
     SERVICE_SETTING,
-  } = SERVICE_ROUTE_PATH;
-  const { REGISTER_ENTRY, MAKE_GROUP } = REGISTER_ROUTE_PATH;
+  } = ROUTE_PATH;
 
   return (
     <div>
@@ -42,10 +41,10 @@ function RootRoute() {
         <Route path="/register" component={Register} />
         <Route path="/forgetPassword" component={ForgetPassword} />
 
-        <RegisterProtectedPage path={REGISTER_ENTRY}>
+        <RegisterProtectedPage path="/registerEntry">
           <RegisterEntry />
         </RegisterProtectedPage>
-        <RegisterProtectedPage path={MAKE_GROUP}>
+        <RegisterProtectedPage path="/makeGroup">
           <MakeGroup />
         </RegisterProtectedPage>
 

@@ -6,12 +6,9 @@ import SignUpPasswordInput from './passwordInput';
 import SignUpNameInput from './nameInput';
 import SignUpCheckboxInput from './checkboxInput';
 import { fetchLoginUser, registerUserRequest } from '../../../store/api/registerApi';
-import { REGISTER_ROUTE_PATH, SERVICE_ROUTE_PATH } from "../../../constants/path";
 
 function SignUp() {
   const history = useHistory();
-  const { REGISTER_ENTRY } = REGISTER_ROUTE_PATH;
-  const { SERVICE } = SERVICE_ROUTE_PATH;
   const [nameValue, setNameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
@@ -39,9 +36,9 @@ function SignUp() {
       const userGroupCount = await fetchLoginUser(emailValue, passwordValue);
 
       if (userGroupCount === 0) {
-        history.replace(REGISTER_ENTRY);
+        history.replace('/registerEntry');
       } else {
-        history.replace(SERVICE);
+        history.replace('/service');
       }
     } catch (e) {
       window.alert(e.message);

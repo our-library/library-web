@@ -1,17 +1,15 @@
-import { Redirect, Route, Switch } from 'react-router';
+import { Redirect, Route, Switch, useRouteMatch } from 'react-router';
 import React from 'react';
 import SignIn from '../component/register/signIn';
 import SignUp from '../component/register/signUp';
-import { REGISTER_ROUTE_PATH } from "../constants/path";
 
 export function RegisterRoute() {
-  const { SIGN_IN, SIGN_UP } = REGISTER_ROUTE_PATH;
-
+  const { path } = useRouteMatch();
   return (
     <Switch>
-      <Route path={SIGN_IN} component={SignIn} />
-      <Route path={SIGN_UP} component={SignUp} />
-      <Redirect from={path} to={SIGN_IN} />
+      <Route path={`${path}/signIn`} component={SignIn} />
+      <Route path={`${path}/signUp`} component={SignUp} />
+      <Redirect from={path} to={`${path}/signIn`} />
     </Switch>
   );
 }

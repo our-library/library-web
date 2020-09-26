@@ -8,10 +8,8 @@ import { fetchUserProfile } from '../../store/api/usersApi';
 import { jobLists } from '../../constants/jobLists';
 import { MODAL_DATA } from '../../constants/modalData';
 import { removeGroupCount } from '../../utils/handleUser';
-import { REGISTER_ROUTE_PATH } from "../../constants/path";
 
 function ActionBar() {
-  const { SIGN_IN } = REGISTER_ROUTE_PATH;
   const history = useHistory();
   const location = useLocation();
 
@@ -28,7 +26,7 @@ function ActionBar() {
   function logout() {
     removeToken();
     removeGroupCount();
-    history.replace(SIGN_IN);
+    history.replace('/register/signIn');
   }
 
   useEffect(() => {
@@ -114,7 +112,7 @@ function ActionBar() {
             {userMenu.map((item, index) => {
               const { pathname, menuValue } = item;
               return (
-                <NavLink to={pathname} key={index}>
+                <NavLink to={`/service/${pathname}`} key={index}>
                   <li>
                     <span>
                       <b>{menuValue}</b>

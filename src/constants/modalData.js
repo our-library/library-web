@@ -12,8 +12,7 @@ export const MODAL_DATA = {
 export const ERROR_MODAL_DATA = {
   LOGIN_ERROR: {
     title: '로그인 안내',
-    description: `아직 가입하지 않았거나 비밀번호를 잘못 입력했어요.
-    확인하고 다시 입력해 주세요.`,
+    description: '아직 가입하지 않았거나 비밀번호를 잘못 입력했어요. 확인하고 다시 입력해 주세요.',
     isConfirmBtn: true,
     isCloseBtn: false,
     confirmBtnName: '다시 입력할게요.',

@@ -6,12 +6,9 @@ import { fetchUserName } from '../../../store/api/usersApi';
 import { logout } from '../../../store/api/registerApi';
 import MakeGroupNameInput from './makeGroupNameInput';
 import JobNameInput from '../jobNameInput';
-import { REGISTER_ROUTE_PATH, SERVICE_ROUTE_PATH } from "../../../constants/path";
 
 function MakeGroup() {
   const history = useHistory();
-  const { SERVICE } = SERVICE_ROUTE_PATH;
-  const { SIGN_IN } = REGISTER_ROUTE_PATH;
   const [categoryValue, setCategoryValue] = useState('');
   const [groupNameValue, setGroupNameValue] = useState('');
   const [jobKey, setJobKey] = useState('');
@@ -41,7 +38,7 @@ function MakeGroup() {
         jobKey,
       };
       await makeGroupRequest(data);
-      history.replace(SERVICE);
+      history.replace('/service');
     } catch (e) {
       setIsJobNameKeyValid(true); //eslint-disable-line
     }
@@ -61,7 +58,7 @@ function MakeGroup() {
 
   async function entryLogout() {
     await logout();
-    history.replace(SIGN_IN);
+    history.replace('/register/signIn');
   }
 
   return (

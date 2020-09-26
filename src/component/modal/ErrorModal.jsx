@@ -8,21 +8,19 @@ function ErrorModal({ setIsOpenModal, errorType }) {
   }
 
   return (
-    <>
-      <div className="ModalOverlay">
-        <div className="ModalWrapper ModalAni_pop" onClick={(e) => e.stopPropagation()}>
-          <h5 className="space-2x">
-            <strong>{title}</strong>
-          </h5>
-          <p className="space-2x">{description}</p>
-          {isConfirmBtn && (
-            <button type="button" onClick={closeModal} className="Btn-default Btn-md">
-              {confirmBtnName}
-            </button>
-          )}
-        </div>
+    <div className="ModalOverlay">
+      <div className="ModalWrapper ModalAni_pop">
+        <h5 className="space-2x">
+          <strong>{title}</strong>
+        </h5>
+        <p className="space-2x">{description}</p>
+        {isConfirmBtn && (
+          <button type="button" onClick={closeModal} className="Btn-default Btn-md">
+            {confirmBtnName}
+          </button>
+        )}
       </div>
-    </>
+    </div>
   );
 }
 
