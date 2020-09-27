@@ -4,6 +4,7 @@ import {
   fetchEmailAuthorize,
   fetchEmailExistence,
 } from '../../../store/api/registerApi';
+import { validateEmailInput } from '../../../utils/handleValidation';
 
 function EmailErrorMessage() {
   return <div className="InputErrorMsg">정확한 이메일을 입력해 주세요.</div>;
@@ -22,9 +23,8 @@ function SignUpEmailInput({ setEmailAuthId, emailAuthId, emailValue, setEmailVal
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   function validateEmail(e) {
-    const re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
     const { value } = e.target;
-    const isValid = re.test(value);
+    const isValid = validateEmailInput(value);
     setEmailValue(value);
     setDisableEmailAuthBtn(!isValid);
     return setIsEmailValid(isValid);

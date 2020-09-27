@@ -32,7 +32,7 @@ function ActionBar() {
   }
 
   useEffect(() => {
-    getUserInfo().then();
+    getUserInfo();
   }, []);
 
   async function getUserInfo() {

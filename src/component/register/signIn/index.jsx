@@ -6,6 +6,7 @@ import ErrorModal from '../../modal/ErrorModal';
 import { ERROR_MODAL_DATA } from '../../../constants/modal';
 import { ROUTE_PATH } from '../../../constants/path';
 import { KEY_CODE } from '../../../constants/keyCode';
+import { validateEmailInput, validatePasswordValue } from '../../../utils/handleValidation';
 
 function EmailErrorMessage() {
   return <div className="InputErrorMsg">올바른 이메일 형식을 입력해 주세요.</div>;
@@ -33,16 +34,14 @@ function SignIn() {
 
   function validateEmail(e) {
     const { value } = e.target;
-    const re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-    const isValid = re.test(value);
+    const isValid = validateEmailInput(value);
     setEmailValue(value);
     setIsEmailValid(isValid);
   }
 
   function validatePassword(e) {
     const { value } = e.target;
-    const re = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;
-    const isValid = re.test(value);
+    const isValid = validatePasswordValue(value);
     setPasswordValue(value);
     setIsPasswordValid(isValid);
   }

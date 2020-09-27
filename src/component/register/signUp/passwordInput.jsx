@@ -1,4 +1,5 @@
 import React from 'react';
+import { validatePasswordValue } from '../../../utils/handleValidation';
 
 function PasswordErrorMessage() {
   return <div className="InputErrorMsg">형식에 맞는 비밀번호를 입력해 주세요.</div>;
@@ -11,10 +12,10 @@ function SignUpPasswordInput({
   setIsPasswordValid,
 }) {
   function validatePassword(e) {
-    const re = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;
-    const isValid = re.test(e.target.value);
-    setPasswordValue(e.target.value);
-    return setIsPasswordValid(isValid);
+    const { value } = e.target;
+    const isValid = validatePasswordValue(value);
+    setPasswordValue(value);
+    setIsPasswordValid(isValid);
   }
 
   return (
