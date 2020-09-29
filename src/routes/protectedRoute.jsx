@@ -1,26 +1,28 @@
-import React, { useState } from 'react';
-import { Redirect, Route } from 'react-router';
+import React, {useEffect, useState} from 'react';
+import {Redirect, Route} from 'react-router';
 
-import { getToken } from '../utils/handleToken';
-import { ROUTE_PATH } from '../constants/path';
-import { fetchGroupCount } from '../store/api/groupApi';
+import {getToken} from '../utils/handleToken';
+import {ROUTE_PATH} from '../constants/path';
+import {fetchGroupCount} from '../store/api/groupApi';
 
-export function ProtectedRoute({ children, ...rest }) {
+export function ProtectedRoute({children, ...rest}) {
   const isAuthenticated = getToken();
 
   return (
     <Route
       {...rest}
-      render={() => (isAuthenticated ? children : <Redirect to="/register/signIn" />)}
+      render={() => (isAuthenticated ? children : <Redirect to="/register/signIn"/>)}
     />
   );
 }
 
-export function RegisterProtectedPage({ children, ...rest }) {
+export function RegisterProtectedPage({children, ...rest}) {
   const isAuthenticated = getToken();
   const { SERVICE } = ROUTE_PATH;
   const [groupCount, setGroupCount] = useState(0);
-  getUserGroupCount().then((result) => setGroupCount(result));
+  useEffect(() => {
+    getUserGroupCount().then((result) => setGroupCount(result));
+  }, [groupCount]);
 
   return (
     <Route
@@ -29,7 +31,7 @@ export function RegisterProtectedPage({ children, ...rest }) {
         if (isAuthenticated && groupCount === 0) {
           return children;
         }
-        return <Redirect to={SERVICE} />;
+        return <Redirect to={SERVICE}/>;
       }}
     />
   );
