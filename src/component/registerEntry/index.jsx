@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
-
 import InviteCodeInput from './inviteCodeInput';
 import JobNameInput from './jobNameInput';
 import { joinGroupRequest } from '../../store/api/groupApi';
 import { fetchUserName } from '../../store/api/usersApi';
 import { ROUTE_PATH } from '../../constants/path';
+import ErrorModal from "../modal/ErrorModal";
+import {ERROR_MODAL_DATA} from "../../constants/modal";
 
 function RegisterEntry() {
   const history = useHistory();
   const { MAKE_GROUP, SERVICE } = ROUTE_PATH;
-
+  const { INVITATION_CODE_ERROR } = ERROR_MODAL_DATA;
   const [jobKey, setJobKey] = useState('');
   const [inviteCode, setInviteCode] = useState('');
-  const [isValidJopNameValue, setIsValidJopNameValue] = useState(false);
+  const [isJobNameKeyValid, setIsJobNameKeyValid] = useState(true);
+  const [isInvitationCodeValid, setIsInvitationCodeValid] = useState(true);
   const [isInvitationBtnDisable, setIsInvitationBtnDisable] = useState(true);
+  const [openInvitationCodeErrorModal, setOpenInvitationCodeErrorModal] = useState(false);
   const [userName, setUserName] = useState('');
+
   useEffect(() => {
     getUserName();
   }, []);
@@ -30,13 +34,13 @@ function RegisterEntry() {
       await joinGroupRequest(inviteCode, jobKey);
       history.push(SERVICE);
     } catch (e) {
-      setIsValidJopNameValue(true);
+      setOpenInvitationCodeErrorModal(true);
     }
   }
 
   useEffect(() => {
-    setIsInvitationBtnDisable(!(inviteCode && isValidJopNameValue));
-  }, [isValidJopNameValue, inviteCode]);
+    setIsInvitationBtnDisable(!(inviteCode && isJobNameKeyValid));
+  }, [isJobNameKeyValid, inviteCode]);
 
   return (
     <div className="entryContainer">
@@ -65,10 +69,19 @@ function RegisterEntry() {
           받으신 초대코드를 입력하세요!
         </p>
 
-        <div>
-          <InviteCodeInput setInviteCode={setInviteCode} />
-          <JobNameInput setIsValidJopNameValue={setIsValidJopNameValue} setJobKey={setJobKey} />
+        <div className="entryInputSec">
+          <InviteCodeInput
+            setInviteCode={setInviteCode}
+            isInvitationCodeValid={isInvitationCodeValid}
+            setIsInvitationCodeValid={setIsInvitationCodeValid}
+          />
+          <JobNameInput
+            isJobNameKeyValid={isJobNameKeyValid}
+            setIsJobNameKeyValid={setIsJobNameKeyValid}
+            setJobKey={setJobKey}
+          />
         </div>
+
         <button
           type="button"
           onClick={handleJoinGroup}
@@ -78,6 +91,9 @@ function RegisterEntry() {
           초대 수락하기
         </button>
       </div>
+      {openInvitationCodeErrorModal && (
+        <ErrorModal errorType={INVITATION_CODE_ERROR} setIsOpenModal={setOpenInvitationCodeErrorModal} />
+      )}
     </div>
   );
 }

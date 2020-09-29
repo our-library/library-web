@@ -5,6 +5,7 @@ import {
   fetchEmailExistence,
 } from '../../../store/api/registerApi';
 import { validateEmailInput } from '../../../utils/handleValidation';
+import { KEY_CODE } from "../../../constants/keyCode";
 
 function EmailErrorMessage() {
   return <div className="InputErrorMsg">정확한 이메일을 입력해 주세요.</div>;
@@ -15,6 +16,7 @@ function EmailExistenceErrorMessage() {
 }
 
 function SignUpEmailInput({ setEmailAuthId, emailAuthId, emailValue, setEmailValue }) {
+  const { ENTER } = KEY_CODE;
   const [emailAuthKey, setEmailAuthKey] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isEmailAuth, setIsEmailAuth] = useState(false);
@@ -36,13 +38,11 @@ function SignUpEmailInput({ setEmailAuthId, emailAuthId, emailValue, setEmailVal
 
   async function handleEmailAuth() {
     const { existence } = await fetchEmailExistence(emailValue);
+    setIsEmailExistence(existence);
     if (!existence) {
-      setIsEmailExistence(false);
       setIsEmailAuth(true);
       const { emailAuthenticationId } = await EmailAuthorizeRequest(emailValue);
       setEmailAuthId(emailAuthenticationId);
-    } else {
-      setIsEmailExistence(true);
     }
   }
 
@@ -52,8 +52,8 @@ function SignUpEmailInput({ setEmailAuthId, emailAuthId, emailValue, setEmailVal
   }
 
   function handleEmailAuthEnterKeyPress(e) {
-    if (e.key === 'Enter') {
-      handleEmailAuth().then();
+    if (e.key === ENTER) {
+      handleEmailAuth();
     }
   }
 

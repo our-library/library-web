@@ -17,4 +17,11 @@ export const ERROR_MODAL_DATA = {
     isCloseBtn: false,
     confirmBtnName: '다시 입력할게요.',
   },
+  INVITATION_CODE_ERROR: {
+    title: '초대코드 에러 안내',
+    description: '초대 코드를 확인 후 다시 입력해 주세요',
+    isConfirmBtn: true,
+    isCloseBtn: false,
+    confirmBtnName: '다시 입력할게요.',
+  }
 };

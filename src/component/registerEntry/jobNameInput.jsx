@@ -5,7 +5,7 @@ function JobNameNoKeyErrorMessage() {
   return <div className="InputErrorMsg">직업 이름을 선택해 주세요.</div>;
 }
 
-function JobNameInput({ setJobKey, setIsValidJopNameValue, isJobNameKeyValid }) {
+function JobNameInput({ setJobKey, setIsJobNameKeyValid, isJobNameKeyValid }) {
   const [jobName, setJobName] = useState('');
   const [filterJobList, setFilterJobList] = useState([]);
   const [isGroupSearchResult, setIsGroupSearchResult] = useState(false);
@@ -14,13 +14,15 @@ function JobNameInput({ setJobKey, setIsValidJopNameValue, isJobNameKeyValid }) 
     const target = e.target.value;
 
     const nextFilterJobList = jobLists.filter((jobList) => {
-      if (target && jobList.jobName.includes(target)) {
+      const isIncludeTarget = jobList.jobName.includes(target) || jobList.jobName.toLowerCase().includes(target);
+
+      if (target && isIncludeTarget) {
         return jobList;
       }
       return false;
     });
     setIsGroupSearchResult(nextFilterJobList.length > 1);
-    setIsValidJopNameValue(target);
+    setIsJobNameKeyValid(target);
     setJobName(target);
     setFilterJobList(nextFilterJobList);
   }
@@ -58,7 +60,7 @@ function JobNameInput({ setJobKey, setIsValidJopNameValue, isJobNameKeyValid }) 
           </ul>
         </div>
       )}
-      {isJobNameKeyValid && <JobNameNoKeyErrorMessage />}
+      {!isJobNameKeyValid && <JobNameNoKeyErrorMessage />}
     </>
   );
 }

@@ -16,10 +16,11 @@ function MakeGroup() {
   const [groupNameValue, setGroupNameValue] = useState('');
   const [jobKey, setJobKey] = useState('');
   const [valueBySelect, setValueBySelect] = useState('회사 또는 단체 이름');
-  const [isValidJopNameValue, setIsValidJopNameValue] = useState('');
+  // const [isValidJopNameValue, setIsValidJopNameValue] = useState('');
   const [isMakeBtnDisable, setIsMakeBtnDisable] = useState(true);
   const [isJobNameKeyValid, setIsJobNameKeyValid] = useState(false);
   const [userName, setUserName] = useState('');
+
   useEffect(() => {
     getUserName();
   }, []);
@@ -30,8 +31,8 @@ function MakeGroup() {
   }
 
   useEffect(() => {
-    setIsMakeBtnDisable(!(categoryValue && groupNameValue && isValidJopNameValue));
-  }, [categoryValue, groupNameValue, isValidJopNameValue]);
+    setIsMakeBtnDisable(!(categoryValue && groupNameValue));
+  }, [categoryValue, groupNameValue]);
 
   async function handleMakeGroup() {
     try {
@@ -88,9 +89,9 @@ function MakeGroup() {
               setGroupNameValue={setGroupNameValue}
             />
             <JobNameInput
-              setIsValidJopNameValue={setIsValidJopNameValue}
-              setJobKey={setJobKey}
               isJobNameKeyValid={isJobNameKeyValid}
+              setIsJobNameKeyValid={setIsJobNameKeyValid}
+              setJobKey={setJobKey}
             />
           </div>
           <button

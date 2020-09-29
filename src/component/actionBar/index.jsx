@@ -33,7 +33,7 @@ function ActionBar() {
 
   useEffect(() => {
     getUserInfo();
-  }, []);
+  }, [userOverdueRentals, userRentals]);
 
   async function getUserInfo() {
     const name = await fetchUserName();
