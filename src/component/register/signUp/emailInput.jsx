@@ -5,7 +5,7 @@ import {
   fetchEmailExistence,
 } from '../../../store/api/registerApi';
 import { validateEmailInput } from '../../../utils/handleValidation';
-import { KEY_CODE } from "../../../constants/keyCode";
+import { KEY_CODE } from '../../../constants/keyCode';
 
 function EmailErrorMessage() {
   return <div className="InputErrorMsg">정확한 이메일을 입력해 주세요.</div>;

@@ -23,5 +23,5 @@ export const ERROR_MODAL_DATA = {
     isConfirmBtn: true,
     isCloseBtn: false,
     confirmBtnName: '다시 입력할게요.',
-  }
+  },
 };

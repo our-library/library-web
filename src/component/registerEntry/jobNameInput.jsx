@@ -11,10 +11,11 @@ function JobNameInput({ setJobKey, setIsJobNameKeyValid, isJobNameKeyValid }) {
   const [isGroupSearchResult, setIsGroupSearchResult] = useState(false);
 
   function handleJobKey(e) {
-    const target = e.target.value;
-
+    const { value: target } = e.target;
     const nextFilterJobList = jobLists.filter((jobList) => {
-      const isIncludeTarget = jobList.jobName.includes(target) || jobList.jobName.toLowerCase().includes(target);
+      const { jobName: listJobName } = jobList;
+      const listJobNameLowerCase = listJobName.toLowerCase();
+      const isIncludeTarget = listJobName.includes(target) || listJobNameLowerCase.includes(target);
 
       if (target && isIncludeTarget) {
         return jobList;

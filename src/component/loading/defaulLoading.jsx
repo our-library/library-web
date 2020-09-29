@@ -24,7 +24,7 @@ function DefaultLoading() {
         </ul>
       </div>
     </div>
-  )
+  );
 }
 
-export default DefaultLoading
+export default DefaultLoading;

@@ -5,8 +5,8 @@ import JobNameInput from './jobNameInput';
 import { joinGroupRequest } from '../../store/api/groupApi';
 import { fetchUserName } from '../../store/api/usersApi';
 import { ROUTE_PATH } from '../../constants/path';
-import ErrorModal from "../modal/ErrorModal";
-import {ERROR_MODAL_DATA} from "../../constants/modal";
+import ErrorModal from '../modal/ErrorModal';
+import { ERROR_MODAL_DATA } from '../../constants/modal';
 
 function RegisterEntry() {
   const history = useHistory();
@@ -92,7 +92,10 @@ function RegisterEntry() {
         </button>
       </div>
       {openInvitationCodeErrorModal && (
-        <ErrorModal errorType={INVITATION_CODE_ERROR} setIsOpenModal={setOpenInvitationCodeErrorModal} />
+        <ErrorModal
+          errorType={INVITATION_CODE_ERROR}
+          setIsOpenModal={setOpenInvitationCodeErrorModal}
+        />
       )}
     </div>
   );

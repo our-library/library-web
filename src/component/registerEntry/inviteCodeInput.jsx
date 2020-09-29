@@ -4,7 +4,7 @@ function InvitationCodeErrorMessage() {
   return <div className="InputErrorMsg">초대 코드를 확인 후 입력해 주세요</div>;
 }
 
-function InviteCodeInput({ setInviteCode, isInvitationCodeValid, setIsInvitationCodeValid}) {
+function InviteCodeInput({ setInviteCode, isInvitationCodeValid, setIsInvitationCodeValid }) {
   function validInvitationCode(e) {
     const { value: invitationCode } = e.target;
     setInviteCode(invitationCode);
@@ -13,12 +13,12 @@ function InviteCodeInput({ setInviteCode, isInvitationCodeValid, setIsInvitation
 
   return (
     <>
-    <input
-      type="text"
-      className="InputText Input-sm"
-      placeholder="초대코드 입력"
-      onChange={validInvitationCode}
-    />
+      <input
+        type="text"
+        className="InputText Input-sm"
+        placeholder="초대코드 입력"
+        onChange={validInvitationCode}
+      />
       {!isInvitationCodeValid && <InvitationCodeErrorMessage />}
     </>
   );
