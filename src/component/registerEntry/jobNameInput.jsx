@@ -1,14 +1,14 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {jobLists} from '../../constants/jobLists';
-import {KEY_CODE} from "../../constants/keyCode";
-import { useKeyPress } from "../../utils/useKeyPress";
+import React, { useEffect, useState } from 'react';
+import { jobLists } from '../../constants/jobLists';
+import { KEY_CODE } from '../../constants/keyCode';
+import { useKeyPress } from '../../utils/useKeyPress';
 
 function JobNameNoKeyErrorMessage() {
   return <div className="InputErrorMsg">직업 이름을 선택해 주세요.</div>;
 }
 
-function JobNameInput({setJobKey, setIsJobNameKeyValid, isJobNameKeyValid}) {
-  const {ARROW_DOWN, ARROW_UP, ENTER} = KEY_CODE;
+function JobNameInput({ setJobKey, setIsJobNameKeyValid, isJobNameKeyValid }) {
+  const { ARROW_DOWN, ARROW_UP, ENTER } = KEY_CODE;
   const [jobName, setJobName] = useState('');
   const [filterJobList, setFilterJobList] = useState([]);
   const [isGroupSearchResult, setIsGroupSearchResult] = useState(false);
@@ -19,16 +19,12 @@ function JobNameInput({setJobKey, setIsJobNameKeyValid, isJobNameKeyValid}) {
 
   useEffect(() => {
     if (filterJobList.length && downPress) {
-      setJobListCursor(prevState =>
-        prevState < filterJobList.length - 1 ? prevState + 1 : 0
-      );
+      setJobListCursor((prevState) => (prevState < filterJobList.length - 1 ? prevState + 1 : 0));
     }
   }, [downPress]);
   useEffect(() => {
     if (filterJobList.length && upPress) {
-      setJobListCursor(prevState =>
-        (prevState > 0 ? prevState - 1 : filterJobList.length - 1)
-      );
+      setJobListCursor((prevState) => (prevState > 0 ? prevState - 1 : filterJobList.length - 1));
     }
   }, [upPress]);
   useEffect(() => {
@@ -41,7 +37,7 @@ function JobNameInput({setJobKey, setIsJobNameKeyValid, isJobNameKeyValid}) {
   }, [enterPress]);
 
   function handleJobKey(e) {
-    const {value: target} = e.target;
+    const { value: target } = e.target;
     const newFilterJobList = handleFilterJobLists(target);
 
     setIsGroupSearchResult(newFilterJobList && target);
@@ -52,12 +48,12 @@ function JobNameInput({setJobKey, setIsJobNameKeyValid, isJobNameKeyValid}) {
 
   function handleFilterJobLists(target) {
     const filterResultList = jobLists.filter((compareList) => {
-      const { jobName } = compareList;
+      const { jobName: compareJobName } = compareList;
       const compareTarget = target.toLowerCase().replace(/\s+/g, '');
-      const compareName = jobName.toLowerCase().replace(/\s+/g, '');
-      return compareName.includes(compareTarget)
+      const compareName = compareJobName.toLowerCase().replace(/\s+/g, '');
+      return compareName.includes(compareTarget);
     });
-    return filterResultList
+    return filterResultList;
   }
 
   function handleJobNameList(jobKey, targetJobName) {
@@ -79,7 +75,7 @@ function JobNameInput({setJobKey, setIsJobNameKeyValid, isJobNameKeyValid}) {
         <div className="makeGroupSearchResult">
           <ul>
             {filterJobList.map((jobList, index) => {
-              const {jobKey, jobName: name} = jobList;
+              const { jobKey, jobName: name } = jobList;
               return (
                 <li
                   onClick={() => handleJobNameList(jobKey, name)}
@@ -93,7 +89,7 @@ function JobNameInput({setJobKey, setIsJobNameKeyValid, isJobNameKeyValid}) {
           </ul>
         </div>
       )}
-      {!isJobNameKeyValid && <JobNameNoKeyErrorMessage/>}
+      {!isJobNameKeyValid && <JobNameNoKeyErrorMessage />}
     </>
   );
 }
