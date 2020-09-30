@@ -1,36 +1,68 @@
-import React, { useState } from 'react';
-import { jobLists } from '../../constants/jobLists';
+import React, {useCallback, useEffect, useState} from 'react';
+import {jobLists} from '../../constants/jobLists';
+import {KEY_CODE} from "../../constants/keyCode";
+import { useKeyPress } from "../../utils/useKeyPress";
 
 function JobNameNoKeyErrorMessage() {
   return <div className="InputErrorMsg">직업 이름을 선택해 주세요.</div>;
 }
 
-function JobNameInput({ setJobKey, setIsJobNameKeyValid, isJobNameKeyValid }) {
+function JobNameInput({setJobKey, setIsJobNameKeyValid, isJobNameKeyValid}) {
+  const {ARROW_DOWN, ARROW_UP, ENTER} = KEY_CODE;
   const [jobName, setJobName] = useState('');
   const [filterJobList, setFilterJobList] = useState([]);
   const [isGroupSearchResult, setIsGroupSearchResult] = useState(false);
+  const [jobListCursor, setJobListCursor] = useState(0);
+  const downPress = useKeyPress(ARROW_DOWN);
+  const upPress = useKeyPress(ARROW_UP);
+  const enterPress = useKeyPress(ENTER);
+
+  useEffect(() => {
+    if (filterJobList.length && downPress) {
+      setJobListCursor(prevState =>
+        prevState < filterJobList.length - 1 ? prevState + 1 : 0
+      );
+    }
+  }, [downPress]);
+  useEffect(() => {
+    if (filterJobList.length && upPress) {
+      setJobListCursor(prevState =>
+        (prevState > 0 ? prevState - 1 : filterJobList.length - 1)
+      );
+    }
+  }, [upPress]);
+  useEffect(() => {
+    if (filterJobList.length && enterPress) {
+      const cursorJobName = filterJobList[jobListCursor].jobName;
+      setJobName(cursorJobName);
+      setIsGroupSearchResult(false);
+      setJobListCursor(0);
+    }
+  }, [enterPress]);
 
   function handleJobKey(e) {
-    const { value: target } = e.target;
-    const nextFilterJobList = jobLists.filter((jobList) => {
-      const { jobName: listJobName } = jobList;
-      const listJobNameLowerCase = listJobName.toLowerCase();
-      const isIncludeTarget = listJobName.includes(target) || listJobNameLowerCase.includes(target);
+    const {value: target} = e.target;
+    const newFilterJobList = handleFilterJobLists(target);
 
-      if (target && isIncludeTarget) {
-        return jobList;
-      }
-      return false;
-    });
-    setIsGroupSearchResult(nextFilterJobList.length > 1);
+    setIsGroupSearchResult(newFilterJobList && target);
     setIsJobNameKeyValid(target);
     setJobName(target);
-    setFilterJobList(nextFilterJobList);
+    setFilterJobList(newFilterJobList);
   }
 
-  function handleJobNameList(jobKey, nextJobName) {
+  function handleFilterJobLists(target) {
+    const filterResultList = jobLists.filter((compareList) => {
+      const { jobName } = compareList;
+      const compareTarget = target.toLowerCase().replace(/\s+/g, '');
+      const compareName = jobName.toLowerCase().replace(/\s+/g, '');
+      return compareName.includes(compareTarget)
+    });
+    return filterResultList
+  }
+
+  function handleJobNameList(jobKey, targetJobName) {
     setJobKey(jobKey);
-    setJobName(nextJobName);
+    setJobName(targetJobName);
     setIsGroupSearchResult(false);
   }
 
@@ -47,12 +79,12 @@ function JobNameInput({ setJobKey, setIsJobNameKeyValid, isJobNameKeyValid }) {
         <div className="makeGroupSearchResult">
           <ul>
             {filterJobList.map((jobList, index) => {
-              const { jobKey, jobName: name } = jobList;
+              const {jobKey, jobName: name} = jobList;
               return (
                 <li
                   onClick={() => handleJobNameList(jobKey, name)}
                   key={index}
-                  className="filterJobList"
+                  className={`filterJobList ${index === jobListCursor && 'jobListActive'}`}
                 >
                   {name}
                 </li>
@@ -61,7 +93,7 @@ function JobNameInput({ setJobKey, setIsJobNameKeyValid, isJobNameKeyValid }) {
           </ul>
         </div>
       )}
-      {!isJobNameKeyValid && <JobNameNoKeyErrorMessage />}
+      {!isJobNameKeyValid && <JobNameNoKeyErrorMessage/>}
     </>
   );
 }

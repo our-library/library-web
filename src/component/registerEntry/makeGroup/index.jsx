@@ -16,9 +16,8 @@ function MakeGroup() {
   const [groupNameValue, setGroupNameValue] = useState('');
   const [jobKey, setJobKey] = useState('');
   const [valueBySelect, setValueBySelect] = useState('회사 또는 단체 이름');
-  // const [isValidJopNameValue, setIsValidJopNameValue] = useState('');
   const [isMakeBtnDisable, setIsMakeBtnDisable] = useState(true);
-  const [isJobNameKeyValid, setIsJobNameKeyValid] = useState(false);
+  const [isJobNameKeyValid, setIsJobNameKeyValid] = useState(true);
   const [userName, setUserName] = useState('');
 
   useEffect(() => {
@@ -32,7 +31,7 @@ function MakeGroup() {
 
   useEffect(() => {
     setIsMakeBtnDisable(!(categoryValue && groupNameValue));
-  }, [categoryValue, groupNameValue]);
+  }, [categoryValue, groupNameValue, valueBySelect]);
 
   async function handleMakeGroup() {
     try {
