@@ -22,7 +22,7 @@ export function RegisterProtectedPage({ children, ...rest }) {
   const [groupCount, setGroupCount] = useState(0);
   useEffect(() => {
     getUserGroupCount().then((result) => setGroupCount(result));
-  }, [groupCount]);
+  }, []);
 
   return (
     <Route
