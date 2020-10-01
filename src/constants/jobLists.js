@@ -1,6 +1,6 @@
 export const jobLists = [
   {
-    jobKey: 0o1,
+    jobKey: 1,
     jobName: '무직',
   },
   {

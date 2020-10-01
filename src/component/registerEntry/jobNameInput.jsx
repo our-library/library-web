@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { jobLists } from '../../constants/jobLists';
 import { KEY_CODE } from '../../constants/keyCode';
-import { useKeyPress } from '../../utils/useKeyPress';
 
 function JobNameNoKeyErrorMessage() {
   return <div className="InputErrorMsg">직업 이름을 선택해 주세요.</div>;
@@ -13,28 +12,29 @@ function JobNameInput({ setJobKey, setIsJobNameKeyValid, isJobNameKeyValid }) {
   const [filterJobList, setFilterJobList] = useState([]);
   const [isGroupSearchResult, setIsGroupSearchResult] = useState(false);
   const [jobListCursor, setJobListCursor] = useState(0);
-  const downPress = useKeyPress(ARROW_DOWN);
-  const upPress = useKeyPress(ARROW_UP);
-  const enterPress = useKeyPress(ENTER);
 
   useEffect(() => {
-    if (filterJobList.length && downPress) {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [filterJobList]);
+
+  function handleKeyDown(e) {
+    const { key } = e;
+    if (key === ARROW_DOWN) {
       setJobListCursor((prevState) => (prevState < filterJobList.length - 1 ? prevState + 1 : 0));
     }
-  }, [downPress]);
-  useEffect(() => {
-    if (filterJobList.length && upPress) {
+
+    if (key === ARROW_UP) {
       setJobListCursor((prevState) => (prevState > 0 ? prevState - 1 : filterJobList.length - 1));
     }
-  }, [upPress]);
-  useEffect(() => {
-    if (filterJobList.length && enterPress) {
+
+    if (key === ENTER) {
       const cursorJobName = filterJobList[jobListCursor].jobName;
       setJobName(cursorJobName);
       setIsGroupSearchResult(false);
       setJobListCursor(0);
     }
-  }, [enterPress]);
+  }
 
   function handleJobKey(e) {
     const { value: target } = e.target;
