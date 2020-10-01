@@ -4,6 +4,8 @@ import {
   fetchEmailAuthorize,
   fetchEmailExistence,
 } from '../../../store/api/registerApi';
+import { validateEmailInput } from '../../../utils/handleValidation';
+import { KEY_CODE } from '../../../constants/keyCode';
 
 function EmailErrorMessage() {
   return <div className="InputErrorMsg">정확한 이메일을 입력해 주세요.</div>;
@@ -14,6 +16,7 @@ function EmailExistenceErrorMessage() {
 }
 
 function SignUpEmailInput({ setEmailAuthId, emailAuthId, emailValue, setEmailValue }) {
+  const { ENTER } = KEY_CODE;
   const [emailAuthKey, setEmailAuthKey] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isEmailAuth, setIsEmailAuth] = useState(false);
@@ -22,9 +25,8 @@ function SignUpEmailInput({ setEmailAuthId, emailAuthId, emailValue, setEmailVal
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   function validateEmail(e) {
-    const re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
     const { value } = e.target;
-    const isValid = re.test(value);
+    const isValid = validateEmailInput(value);
     setEmailValue(value);
     setDisableEmailAuthBtn(!isValid);
     return setIsEmailValid(isValid);
@@ -35,29 +37,32 @@ function SignUpEmailInput({ setEmailAuthId, emailAuthId, emailValue, setEmailVal
   }
 
   async function handleEmailAuth() {
-    try {
-      const { existence } = await fetchEmailExistence(emailValue);
-      if (!existence) {
-        setIsEmailExistence(false);
-        setIsEmailAuth(true);
-        const { emailAuthenticationId } = await EmailAuthorizeRequest(emailValue);
-        console.log(emailAuthenticationId);
-        setEmailAuthId(emailAuthenticationId);
-      } else {
-        setIsEmailExistence(true);
-      }
-    } catch (e) {
-      console.log(e);
+    const { existence } = await fetchEmailExistence(emailValue);
+    setIsEmailExistence(existence);
+    if (!existence) {
+      setIsEmailAuth(true);
+      const { emailAuthenticationId } = await EmailAuthorizeRequest(emailValue);
+      setEmailAuthId(emailAuthenticationId);
     }
   }
 
-  function completeEmailAuth() {
-    fetchEmailAuthorize(emailAuthId, emailAuthKey)
-      .then(() => {
-        setIsAuthenticated(true);
-        console.log('email authorization success');
-      })
-      .catch((e) => console.log(e));
+  async function completeEmailAuth() {
+    await fetchEmailAuthorize(emailAuthId, emailAuthKey);
+    setIsAuthenticated(true);
+  }
+
+  function handleEmailAuthEnterKeyPress(e) {
+    if (e.key === ENTER) {
+      handleEmailAuth();
+    }
+  }
+
+  function resetEmailAuth() {
+    setEmailAuthKey('');
+    setIsEmailValid(true);
+    setIsEmailAuth(false);
+    setIsEmailExistence(false);
+    setIsAuthenticated(false);
   }
 
   return (
@@ -69,15 +74,18 @@ function SignUpEmailInput({ setEmailAuthId, emailAuthId, emailValue, setEmailVal
           type="text"
           placeholder="이메일@example.com"
           onChange={validateEmail}
+          onKeyPress={handleEmailAuthEnterKeyPress}
         />
-        <button
-          type="button"
-          disabled={disableEmailAuthBtn || isAuthenticated}
-          className="Btn-primary Btn-sm"
-          onClick={handleEmailAuth}
-        >
-          인증하기
-        </button>
+        {!isEmailAuth && (
+          <button
+            type="button"
+            disabled={disableEmailAuthBtn || isAuthenticated}
+            className="Btn-primary Btn-sm"
+            onClick={handleEmailAuth}
+          >
+            인증하기
+          </button>
+        )}
       </div>
       {isEmailExistence && <EmailExistenceErrorMessage />}
       {!isEmailValid && <EmailErrorMessage />}
@@ -100,6 +108,14 @@ function SignUpEmailInput({ setEmailAuthId, emailAuthId, emailValue, setEmailVal
               인증완료
             </button>
           )}
+        </div>
+      )}
+      {isAuthenticated && (
+        <div>
+          인증 완료!
+          <button type="button" className="Btn-default Btn-sm" onClick={resetEmailAuth}>
+            재인증하기
+          </button>
         </div>
       )}
     </>

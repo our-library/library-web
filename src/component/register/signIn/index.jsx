@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
-import { setToken } from '../../../utils/handleToken';
-import { loginRequest } from '../../../store/api/registerApi';
-import { fetchGroupMe } from '../../../store/api/groupApi';
-import { setGroupCount } from '../../../utils/handleUser';
+import { fetchLoginUser } from '../../../store/api/registerApi';
+import ErrorModal from '../../modal/ErrorModal';
+import { ERROR_MODAL_DATA } from '../../../constants/modal';
+import { ROUTE_PATH } from '../../../constants/path';
+import { KEY_CODE } from '../../../constants/keyCode';
+import { validateEmailInput, validatePasswordValue } from '../../../utils/handleValidation';
 
 function EmailErrorMessage() {
   return <div className="InputErrorMsg">올바른 이메일 형식을 입력해 주세요.</div>;
@@ -16,50 +18,51 @@ function PasswordErrorMessage() {
 
 function SignIn() {
   const history = useHistory();
+  const { LOGIN_ERROR } = ERROR_MODAL_DATA;
+  const { REGISTER_ENTRY, SERVICE } = ROUTE_PATH;
+  const { ENTER } = KEY_CODE;
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [isLoginBtnDisable, setIsLoginBtnDisable] = useState(true);
+  const [openLoginErrorModal, setOpenLoginErrorModal] = useState(false);
 
   useEffect(() => {
-    setIsLoginBtnDisable(!(emailValue && passwordValue));
+    setIsLoginBtnDisable(!(isEmailValid && isPasswordValid && emailValue && passwordValue));
   }, [emailValue, passwordValue]);
 
   function validateEmail(e) {
     const { value } = e.target;
-    const re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-    const isValid = re.test(value);
+    const isValid = validateEmailInput(value);
     setEmailValue(value);
     setIsEmailValid(isValid);
   }
 
   function validatePassword(e) {
     const { value } = e.target;
-    const re = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/;
-    const isValid = re.test(value);
+    const isValid = validatePasswordValue(value);
     setPasswordValue(value);
     setIsPasswordValid(isValid);
   }
 
   async function requestLogin() {
     try {
-      const { token } = await loginRequest(emailValue, passwordValue);
-
-      setToken(token);
-
-      const groupData = await fetchGroupMe();
-      const { count: userGroupCount } = groupData;
-
-      setGroupCount(userGroupCount);
+      const userGroupCount = await fetchLoginUser(emailValue, passwordValue);
 
       if (userGroupCount === 0) {
-        history.replace('/registerEntry');
+        history.replace(REGISTER_ENTRY);
       } else {
-        history.replace('/service');
+        history.replace(SERVICE);
       }
     } catch (e) {
-      console.log(e);
+      setOpenLoginErrorModal(true);
+    }
+  }
+
+  function handleEnterKeyPress(e) {
+    if (e.key === ENTER) {
+      requestLogin();
     }
   }
 
@@ -77,9 +80,11 @@ function SignIn() {
         <input
           className="InputText Input-md"
           type="password"
-          placeholder="영문/숫자 혼용 8자 이상"
+          placeholder="비밀번호(영문/숫자/특수문자 혼합 8자 이상)"
+          maxLength={30}
           onChange={validatePassword}
           value={passwordValue}
+          onKeyPress={handleEnterKeyPress}
         />
         {!isPasswordValid && <PasswordErrorMessage />}
         <button
@@ -96,6 +101,9 @@ function SignIn() {
           </button>
         </Link>
       </form>
+      {openLoginErrorModal && (
+        <ErrorModal errorType={LOGIN_ERROR} setIsOpenModal={setOpenLoginErrorModal} />
+      )}
     </div>
   );
 }

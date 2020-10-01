@@ -21,6 +21,10 @@
   }
 }
 
+.entryInputSec {
+  width: 100%;
+}
+
 .makeGroupContainer {
   width: 100vw;
   height: 90vh;
@@ -65,6 +69,10 @@
       &:hover {
         background-color: $global-light-line-color;
       }
+    }
+
+    .jobListActive {
+      background-color: darken($global-light-line-color, 10%);
     }
   }
 }

@@ -2,18 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { Link, NavLink } from 'react-router-dom';
 import { removeToken } from '../../utils/handleToken';
-import { GroupMasterMenu } from './serviceMenu';
+import { GroupMasterMenu } from '../../constants/serviceMenu';
 import { fetchGroupMe } from '../../store/api/groupApi';
-import { fetchUserProfile } from '../../store/api/usersApi';
+import { fetchUserName } from '../../store/api/usersApi';
 import { jobLists } from '../../constants/jobLists';
-import { MODAL_DATA } from '../../constants/modalData';
+import { MODAL_DATA } from '../../constants/modal';
 import { removeGroupCount } from '../../utils/handleUser';
+import { ROUTE_PATH } from '../../constants/path';
 
 function ActionBar() {
   const history = useHistory();
   const location = useLocation();
 
   const { INVITE_PEOPLE_MODAL } = MODAL_DATA;
+  const { SIGN_IN } = ROUTE_PATH;
   const [userMenu] = useState(GroupMasterMenu);
   const [userName, setUserName] = useState('');
   const [userGroupName, setUserGroupName] = useState('');
@@ -26,31 +28,28 @@ function ActionBar() {
   function logout() {
     removeToken();
     removeGroupCount();
-    history.replace('/register/signIn');
+    history.replace(SIGN_IN);
   }
 
   useEffect(() => {
-    fetchUserProfile().then((data) => {
-      const { name } = data;
-      setUserName(name);
-    });
-    fetchGroupMe().then((data) => {
-      const {
-        name: groupName,
-        department,
-        jobKey,
-        rentals,
-        overdueRentals,
-        invitationKey,
-      } = data.results[0];
-      setUserGroupName(groupName);
-      setUserDepartment(department || '부서명');
-      setJobName(jobKey);
-      setUserRentals(rentals);
-      setUserOverdueRentals(overdueRentals);
-      setGroupInvitationKey(invitationKey);
-    });
-  }, []);
+    getUserInfo();
+  }, [userOverdueRentals, userRentals]);
+
+  async function getUserInfo() {
+    const name = await fetchUserName();
+    setUserName(name);
+
+    const data = await fetchGroupMe();
+    const results = data.results[0];
+    const { name: groupName, department, jobKey, rentals, overdueRentals, invitationKey } = results;
+
+    setUserGroupName(groupName);
+    setUserDepartment(department || '부서명');
+    setJobName(jobKey);
+    setUserRentals(rentals);
+    setUserOverdueRentals(overdueRentals);
+    setGroupInvitationKey(invitationKey);
+  }
 
   function setJobName(jobKey) {
     const jobKeyIndex = jobLists.findIndex((list) => list.jobKey === jobKey);
@@ -111,7 +110,7 @@ function ActionBar() {
             {userMenu.map((item, index) => {
               const { pathname, menuValue } = item;
               return (
-                <NavLink to={`/service/${pathname}`} key={index}>
+                <NavLink to={pathname} key={index}>
                   <li>
                     <span>
                       <b>{menuValue}</b>

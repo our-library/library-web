@@ -1,11 +1,23 @@
 import { Api } from './index';
+import { removeToken, setToken } from '../../utils/handleToken';
+import { removeGroupCount } from '../../utils/handleUser';
+import { fetchGroupCount } from './groupApi';
 
-export function loginRequest(email, password) {
+function loginRequest(email, password) {
   return Api.fetch({
     url: 'login/oauth',
     method: 'post',
     data: { email, password },
   });
+}
+
+export async function fetchLoginUser(email, password) {
+  const { token } = await loginRequest(email, password);
+  setToken(token);
+
+  const userGroupCount = await fetchGroupCount();
+
+  return userGroupCount;
 }
 
 export function fetchEmailExistence(email) {
@@ -37,4 +49,9 @@ export function registerUserRequest({ name, email, password, emailAuthentication
     method: 'post',
     data: { name, email, password, emailAuthenticationId },
   });
+}
+
+export async function logout() {
+  await removeToken();
+  await removeGroupCount();
 }

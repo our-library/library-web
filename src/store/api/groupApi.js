@@ -7,6 +7,12 @@ export function fetchGroupMe() {
   });
 }
 
+export async function fetchGroupCount() {
+  const groupData = await fetchGroupMe();
+  const { count: userGroupCount } = groupData;
+  return userGroupCount;
+}
+
 export function joinGroupRequest(invitationKey, jobKey) {
   return Api.fetch({
     url: '/groups/join',

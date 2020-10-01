@@ -1,43 +1,23 @@
 export const jobLists = [
   {
+    jobKey: 1,
+    jobName: '무직',
+  },
+  {
     jobKey: 101,
-    jobName: 'IR',
+    jobName: '생산관리자',
   },
   {
     jobKey: 102,
-    jobName: '감정평가사',
+    jobName: '생산직 종사자',
   },
   {
     jobKey: 103,
-    jobName: '공인회계사',
+    jobName: '제조 테스트 엔지니어',
   },
   {
     jobKey: 104,
-    jobName: '내부통제 담당자',
-  },
-  {
-    jobKey: 105,
-    jobName: '애널리스트',
-  },
-  {
-    jobKey: 106,
-    jobName: '자산운용가',
-  },
-  {
-    jobKey: 107,
-    jobName: '재무 분석가',
-  },
-  {
-    jobKey: 108,
-    jobName: '준법감시인',
-  },
-  {
-    jobKey: 109,
-    jobName: '트레이더',
-  },
-  {
-    jobKey: 110,
-    jobName: '회계담당',
+    jobName: '화학자',
   },
   // 200
   {

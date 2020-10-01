@@ -8,8 +8,9 @@ function MakeGroupNameInput({ valueBySelect, setGroupNameValue }) {
   const [isMakeGroupNameValid, setIsMakeGroupNameValid] = useState(true);
 
   function handleMakeGroupName(e) {
-    const { value: groupName } = e.target;
-    setGroupNameValue(groupName.length > 1);
+    const { value: groupNameValue } = e.target;
+    setGroupNameValue(groupNameValue);
+    setIsMakeGroupNameValid(groupNameValue.length > 1);
   }
 
   return (
@@ -17,6 +18,7 @@ function MakeGroupNameInput({ valueBySelect, setGroupNameValue }) {
       <input
         type="text"
         className="InputText Input-sm"
+        maxLength={100}
         placeholder={valueBySelect}
         onChange={handleMakeGroupName}
         onFocus={() => setIsMakeGroupNameValid(false)}

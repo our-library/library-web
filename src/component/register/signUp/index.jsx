@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
+import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import SignUpEmailInput from './emailInput';
 import SignUpPasswordInput from './passwordInput';
 import SignUpNameInput from './nameInput';
 import SignUpCheckboxInput from './checkboxInput';
-import { registerUserRequest } from '../../../store/api/registerApi';
+import { fetchLoginUser, registerUserRequest } from '../../../store/api/registerApi';
+import { ROUTE_PATH } from '../../../constants/path';
+import { KEY_CODE } from '../../../constants/keyCode';
 
 function SignUp() {
+  const history = useHistory();
+  const { REGISTER_ENTRY, SERVICE } = ROUTE_PATH;
+  const { ENTER } = KEY_CODE;
   const [nameValue, setNameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
@@ -22,18 +28,28 @@ function SignUp() {
     setIsSignUpBtnDisable(!(isNameValid && isPasswordValid && isTermsValid && emailAuthId));
   }, [isTermsValid, isNameValid, isPasswordValid, emailAuthId]);
 
-  function submitUser() {
-    const data = {
+  async function submitUser() {
+    const submitUserData = {
       name: nameValue,
       email: emailValue,
       password: passwordValue,
       emailAuthenticationId: emailAuthId,
     };
-    registerUserRequest(data)
-      .then(() => {
-        console.log('register success!');
-      })
-      .catch((e) => console.log(e));
+    await registerUserRequest(submitUserData);
+
+    const userGroupCount = await fetchLoginUser(emailValue, passwordValue);
+
+    if (userGroupCount === 0) {
+      history.replace(REGISTER_ENTRY);
+    } else {
+      history.replace(SERVICE);
+    }
+  }
+
+  function handleEnterKeyPress(e) {
+    if (e.key === ENTER) {
+      submitUser();
+    }
   }
 
   return (
@@ -56,6 +72,7 @@ function SignUp() {
           isPasswordValid={isPasswordValid}
           setIsPasswordValid={setIsPasswordValid}
           setPasswordValue={setPasswordValue}
+          onKeyPress={handleEnterKeyPress}
         />
         <SignUpCheckboxInput isTermsValid={isTermsValid} setIsTermsValid={setIsTermsValid} />
         <button
