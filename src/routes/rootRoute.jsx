@@ -12,7 +12,8 @@ import Home from '../component/home';
 import Info from '../component/info';
 import Register from '../component/register';
 import ServiceMain from '../component/serviceMain';
-import CreateConfirmModal from '../component/modal/CreateConfirmModal';
+import InvitationCodeModal from '../component/modal/invitationCodeModal';
+import BookRentModal from "../component/modal/bookRentModal";
 
 function RootRoute() {
   const location = useLocation();
@@ -38,16 +39,19 @@ function RootRoute() {
         <ProtectedRoute path={SERVICE}>
           <ServiceMain />
         </ProtectedRoute>
-        <ProtectedRoute path="/service/modal/:id">
-          <CreateConfirmModal />
-        </ProtectedRoute>
+
         <Redirect path="*" to="/" />
         <Route component={NotFound} />
       </Switch>
       {background && (
-        <Route path="/service/modal/:id">
-          <CreateConfirmModal />
-        </Route>
+        <ProtectedRoute path="/service/book-list/:id">
+          <BookRentModal />
+        </ProtectedRoute>
+      )}
+      {background && (
+        <ProtectedRoute path="/service/modal/:id">
+          <InvitationCodeModal />
+        </ProtectedRoute>
       )}
     </div>
   );

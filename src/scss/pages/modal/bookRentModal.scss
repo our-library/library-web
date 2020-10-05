@@ -1,0 +1,66 @@
+.bookRentModalSec {
+  .bookImg {
+    width: 80px;
+    height: 100px;
+    background-color: $global-subtext-color;
+    margin-right: 16px;
+  }
+
+  .title {
+    font-size: 15px;
+    font-weight: 800;
+    padding: 12px 0 ;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .subTitle {
+    font-size: 13px;
+    color: $global-subtext-color;
+  }
+
+  .tag {
+    padding: 2px 8px;
+    font-size: 13px;
+    background-color: $global-light-line-color;
+    color: $global-subtext-color;
+    border-radius: 50px;
+    font-weight: 600;
+  }
+
+  .content {
+    font-size: 13px;
+    color: $global-subtext-color;
+    text-align: left;
+  }
+
+  .bookInfo {
+    display: flex;
+    text-align: left;
+  }
+
+  .btnSec {
+    width: 100%;
+    display: inline-block;
+  }
+
+  .rentInfoSec {
+    border-top: 1px solid $global-light-line-color;
+  }
+
+  .rentInfoTable {
+    padding: 16px 0;
+    border-bottom: 1px solid $global-light-line-color;
+    display: flex;
+
+    .th {
+      color: $global-subtext-color;
+      font-weight: 800;
+      font-size: 13px;
+      width: 100px;
+      text-align: left;
+    }
+  }
+}

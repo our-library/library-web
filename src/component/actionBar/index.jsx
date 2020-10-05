@@ -72,9 +72,8 @@ function ActionBar() {
               <strong>{userName}</strong>
             </p>
             <div className="profileDescription">
-              <small>
-                {userJobName} /{userDepartment}
-              </small>
+              <small>{userJobName}</small>
+              <small>{userDepartment}</small>
               <small>{userGroupName}</small>
             </div>
           </div>

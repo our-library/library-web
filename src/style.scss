@@ -5,6 +5,11 @@
 //     pages
 // ---------------------
 
+
+//common
+@import "scss/pages/common/tab";
+
+//page
 @import "scss/pages/app/app";
 @import "scss/pages/nav";
 @import "scss/pages/home/info";
@@ -12,10 +17,14 @@
 @import "scss/pages/actionBar";
 @import "scss/pages/app/serviceLayout";
 @import "scss/pages/register/registerEntry";
-
+@import "scss/pages/bookList/bookList";
+@import "scss/pages/bookList/bookSearch";
+@import "scss/pages/bookList/bookDetail";
+@import "scss/pages/addBook";
 
 // modal
 @import "scss/pages/modal/invitationCodeModal";
+@import "scss/pages/modal/bookRentModal";
 
 //loading
 @import "scss/pages/loading";

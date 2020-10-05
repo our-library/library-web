@@ -1,0 +1,28 @@
+.tabWrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  button {
+    padding: 16px 20px;
+    transition: font-weight 0.2s;
+    position: relative;
+
+    &:hover {
+      font-weight: 700;
+    }
+  }
+
+  .tabUnderLine {
+    width: 30px;
+    height: 4px;
+    bottom: -1px;
+    position: absolute;
+    background: $global-primary1-color;
+    transition: .5s ease;
+  }
+
+  .tabActive {
+    font-weight: 700;
+  }
+}

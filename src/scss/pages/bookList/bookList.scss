@@ -1,0 +1,115 @@
+.bookListContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.bookListMenuSec {
+  background-color: $global-base-color;
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid $global-light-line-color;
+}
+
+.bookListSec {
+  height: 100vh;
+  background-color: $global-light-gray-base-color;
+  width: 100%;
+  padding: 20px;
+
+  .bookListGrid {
+    max-width: 930px;
+    margin: 0 auto;
+  }
+
+  .listContent {
+    display: flex;
+    flex-flow: row wrap;
+  }
+}
+
+.listCard {
+  margin: 0 4px 16px 4px;
+  max-width: 220px;
+  max-height: 320px;
+  background-color: $global-base-color;
+  box-shadow: 0 4px 12px 0 $color-black-opacity05;
+  border-radius: 6px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .bookImg {
+    width: 80px;
+    height: 100px;
+    background-color: $global-subtext-color;
+  }
+
+  .title {
+    font-size: 15px;
+    font-weight: 800;
+    padding: 12px 0 ;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .subTitle {
+    font-size: 13px;
+    color: $global-subtext-color;
+  }
+
+  .tag {
+    padding: 2px 8px;
+    font-size: 13px;
+    background-color: $global-light-line-color;
+    color: $global-subtext-color;
+    border-radius: 50px;
+    font-weight: 600;
+  }
+
+  .listCardBtnSec {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+.listFilterSec {
+  display: flex;
+  margin: 0 4px 16px 4px;
+}
+
+.selectorSec {
+  max-width: 220px;
+  background-color: $global-base-color;
+  box-shadow: 0 4px 12px 0 $color-black-opacity05;
+  border-radius: 6px;
+  padding: 8px;
+
+
+  .label {
+    font-size: 13px;
+    font-weight: 700;
+    color: $global-subtext-color;
+    margin-right: 8px;
+  }
+  .selector {
+    border: none;
+    outline: none;
+  }
+}
+
+.filterSec {
+  background-color: $global-base-color;
+  box-shadow: 0 4px 12px 0 $color-black-opacity05;
+  border-radius: 6px;
+  padding: 8px;
+  width: 32px;
+
+}

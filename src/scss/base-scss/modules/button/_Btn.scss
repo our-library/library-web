@@ -48,6 +48,7 @@
 
 .Btn-blue {
   @extend %Btn;
+  font-weight: 900;
   background-color: $global-primary2-light-color;
   color: $global-primary2-color;
 

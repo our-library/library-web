@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Switch } from 'react-router-dom';
-import { Redirect } from 'react-router';
+import {Redirect, Route} from 'react-router';
 import { ROUTE_PATH } from '../constants/path';
 
 import BookList from '../component/bookList';
@@ -10,6 +10,8 @@ import Inquiry from '../component/inquiry';
 import MemberManagement from '../component/memberManagement';
 import Setting from '../component/setting';
 import { ProtectedRoute } from './protectedRoute';
+import BookDetail from "../component/bookList/bookDetail";
+import SelectDepartment from "../component/registerEntry/selectDepartment";
 
 function ServiceRoute() {
   const {
@@ -24,6 +26,10 @@ function ServiceRoute() {
 
   return (
     <Switch>
+      <ProtectedRoute path="/service/book-list/:bookId">
+        <BookDetail />
+      </ProtectedRoute>
+
       <ProtectedRoute path={SERVICE_BOOK_LIST}>
         <BookList />
       </ProtectedRoute>
@@ -42,6 +48,13 @@ function ServiceRoute() {
       <ProtectedRoute path={SERVICE_SETTING}>
         <Setting />
       </ProtectedRoute>
+
+      <ProtectedRoute path="/service/select-department">
+        <SelectDepartment />
+      </ProtectedRoute>
+
+
+
       <Redirect from={SERVICE} to={SERVICE_BOOK_LIST} />
     </Switch>
   );
