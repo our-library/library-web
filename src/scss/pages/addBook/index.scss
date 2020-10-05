@@ -1,0 +1,71 @@
+.searchResultCard {
+  margin: 0 4px 16px 4px;
+  background-color: $global-base-color;
+  box-shadow: 0 4px 12px 0 $color-black-opacity05;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+
+
+  .contentSec {
+    width: 100%;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: row;
+    p {
+      color: $global-subtext-color;
+    }
+
+    .bookImg {
+      flex: 1;
+      max-width: 100px;
+      height: 146px;
+      background-color: #9e9e9e;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .contents {
+      padding: 6px 12px 0 12px;
+      flex: 4;
+    }
+
+    .descriptionSec {
+      display: block;
+      max-height: 64px;
+      overflow: hidden;
+      white-space: normal;
+      text-overflow: ellipsis;
+      word-wrap: break-word;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+  }
+
+  .buttonSec {
+    width: 140px;
+    text-align: center;
+  }
+}
+
+.bookSearchResultContainer {
+  height: 100vh;
+  background-color: $global-light-gray-base-color;
+  width: 100%;
+  padding: 20px;
+}
+
+.bookSearchResultSec {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
