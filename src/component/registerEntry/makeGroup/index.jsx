@@ -11,7 +11,6 @@ import { ROUTE_PATH } from '../../../constants/path';
 function MakeGroup() {
   const history = useHistory();
   const { SERVICE, SIGN_IN } = ROUTE_PATH;
-
   const [categoryValue, setCategoryValue] = useState('');
   const [groupNameValue, setGroupNameValue] = useState('');
   const [jobKey, setJobKey] = useState('');
