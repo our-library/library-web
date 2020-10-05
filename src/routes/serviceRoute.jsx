@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Switch } from 'react-router-dom';
-import {Redirect, Route} from 'react-router';
+import { Redirect } from 'react-router';
 import { ROUTE_PATH } from '../constants/path';
 
 import BookList from '../component/bookList';
@@ -10,8 +10,8 @@ import Inquiry from '../component/inquiry';
 import MemberManagement from '../component/memberManagement';
 import Setting from '../component/setting';
 import { ProtectedRoute } from './protectedRoute';
-import BookDetail from "../component/bookList/bookDetail";
-import SelectDepartment from "../component/registerEntry/selectDepartment";
+import BookDetail from '../component/bookList/bookDetail';
+import SelectDepartment from '../component/registerEntry/selectDepartment';
 
 function ServiceRoute() {
   const {
@@ -52,8 +52,6 @@ function ServiceRoute() {
       <ProtectedRoute path="/service/select-department">
         <SelectDepartment />
       </ProtectedRoute>
-
-
 
       <Redirect from={SERVICE} to={SERVICE_BOOK_LIST} />
     </Switch>

@@ -13,7 +13,7 @@ import Info from '../component/info';
 import Register from '../component/register';
 import ServiceMain from '../component/serviceMain';
 import InvitationCodeModal from '../component/modal/invitationCodeModal';
-import BookRentModal from "../component/modal/bookRentModal";
+import BookRentModal from '../component/modal/bookRentModal';
 
 function RootRoute() {
   const location = useLocation();

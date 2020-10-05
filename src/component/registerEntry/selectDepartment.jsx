@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
 function DepartmentErrorMessage() {
   return <div className="InputErrorMsg">부서 이름을 입력해 주세요.</div>;
@@ -17,13 +17,12 @@ function SelectDepartment() {
   }, [departmentValue]);
 
   function validDepartment(e) {
-    const {value} = e.target;
+    const { value } = e.target;
     setDepartmentValue(value);
     setIsDepartmentValid(value.length > 1);
   }
 
   function registerDepartment() {
-    console.log('register!');
   }
 
   function addDepartment() {
@@ -42,7 +41,7 @@ function SelectDepartment() {
   }
 
   function validEditDepartment(e) {
-    const {value} = e.target;
+    const { value } = e.target;
     setEditDepartmentValue(value);
   }
 
@@ -66,9 +65,12 @@ function SelectDepartment() {
 
   return (
     <div className="departmentContainer">
-      <h6><strong>부서에 필요한 책을 추천드려요!</strong></h6>
+      <h6>
+        <strong>부서에 필요한 책을 추천드려요!</strong>
+      </h6>
       <p>
-        어떤 부서에 계신지 <br/>부서 이름을 선택해 주세요.
+        어떤 부서에 계신지 <br />
+        부서 이름을 선택해 주세요.
       </p>
       <input
         type="text"
@@ -78,33 +80,29 @@ function SelectDepartment() {
         value={departmentValue}
         className="InputText Input-md"
       />
-      {!isDepartmentValid && <DepartmentErrorMessage/>}
+      {!isDepartmentValid && <DepartmentErrorMessage />}
       <div className="departmentResultSec">
         <ul>
-          {departmentList.map((list, index) => {
-            return (
-              <li key={index}>
-                {!(isDepartmentEdit === index) ?
-                  <div>
-                    <button onClick={selectDepartment}><span>{list}</span></button>
-                    <button onClick={() => editDepartment(list, index)}>수정</button>
-                    <button onClick={() => removeDepartment(index)}>삭제</button>
-                  </div>
-                  :
-                  <div>
-                    <input type="text" value={editDepartmentValue} onChange={validEditDepartment}/>
-                    <button onClick={() => completedEditDepartment(index)}>완료</button>
-                  </div>
-                }
-
-              </li>
-            )
-          })}
+          {departmentList.map((list, index) => (
+            <li key={index}>
+              {!(isDepartmentEdit === index) ? (
+                <div>
+                  <button type="button" onClick={selectDepartment}>
+                    <span>{list}</span>
+                  </button>
+                  <button type="button" onClick={() => editDepartment(list, index)}>수정</button>
+                  <button type="button" onClick={() => removeDepartment(index)}>삭제</button>
+                </div>
+              ) : (
+                <div>
+                  <input type="text" value={editDepartmentValue} onChange={validEditDepartment} />
+                  <button type="button" onClick={() => completedEditDepartment(index)}>완료</button>
+                </div>
+              )}
+            </li>
+          ))}
         </ul>
-        <button
-          onClick={addDepartment}
-        >+ {departmentValue} 추가하기
-        </button>
+        <button type="button" onClick={addDepartment}>+ {departmentValue} 추가하기</button>
       </div>
       <button
         type="button"
@@ -115,7 +113,7 @@ function SelectDepartment() {
         입력했어요.
       </button>
     </div>
-  )
+  );
 }
 
-export default SelectDepartment
+export default SelectDepartment;

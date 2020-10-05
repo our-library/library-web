@@ -1,28 +1,13 @@
-import React, {createRef, useEffect, useRef, useState} from 'react';
+import React, { createRef, useEffect, useRef, useState } from 'react';
 
-const mockMenu = [
-  {
-    key: 'all',
-    value: '전체 책 목록',
-  },
-  {
-    key: 'recent',
-    value: '최근 비치된 책'
-  },
-  {
-    key: 'recentReply',
-    value: '최근 후기'
-  }
-];
-
-function Tabs({menuObj, handleMenu}) {
+function Tabs({ menuObj, handleMenu }) {
   const tabUnderLine = useRef();
   const tabWrap = useRef();
   const [isTabActive, setIsTabActive] = useState(0);
-  let refs = useRef([createRef()]);
+  const refs = useRef([createRef()]);
 
   function handleTab(e) {
-    const {target} = e;
+    const { target } = e;
     calculateActiveTabUnderLine(target);
     const clickElIndex = findMenuIndex(target);
     setIsTabActive(clickElIndex);
@@ -31,9 +16,7 @@ function Tabs({menuObj, handleMenu}) {
 
   function findMenuIndex(target) {
     const targetValue = target.innerText;
-    const result = menuObj.filter((menu) => {
-      return menu.value.includes(targetValue);
-    })[0];
+    const result = menuObj.filter((menu) => menu.value.includes(targetValue))[0];
     return menuObj.indexOf(result);
   }
 
@@ -57,18 +40,22 @@ function Tabs({menuObj, handleMenu}) {
   return (
     <div className="tabWrap" ref={tabWrap}>
       {menuObj.map((menu, index) => {
-        const {value} = menu;
-        return <button
-          key={menu.key}
-          onClick={handleTab}
-          ref={refs.current[index]}
-          className={`${isTabActive === index && 'tabActive'}`}
-        >{value}</button>
-      })
-      }
-      <div className="tabUnderLine" ref={tabUnderLine}/>
+        const { value } = menu;
+        return (
+          <button
+            type="button"
+            key={menu.key}
+            onClick={handleTab}
+            ref={refs.current[index]}
+            className={`${isTabActive === index && 'tabActive'}`}
+          >
+            {value}
+          </button>
+        );
+      })}
+      <div className="tabUnderLine" ref={tabUnderLine} />
     </div>
-  )
+  );
 }
 
-export default Tabs
+export default Tabs;

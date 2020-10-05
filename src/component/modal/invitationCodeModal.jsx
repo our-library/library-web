@@ -1,12 +1,12 @@
 import React from 'react';
-import {useHistory, useLocation} from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import InvitationCodeContent from './contents/invitationCodeContent';
 
 function InvitationCodeModal() {
   const history = useHistory();
   const location = useLocation();
-  const {title, subTitle, description, isConfirmBtn, isCloseBtn} = location.state.data;
-  const {groupInvitationKey} = location.state;
+  const { title, subTitle, description, isConfirmBtn, isCloseBtn } = location.state.data;
+  const { groupInvitationKey } = location.state;
 
   return (
     <div className="ModalOverlay" onClick={() => history.goBack()}>
@@ -16,18 +16,14 @@ function InvitationCodeModal() {
         </h5>
         <p className="space-2x">{subTitle}</p>
         <p className="space-2x">{description}</p>
-        {groupInvitationKey && <InvitationCodeContent groupInvitationKey={groupInvitationKey}/>}
+        {groupInvitationKey && <InvitationCodeContent groupInvitationKey={groupInvitationKey} />}
         {isConfirmBtn && (
           <button type="button" onClick={() => history.goBack()} className="Btn-default Btn-md">
             확인
           </button>
         )}
         {isCloseBtn && (
-          <button
-            type="button"
-            onClick={() => history.goBack()}
-            className="Btn-transparent Btn-md"
-          >
+          <button type="button" onClick={() => history.goBack()} className="Btn-transparent Btn-md">
             닫기
           </button>
         )}

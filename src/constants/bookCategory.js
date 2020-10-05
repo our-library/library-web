@@ -19,7 +19,7 @@ export const bookCategory = [
         subCategoryKey: 104,
         subCategoryName: '테마소설',
       },
-    ]
+    ],
   },
   {
     mainCategoryKey: 200,
@@ -65,7 +65,7 @@ export const bookCategory = [
         subCategoryKey: 210,
         subCategoryName: '삶의 지혜/명언',
       },
-    ]
+    ],
   },
   {
     mainCategoryKey: 300,
@@ -91,7 +91,7 @@ export const bookCategory = [
         subCategoryKey: 305,
         subCategoryName: '창업/취업',
       },
-    ]
+    ],
   },
   {
     mainCategoryKey: 400,
@@ -117,7 +117,7 @@ export const bookCategory = [
         subCategoryKey: 405,
         subCategoryName: '자기능력계발',
       },
-    ]
+    ],
   },
   {
     mainCategoryKey: 500,
@@ -155,7 +155,7 @@ export const bookCategory = [
         subCategoryKey: 507,
         subCategoryName: '신화',
       },
-    ]
+    ],
   },
   {
     mainCategoryKey: 600,
@@ -181,7 +181,7 @@ export const bookCategory = [
         subCategoryKey: 605,
         subCategoryName: '한국사',
       },
-    ]
+    ],
   },
   {
     mainCategoryKey: 700,
@@ -219,6 +219,6 @@ export const bookCategory = [
         subCategoryKey: 507,
         subCategoryName: '신화',
       },
-    ]
+    ],
   },
 ];
