@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-function InvitationCodeModal({ groupInvitationKey }) {
+function InvitationCodeContent({ groupInvitationKey }) {
   const copyText = useRef(groupInvitationKey);
 
   function copyToClipboard() {
@@ -32,4 +32,4 @@ function InvitationCodeModal({ groupInvitationKey }) {
   );
 }
 
-export default InvitationCodeModal;
+export default InvitationCodeContent;

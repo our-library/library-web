@@ -75,6 +75,7 @@ function SignUpEmailInput({ setEmailAuthId, emailAuthId, emailValue, setEmailVal
           placeholder="이메일@example.com"
           onChange={validateEmail}
           onKeyPress={handleEmailAuthEnterKeyPress}
+          maxLength={100}
         />
         {!isEmailAuth && (
           <button

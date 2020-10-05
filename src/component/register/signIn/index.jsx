@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { fetchLoginUser } from '../../../store/api/registerApi';
-import ErrorModal from '../../modal/ErrorModal';
+import ErrorModal from '../../modal/errorModal';
 import { ERROR_MODAL_DATA } from '../../../constants/modal';
 import { ROUTE_PATH } from '../../../constants/path';
 import { KEY_CODE } from '../../../constants/keyCode';
@@ -73,6 +73,7 @@ function SignIn() {
           className="InputText Input-md"
           type="text"
           placeholder="이메일@example.com"
+          maxLength={100}
           onChange={validateEmail}
           value={emailValue}
         />

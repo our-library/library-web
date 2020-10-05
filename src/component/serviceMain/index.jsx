@@ -6,7 +6,9 @@ function ServiceMain() {
   return (
     <div className="serviceLayoutContainer">
       <ActionBar />
-      <ServiceRoute />
+      <div className="serviceContents">
+        <ServiceRoute />
+      </div>
     </div>
   );
 }

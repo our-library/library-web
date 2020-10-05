@@ -81,4 +81,26 @@
   text-align: center;
 }
 
+.departmentContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    text-align: center;
+  }
+}
+
+.departmentResultSec {
+  padding: 16px 24px;
+  border: 1px solid $global-line-color;
+  color: $global-text-color;
+  border-radius: 10px;
+  transition: all 0.2s;
+  width: 100%;
+  max-width: 370px;
+}
+
 

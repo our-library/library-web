@@ -1,5 +1,6 @@
 .actionBarContainer {
-  flex-basis: 220px;
+  position: fixed;
+  width: 200px;
   height: 100vh;
   background-color: $color-white;
   border-right: 1px solid $global-light-line-color;
