@@ -28,12 +28,6 @@ function Tabs({ menuArr, handleMenu }) {
     handleMenu();
   }
 
-  function findMenuIndex(target) {
-    const targetValue = target.innerText;
-    const result = menuArr.findIndex((menu) => menu.value.includes(targetValue))[0];
-    return menuArr.indexOf(result);
-  }
-
   function calculateActiveTabUnderLine(target) {
     const underLine = tabUnderLine.current;
     const distanceTargetToLeft = target.getBoundingClientRect().left;
