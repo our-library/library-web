@@ -18,7 +18,17 @@ import BookRentModal from '../component/modal/bookRentModal';
 function RootRoute() {
   const location = useLocation();
   const background = location.state && location.state.background;
-  const { SERVICE, REGISTER, MAKE_GROUP, REGISTER_ENTRY, FORGET_PASSWORD, HOME, INFO } = ROUTE_PATH;
+  const {
+    SERVICE,
+    REGISTER,
+    MAKE_GROUP,
+    REGISTER_ENTRY,
+    FORGET_PASSWORD,
+    HOME,
+    INFO,
+    SERVICE_MODAL_ID,
+    SERVICE_BOOK_LIST_MODAL_ID,
+  } = ROUTE_PATH;
 
   return (
     <div>
@@ -44,12 +54,12 @@ function RootRoute() {
         <Route component={NotFound} />
       </Switch>
       {background && (
-        <ProtectedRoute path="/service/book-list/:id">
+        <ProtectedRoute path={SERVICE_BOOK_LIST_MODAL_ID}>
           <BookRentModal />
         </ProtectedRoute>
       )}
       {background && (
-        <ProtectedRoute path="/service/modal/:id">
+        <ProtectedRoute path={SERVICE_MODAL_ID}>
           <InvitationCodeModal />
         </ProtectedRoute>
       )}

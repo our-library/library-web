@@ -3,6 +3,7 @@ import { famousSaying } from '../../constants/famousSaying';
 import BookSearchInput from './bookSearchInput';
 
 function FamousSayingSec() {
+  // TODO...
   const n = 0;
   const { content, author } = famousSaying[n];
   return (

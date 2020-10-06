@@ -1,4 +1,4 @@
-import React, {createRef, useEffect, useRef, useState} from 'react';
+import React, { createRef, useEffect, useRef, useState } from 'react';
 
 function Tabs({ menuArr, handleMenu }) {
   const tabUnderLine = useRef();
@@ -10,16 +10,17 @@ function Tabs({ menuArr, handleMenu }) {
   useEffect(() => {
     const firstTarget = refs.current[0].current;
     calculateActiveTabUnderLine(firstTarget);
+  }, []);
 
+  useEffect(() => {
     function handleResize() {
-      const targetMenuList = refs.current;
-      const currentTarget = targetMenuList.filter(ref => ref.current.className.includes('tabActive'))[0].current;
-      calculateActiveTabUnderLine(currentTarget)
+      const currentTarget = refs.current[isTabActiveIndex].current;
+      calculateActiveTabUnderLine(currentTarget);
     }
 
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize)
-  },[]);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isTabActiveIndex]);
 
   function handleTab(e, index) {
     const { target } = e;
@@ -35,9 +36,9 @@ function Tabs({ menuArr, handleMenu }) {
     const startTargetLeft = distanceTargetToLeft - distanceMenuBoxToLeft;
     const targetWidth = target.offsetWidth / 2;
     const underLineWidth = underLine.offsetWidth / 2;
-    const moveToLeftValue = startTargetLeft + (targetWidth - underLineWidth);
+    const moveValue = startTargetLeft + (targetWidth - underLineWidth);
 
-    setMoveToLeftValue(moveToLeftValue);
+    setMoveToLeftValue(moveValue);
   }
 
   return (
@@ -48,7 +49,7 @@ function Tabs({ menuArr, handleMenu }) {
           <button
             type="button"
             key={key}
-            onClick={(e) => handleTab(e,index)}
+            onClick={(e) => handleTab(e, index)}
             ref={refs.current[index]}
             className={`${isTabActiveIndex === index && 'tabActive'}`}
           >
@@ -56,9 +57,9 @@ function Tabs({ menuArr, handleMenu }) {
           </button>
         );
       })}
-      <div className="tabUnderLine" ref={tabUnderLine} style={{ left: moveToLeftValue }}/>
+      <div className="tabUnderLine" ref={tabUnderLine} style={{ left: moveToLeftValue }} />
     </div>
   );
 }
 
-export default Tabs
+export default Tabs;

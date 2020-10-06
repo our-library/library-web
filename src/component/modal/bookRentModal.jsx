@@ -17,9 +17,11 @@ function BookRentModal() {
     status,
   } = location.state.mockBookList;
   const [rentTime, setRentTime] = useState('');
+  // TODO...
   const rentDuration = 7;
 
   useEffect(() => {
+    // TODO...
     setRentTime(moment().add(rentDuration, 'd').format('YYYY.MM.DD'));
   }, [rentDuration]);
 
