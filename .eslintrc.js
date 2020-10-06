@@ -17,7 +17,8 @@ module.exports = {
   rules: {
     'import/no-extraneous-dependencies': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
-    'import/extensions': ['off'],
+    'import/extensions': 'off',
+    "import/no-unresolved": 'off',
     'object-curly-newline': 0,
     'import/prefer-default-export': 0,
     'react/prop-types': 0,
