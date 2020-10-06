@@ -5,6 +5,7 @@ function Tabs({ menuObj, handleMenu }) {
   const tabWrap = useRef();
   const [isTabActive, setIsTabActive] = useState(0);
   const refs = useRef([createRef()]);
+  const [moveToLeftValue, setMoveToLeftValue] = useState(null);
 
   function handleTab(e) {
     const { target } = e;
@@ -16,8 +17,8 @@ function Tabs({ menuObj, handleMenu }) {
 
   function findMenuIndex(target) {
     const targetValue = target.innerText;
-    const result = menuObj.filter((menu) => menu.value.includes(targetValue))[0];
-    return menuObj.indexOf(result);
+    const findIndex = menuObj.findIndex((menu) => menu.value.includes(targetValue));
+    return findIndex;
   }
 
   useEffect(() => {
@@ -32,9 +33,9 @@ function Tabs({ menuObj, handleMenu }) {
     const startTargetLeft = distanceTargetToLeft - distanceMenuBoxToLeft;
     const targetWidth = target.offsetWidth / 2;
     const underLineWidth = underLine.offsetWidth / 2;
-    const moveToLeftValue = startTargetLeft + (targetWidth - underLineWidth);
+    const moveValue = startTargetLeft + (targetWidth - underLineWidth);
 
-    underLine.style.left = `${moveToLeftValue}px`;
+    setMoveToLeftValue(moveValue);
   }
 
   return (
@@ -53,7 +54,7 @@ function Tabs({ menuObj, handleMenu }) {
           </button>
         );
       })}
-      <div className="tabUnderLine" ref={tabUnderLine} />
+      <div className="tabUnderLine" ref={tabUnderLine} style={{ left: moveToLeftValue }} />
     </div>
   );
 }

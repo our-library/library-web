@@ -22,8 +22,7 @@ function SelectDepartment() {
     setIsDepartmentValid(value.length > 1);
   }
 
-  function registerDepartment() {
-  }
+  function registerDepartment() {}
 
   function addDepartment() {
     const newDepartmentList = departmentList.slice();
@@ -90,19 +89,27 @@ function SelectDepartment() {
                   <button type="button" onClick={selectDepartment}>
                     <span>{list}</span>
                   </button>
-                  <button type="button" onClick={() => editDepartment(list, index)}>수정</button>
-                  <button type="button" onClick={() => removeDepartment(index)}>삭제</button>
+                  <button type="button" onClick={() => editDepartment(list, index)}>
+                    수정
+                  </button>
+                  <button type="button" onClick={() => removeDepartment(index)}>
+                    삭제
+                  </button>
                 </div>
               ) : (
                 <div>
                   <input type="text" value={editDepartmentValue} onChange={validEditDepartment} />
-                  <button type="button" onClick={() => completedEditDepartment(index)}>완료</button>
+                  <button type="button" onClick={() => completedEditDepartment(index)}>
+                    완료
+                  </button>
                 </div>
               )}
             </li>
           ))}
         </ul>
-        <button type="button" onClick={addDepartment}>+ {departmentValue} 추가하기</button>
+        <button type="button" onClick={addDepartment}>
+          + {departmentValue} 추가하기
+        </button>
       </div>
       <button
         type="button"

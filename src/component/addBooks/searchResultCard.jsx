@@ -55,7 +55,9 @@ function SearchResultCard() {
         </div>
       </div>
       <div className="buttonSec">
-        <button type="button" className="Btn-default Btn-sm">등록 시작</button>
+        <button type="button" className="Btn-default Btn-sm">
+          등록 시작
+        </button>
       </div>
     </div>
   );

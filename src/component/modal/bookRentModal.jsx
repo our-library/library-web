@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import * as moment from 'moment';
+import { BOOK_STATUS } from '../../constants/bookStatus';
 
 function BookRentModal() {
+  const { AVAILABLE, RENTED } = BOOK_STATUS;
   const history = useHistory();
   const location = useLocation();
   const {
@@ -64,12 +66,12 @@ function BookRentModal() {
         </div>
 
         <div className="btnSec">
-          {status === 'rented' && (
+          {status === RENTED && (
             <button type="button" onClick={() => history.goBack()} className="Btn-default Btn-md">
               예약하기
             </button>
           )}
-          {status === 'available' && (
+          {status === AVAILABLE && (
             <button type="button" onClick={() => history.goBack()} className="Btn-default Btn-md">
               대여하기
             </button>

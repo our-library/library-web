@@ -20,8 +20,7 @@ const bookListMenu = [
 ];
 
 function BookList() {
-  function handleBookListMenu() {
-  }
+  function handleBookListMenu() {}
 
   return (
     <div className="bookListContainer">
@@ -42,7 +41,9 @@ function BookList() {
             <div className="filterSec">...</div>
           </div>
           <div className="listContent">
-            {mockBookData.map((list, i) => <BookListCard key={i} mockBookList={list} />)}
+            {mockBookData.map((list, i) => (
+              <BookListCard key={i} mockBookList={list} />
+            ))}
           </div>
         </div>
       </div>

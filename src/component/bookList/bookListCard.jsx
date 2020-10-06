@@ -1,18 +1,12 @@
 import React from 'react';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
+import { BOOK_STATUS } from '../../constants/bookStatus';
 
 function BookListCard({ mockBookList }) {
+  const { AVAILABLE, RENTED } = BOOK_STATUS;
   const location = useLocation();
-  const {
-    title,
-    author,
-    bookId,
-    status,
-    publisher,
-    datetime,
-    label,
-  } = mockBookList;
+  const { title, author, bookId, status, publisher, datetime, label } = mockBookList;
 
   return (
     <div className="listCard">
@@ -36,7 +30,7 @@ function BookListCard({ mockBookList }) {
         </p>
       </div>
       <div className="listCardBtnSec">
-        {status === 'available' && (
+        {status === AVAILABLE && (
           <Link
             to={{
               pathname: `/service/book-list/${bookId}`,
@@ -46,10 +40,16 @@ function BookListCard({ mockBookList }) {
               },
             }}
           >
-            <button type="button" className="Btn-default Btn-sm">대여하기</button>
+            <button type="button" className="Btn-default Btn-sm">
+              대여하기
+            </button>
           </Link>
         )}
-        {status === 'rented' && <button type="button" className="Btn-blue Btn-sm">예약하기</button>}
+        {status === RENTED && (
+          <button type="button" className="Btn-blue Btn-sm">
+            예약하기
+          </button>
+        )}
       </div>
     </div>
   );

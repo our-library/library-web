@@ -16,23 +16,17 @@ const bookDetailMenu = [
 function BookDetail() {
   const history = useHistory();
   const location = useLocation();
-  const {
-    title,
-    author,
-    publisher,
-    content,
-    datetime,
-    label,
-  } = location.state.mockBookList;
+  const { title, author, publisher, content, datetime, label } = location.state.mockBookList;
 
-  function handleBookDetailMenu() {
-  }
+  function handleBookDetailMenu() {}
 
   return (
     <div className="bookDetailContainer">
       <div className="bookDetailInfoSec">
         <div className="goBackSec space-4x">
-          <button type="button" onClick={() => history.goBack()}>뒤로가기</button>
+          <button type="button" onClick={() => history.goBack()}>
+            뒤로가기
+          </button>
         </div>
         <div className="infoSec">
           <div className="bookImg">
@@ -47,7 +41,9 @@ function BookDetail() {
               {author} • {publisher} • {datetime}
             </p>
             <p className="space-3x">{content}</p>
-            <button type="button" className="Btn-primary Btn-md">대여하기</button>
+            <button type="button" className="Btn-primary Btn-md">
+              대여하기
+            </button>
           </div>
         </div>
         <Tabs menuObj={bookDetailMenu} handleMenu={handleBookDetailMenu} />
