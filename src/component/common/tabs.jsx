@@ -1,30 +1,38 @@
-import React, { createRef, useEffect, useRef, useState } from 'react';
+import React, {createRef, useEffect, useRef, useState} from 'react';
 
-function Tabs({ menuObj, handleMenu }) {
+function Tabs({ menuArr, handleMenu }) {
   const tabUnderLine = useRef();
   const tabWrap = useRef();
-  const [isTabActive, setIsTabActive] = useState(0);
-  const refs = useRef([createRef()]);
+  const [isTabActiveIndex, setIsTabActiveIndex] = useState(0);
+  const refs = useRef(Array.from({ length: menuArr.length }, () => createRef()));
   const [moveToLeftValue, setMoveToLeftValue] = useState(null);
 
-  function handleTab(e) {
+  useEffect(() => {
+    const firstTarget = refs.current[0].current;
+    calculateActiveTabUnderLine(firstTarget);
+
+    function handleResize() {
+      const targetMenuList = refs.current;
+      const currentTarget = targetMenuList.filter(ref => ref.current.className.includes('tabActive'))[0].current;
+      calculateActiveTabUnderLine(currentTarget)
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize)
+  },[]);
+
+  function handleTab(e, index) {
     const { target } = e;
     calculateActiveTabUnderLine(target);
-    const clickElIndex = findMenuIndex(target);
-    setIsTabActive(clickElIndex);
+    setIsTabActiveIndex(index);
     handleMenu();
   }
 
   function findMenuIndex(target) {
     const targetValue = target.innerText;
-    const findIndex = menuObj.findIndex((menu) => menu.value.includes(targetValue));
-    return findIndex;
+    const result = menuArr.findIndex((menu) => menu.value.includes(targetValue))[0];
+    return menuArr.indexOf(result);
   }
-
-  useEffect(() => {
-    const firstTab = refs.current[0].current;
-    calculateActiveTabUnderLine(firstTab);
-  }, []);
 
   function calculateActiveTabUnderLine(target) {
     const underLine = tabUnderLine.current;
@@ -33,30 +41,30 @@ function Tabs({ menuObj, handleMenu }) {
     const startTargetLeft = distanceTargetToLeft - distanceMenuBoxToLeft;
     const targetWidth = target.offsetWidth / 2;
     const underLineWidth = underLine.offsetWidth / 2;
-    const moveValue = startTargetLeft + (targetWidth - underLineWidth);
+    const moveToLeftValue = startTargetLeft + (targetWidth - underLineWidth);
 
-    setMoveToLeftValue(moveValue);
+    setMoveToLeftValue(moveToLeftValue);
   }
 
   return (
     <div className="tabWrap" ref={tabWrap}>
-      {menuObj.map((menu, index) => {
-        const { value } = menu;
+      {menuArr.map((menu, index) => {
+        const { value, key } = menu;
         return (
           <button
             type="button"
-            key={menu.key}
-            onClick={handleTab}
+            key={key}
+            onClick={(e) => handleTab(e,index)}
             ref={refs.current[index]}
-            className={`${isTabActive === index && 'tabActive'}`}
+            className={`${isTabActiveIndex === index && 'tabActive'}`}
           >
             {value}
           </button>
         );
       })}
-      <div className="tabUnderLine" ref={tabUnderLine} style={{ left: moveToLeftValue }} />
+      <div className="tabUnderLine" ref={tabUnderLine} style={{ left: moveToLeftValue }}/>
     </div>
   );
 }
 
-export default Tabs;
+export default Tabs

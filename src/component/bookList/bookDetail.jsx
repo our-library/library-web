@@ -46,7 +46,7 @@ function BookDetail() {
             </button>
           </div>
         </div>
-        <Tabs menuObj={bookDetailMenu} handleMenu={handleBookDetailMenu} />
+        <Tabs menuArr={bookDetailMenu} handleMenu={handleBookDetailMenu} />
         <div className="bookDetailSubSec" />
       </div>
     </div>

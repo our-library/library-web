@@ -25,7 +25,7 @@ function BookList() {
   return (
     <div className="bookListContainer">
       <SearchSec />
-      <Tabs menuObj={bookListMenu} handleMenu={handleBookListMenu} />
+      <Tabs menuArr={bookListMenu} handleMenu={handleBookListMenu} />
       <div className="bookListSec">
         <div className="bookListGrid">
           <div className="listFilterSec">
