@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import * as moment from 'moment';
-import { BOOK_STATUS } from '../../constants/bookStatus';
+import {BOOK_STATUS} from '../../constants/bookStatus';
 
 function BookRentModal() {
   const { AVAILABLE, RENTED } = BOOK_STATUS;
