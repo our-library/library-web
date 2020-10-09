@@ -3,7 +3,7 @@ import { famousSaying } from '../../constants/famousSaying';
 import BookSearchInput from './bookSearchInput';
 
 function FamousSayingSec() {
-  // TODO...
+  // TODO famousSaying logic is not completed
   const n = 0;
   const { content, author } = famousSaying[n];
   return (
@@ -23,7 +23,6 @@ function SearchSec() {
           이번엔 어떤 책을 읽어볼까요?
         </h5>
         <BookSearchInput />
-        <button type="button">책 신청하기</button>
       </div>
       <FamousSayingSec />
     </div>
