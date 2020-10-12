@@ -8,6 +8,8 @@ import { ROUTE_PATH } from '../../../constants/path';
 import { KEY_CODE } from '../../../constants/keyCode';
 import { validateEmailInput, validatePasswordValue } from '../../../utils/handleValidation';
 import Button from '../../common/button';
+import Icon from "../../common/icon";
+import Spinner from "../../common/spinner";
 
 function EmailErrorMessage() {
   return <div className="InputErrorMsg">올바른 이메일 형식을 입력해 주세요.</div>;
@@ -28,6 +30,8 @@ function SignIn() {
   const [passwordValue, setPasswordValue] = useState('');
   const [isLoginBtnDisable, setIsLoginBtnDisable] = useState(true);
   const [openLoginErrorModal, setOpenLoginErrorModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   useEffect(() => {
     setIsLoginBtnDisable(!(isEmailValid && isPasswordValid && emailValue && passwordValue));
@@ -49,7 +53,9 @@ function SignIn() {
 
   async function requestLogin() {
     try {
+      setIsLoading(true);
       const userGroupCount = await fetchLoginUser(emailValue, passwordValue);
+      setIsLoading(false);
 
       if (userGroupCount === 0) {
         history.replace(REGISTER_ENTRY);
@@ -95,6 +101,7 @@ function SignIn() {
           disabled={isLoginBtnDisable}
           handleClick={requestLogin}
         >
+          {isLoading && <Spinner className="mr-2x" />}
           로그인
         </Button>
 
