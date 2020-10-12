@@ -22,11 +22,13 @@ function ServiceRoute() {
     SERVICE_MEMBER_MANAGEMENT,
     SERVICE_INQUIRY,
     SERVICE_SETTING,
+    SERVICE_BOOK_LIST_BOOK_ID,
+    SERVICE_SELECT_DEPARTMENT
   } = ROUTE_PATH;
 
   return (
     <Switch>
-      <ProtectedRoute path="/service/book-list/:bookId">
+      <ProtectedRoute path={SERVICE_BOOK_LIST_BOOK_ID}>
         <BookDetail />
       </ProtectedRoute>
 
@@ -49,7 +51,7 @@ function ServiceRoute() {
         <Setting />
       </ProtectedRoute>
 
-      <ProtectedRoute path="/service/select-department">
+      <ProtectedRoute path={SERVICE_SELECT_DEPARTMENT}>
         <SelectDepartment />
       </ProtectedRoute>
 
