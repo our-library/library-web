@@ -1,11 +1,12 @@
 import React from 'react';
 import { useHistory, useLocation } from 'react-router';
 import InvitationCodeContent from './contents/invitationCodeContent';
+import Button from '../common/button';
 
 function InvitationCodeModal() {
   const history = useHistory();
   const location = useLocation();
-  const { title, subTitle, description, isConfirmBtn, isCloseBtn } = location.state.data;
+  const { title, subTitle, description } = location.state.data;
   const { groupInvitationKey } = location.state;
 
   return (
@@ -17,16 +18,9 @@ function InvitationCodeModal() {
         <p className="space-2x">{subTitle}</p>
         <p className="space-2x">{description}</p>
         {groupInvitationKey && <InvitationCodeContent groupInvitationKey={groupInvitationKey} />}
-        {isConfirmBtn && (
-          <button type="button" onClick={() => history.goBack()} className="Btn-default Btn-md">
-            확인
-          </button>
-        )}
-        {isCloseBtn && (
-          <button type="button" onClick={() => history.goBack()} className="Btn-transparent Btn-md">
-            닫기
-          </button>
-        )}
+        <Button classType="transparent" size="md" handleClick={() => history.goBack()}>
+          닫기
+        </Button>
       </div>
     </div>
   );

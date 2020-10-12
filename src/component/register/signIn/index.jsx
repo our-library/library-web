@@ -7,6 +7,7 @@ import { ERROR_MODAL_DATA } from '../../../constants/modal';
 import { ROUTE_PATH } from '../../../constants/path';
 import { KEY_CODE } from '../../../constants/keyCode';
 import { validateEmailInput, validatePasswordValue } from '../../../utils/handleValidation';
+import Button from '../../common/button';
 
 function EmailErrorMessage() {
   return <div className="InputErrorMsg">올바른 이메일 형식을 입력해 주세요.</div>;
@@ -88,14 +89,15 @@ function SignIn() {
           onKeyPress={handleEnterKeyPress}
         />
         {!isPasswordValid && <PasswordErrorMessage />}
-        <button
-          type="button"
+        <Button
+          classType="default"
+          size="sm"
           disabled={isLoginBtnDisable}
-          className="Btn-default Btn-sm"
-          onClick={requestLogin}
+          handleClick={requestLogin}
         >
           로그인
-        </button>
+        </Button>
+
         <Link to="/forgetPassword">
           <button type="button" className="TextBtn TextBtn--gray">
             비밀번호를 잊으셨습니까?

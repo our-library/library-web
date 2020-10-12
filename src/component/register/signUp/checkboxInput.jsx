@@ -1,5 +1,6 @@
 import React from 'react';
 import { TERMS_LINK } from '../../../constants/termsLink';
+import Checkbox from '../../common/checkbox';
 
 function SignUpCheckboxInput({ isTermsValid, setIsTermsValid }) {
   const { TERMS_OF_USE, INFO_PROCESSING_POLICY } = TERMS_LINK;
@@ -9,9 +10,7 @@ function SignUpCheckboxInput({ isTermsValid, setIsTermsValid }) {
   }
 
   return (
-    <label className="checkboxGroup">
-      <input type="checkbox" className="checkbox" checked={isTermsValid} onChange={validateTerms} />
-      <span className="checkMark" />
+    <Checkbox isChecked={isTermsValid} handleCheckBox={validateTerms}>
       <span>
         (필수) 아워 라이브러리의&nbsp;
         <a href={TERMS_OF_USE} target="_blank" className="TextBtn" rel="noreferrer">
@@ -23,7 +22,7 @@ function SignUpCheckboxInput({ isTermsValid, setIsTermsValid }) {
         </a>
         에 동의합니다.
       </span>
-    </label>
+    </Checkbox>
   );
 }
 

@@ -1,0 +1,32 @@
+%Icon {
+  padding-right: 4px;
+}
+
+.Icon-line {
+  @extend %Icon;
+  path {
+    fill: none;
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-miterlimit: 10;
+  }
+}
+
+.Icon-fill {
+  @extend %Icon;
+}
+
+.Icon-sm {
+  width: 20px;
+  height: 20px;
+}
+
+.Icon-md {
+  width: 24px;
+  height: 24px;
+}
+
+.Icon-lg {
+  width: 32px;
+  height: 32px;
+}

@@ -36,7 +36,7 @@
   max-width: 220px;
   max-height: 320px;
   background-color: $global-base-color;
-  box-shadow: 0 4px 12px 0 $color-black-opacity05;
+  box-shadow: $card-shadow;
   border-radius: 6px;
   padding: 20px;
   display: flex;

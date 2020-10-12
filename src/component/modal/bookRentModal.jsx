@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import * as moment from 'moment';
-import {BOOK_STATUS} from '../../constants/bookStatus';
+import { BOOK_STATUS } from '../../constants/bookStatus';
+import Button from '../common/button';
 
 function BookRentModal() {
   const { AVAILABLE, RENTED } = BOOK_STATUS;
@@ -68,18 +69,18 @@ function BookRentModal() {
 
         <div className="btnSec">
           {status === RENTED && (
-            <button type="button" onClick={() => history.goBack()} className="Btn-default Btn-md">
+            <Button classType="blue" size="md" handleClick={() => history.goBack()}>
               예약하기
-            </button>
+            </Button>
           )}
           {status === AVAILABLE && (
-            <button type="button" onClick={() => history.goBack()} className="Btn-default Btn-md">
+            <Button classType="default" size="md" handleClick={() => history.goBack()}>
               대여하기
-            </button>
+            </Button>
           )}
-          <button type="button" onClick={() => history.goBack()} className="Btn-transparent Btn-md">
+          <Button classType="transparent" size="md" handleClick={() => history.goBack()}>
             취소
-          </button>
+          </Button>
         </div>
       </div>
     </div>
