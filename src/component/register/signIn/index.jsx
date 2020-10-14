@@ -8,7 +8,6 @@ import { ROUTE_PATH } from '../../../constants/path';
 import { KEY_CODE } from '../../../constants/keyCode';
 import { validateEmailInput, validatePasswordValue } from '../../../utils/handleValidation';
 import Button from '../../common/button';
-import Icon from '../../common/icon';
 import Spinner from '../../common/spinner';
 
 function EmailErrorMessage() {
