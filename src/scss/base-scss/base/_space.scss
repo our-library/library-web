@@ -11,6 +11,13 @@ $max: 16;
   }
 }
 
+@for $i from 0 through $max {
+  .mr-#{$i}x {
+    margin-right: $unit * $i;
+  }
+}
+
+
 
 // 태블릿
 @media (max-width: $tablet-break-point) {
@@ -30,3 +37,4 @@ $max: 16;
     }
   }
 }
+

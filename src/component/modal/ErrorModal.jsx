@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../common/button';
 
 function ErrorModal({ setIsOpenModal, errorType }) {
   const { title, description, isConfirmBtn, confirmBtnName } = errorType;
@@ -15,9 +16,9 @@ function ErrorModal({ setIsOpenModal, errorType }) {
         </h5>
         <p className="space-2x">{description}</p>
         {isConfirmBtn && (
-          <button type="button" onClick={closeModal} className="Btn-default Btn-md">
+          <Button classType="transparent" size="md" handleClick={closeModal}>
             {confirmBtnName}
-          </button>
+          </Button>
         )}
       </div>
     </div>

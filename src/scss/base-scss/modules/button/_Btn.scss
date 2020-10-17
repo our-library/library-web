@@ -1,5 +1,7 @@
 %Btn {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: $global-font-size;
   font-weight: 500;
   margin: 0 4px;

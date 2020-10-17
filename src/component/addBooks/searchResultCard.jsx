@@ -1,5 +1,6 @@
 import React from 'react';
 import * as moment from 'moment';
+import Button from '../common/button';
 
 const mockSearchResult = {
   meta: {
@@ -55,9 +56,9 @@ function SearchResultCard() {
         </div>
       </div>
       <div className="buttonSec">
-        <button type="button" className="Btn-default Btn-sm">
+        <Button classType="default" size="sm">
           등록 시작
-        </button>
+        </Button>
       </div>
     </div>
   );

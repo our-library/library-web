@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import searchIcon from '../../../assets/Icon/search-bar.svg';
+import Icon from '../common/icon';
 
 function BookSearchInput() {
   const [searchValue, setSearchValue] = useState('');
@@ -11,10 +11,9 @@ function BookSearchInput() {
 
   return (
     <div className="bookSearchBar">
-      <img src={searchIcon} alt="icon" className="searchIcon" />
+      <Icon icon="search" classType="line" size="sm" color="primary" />
       <input
         type="text"
-        className=""
         value={searchValue}
         onChange={handleSearch}
         placeholder="제목, 저자, 출판사를 검색해 보세요."
