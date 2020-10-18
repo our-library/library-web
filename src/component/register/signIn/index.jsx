@@ -8,8 +8,7 @@ import { ROUTE_PATH } from '../../../constants/path';
 import { KEY_CODE } from '../../../constants/keyCode';
 import { validateEmailInput, validatePasswordValue } from '../../../utils/handleValidation';
 import Button from '../../common/button';
-import Icon from "../../common/icon";
-import Spinner from "../../common/spinner";
+import Spinner from '../../common/spinner';
 
 function EmailErrorMessage() {
   return <div className="InputErrorMsg">올바른 이메일 형식을 입력해 주세요.</div>;
@@ -31,7 +30,6 @@ function SignIn() {
   const [isLoginBtnDisable, setIsLoginBtnDisable] = useState(true);
   const [openLoginErrorModal, setOpenLoginErrorModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
 
   useEffect(() => {
     setIsLoginBtnDisable(!(isEmailValid && isPasswordValid && emailValue && passwordValue));
