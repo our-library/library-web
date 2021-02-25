@@ -4,25 +4,40 @@
   justify-content: center;
 
   button {
-    padding: 16px 20px;
+    padding: 40px 20px 16px;
     transition: font-weight 0.2s;
     position: relative;
+    font-size: 15px;
 
     &:hover {
       font-weight: 700;
     }
   }
 
-  .tabUnderLine {
-    width: 30px;
-    height: 4px;
-    bottom: -1px;
-    position: absolute;
-    background: $global-primary1-color;
-    transition: .5s ease left;
-  }
-
-  .tabActive {
+  .count {
     font-weight: 700;
+    color: $global-subtext-color;
   }
 }
+
+.tabUnderLine {
+  width: 30px;
+  height: 4px;
+  bottom: -1px;
+  position: absolute;
+  background: $global-primary1-color;
+  transition: .5s ease left;
+}
+
+.tabActive {
+  font-weight: 700;
+
+  .count {
+    font-weight: 700;
+    color: $global-primary1-color;
+  }
+}
+
+
+
+

@@ -6,10 +6,14 @@
     margin-right: 16px;
   }
 
+  .titleSec {
+   max-width: 250px;
+  }
+
   .title {
     font-size: 15px;
     font-weight: 800;
-    padding: 12px 0 ;
+    margin: 12px 0;
 
     &:hover {
       text-decoration: underline;
@@ -30,20 +34,28 @@
     font-weight: 600;
   }
 
+  .contentSec {
+    margin: 12px 0 20px;
+    height: 74px;
+    overflow: hidden;
+    word-wrap: break-word;
+  }
+
   .content {
     font-size: 13px;
     color: $global-subtext-color;
     text-align: left;
+
+    white-space: normal;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
   }
 
   .bookInfo {
     display: flex;
     text-align: left;
-  }
-
-  .btnSec {
-    width: 100%;
-    display: inline-block;
   }
 
   .rentInfoSec {
@@ -62,5 +74,22 @@
       width: 100px;
       text-align: left;
     }
+  }
+}
+
+.modalBtnSec {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.reservationInfoSec {
+  width: 100%;
+  background-color: $global-light-gray-base-color;
+  padding: 20px 0;
+  text-align: center;
+
+  p {
+    opacity: 0.8;
   }
 }
