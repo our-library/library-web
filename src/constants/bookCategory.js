@@ -1,224 +1,198 @@
-export const bookCategory = [
+export const BOOK_CATEGORY = [
   {
-    mainCategoryKey: 100,
-    mainCategoryName: '소설',
+    categoryKey: 100,
+    categoryName: '소설',
     includedCategories: [
       {
-        subCategoryKey: 101,
-        subCategoryName: '나라별 소설',
+        categoryKey: 101,
+        categoryName: '나라별 소설',
       },
       {
-        subCategoryKey: 102,
-        subCategoryName: '고전/문학',
+        categoryKey: 102,
+        categoryName: '고전/문학',
       },
       {
-        subCategoryKey: 103,
-        subCategoryName: '장르소설',
+        categoryKey: 103,
+        categoryName: '장르소설',
       },
       {
-        subCategoryKey: 104,
-        subCategoryName: '테마소설',
+        categoryKey: 104,
+        categoryName: '테마소설',
       },
     ],
   },
   {
-    mainCategoryKey: 200,
-    mainCategoryName: '시/에세이',
+    categoryKey: 200,
+    categoryName: '시/에세이',
     includedCategories: [
       {
-        subCategoryKey: 201,
-        subCategoryName: '한국시',
+        categoryKey: 201,
+        categoryName: '한국시',
       },
       {
-        subCategoryKey: 202,
-        subCategoryName: '외국시',
+        categoryKey: 202,
+        categoryName: '외국시',
       },
       {
-        subCategoryKey: 203,
-        subCategoryName: '그림/포토 에세이',
+        categoryKey: 203,
+        categoryName: '그림/포토 에세이',
       },
       {
-        subCategoryKey: 204,
-        subCategoryName: '독서 에세이',
+        categoryKey: 204,
+        categoryName: '독서 에세이',
       },
       {
-        subCategoryKey: 205,
-        subCategoryName: '명상 에세이',
+        categoryKey: 205,
+        categoryName: '명상 에세이',
       },
       {
-        subCategoryKey: 206,
-        subCategoryName: '성공 에세이',
+        categoryKey: 206,
+        categoryName: '성공 에세이',
       },
       {
-        subCategoryKey: 207,
-        subCategoryName: '여행 에세이',
+        categoryKey: 207,
+        categoryName: '여행 에세이',
       },
       {
-        subCategoryKey: 208,
-        subCategoryName: '연애/사랑 에세이',
+        categoryKey: 208,
+        categoryName: '연애/사랑 에세이',
       },
       {
-        subCategoryKey: 209,
-        subCategoryName: '인물 에세이',
+        categoryKey: 209,
+        categoryName: '인물 에세이',
       },
       {
-        subCategoryKey: 210,
-        subCategoryName: '삶의 지혜/명언',
+        categoryKey: 210,
+        categoryName: '삶의 지혜/명언',
       },
     ],
   },
   {
-    mainCategoryKey: 300,
-    mainCategoryName: '경영/경제',
+    categoryKey: 300,
+    categoryName: '경영/경제',
     includedCategories: [
       {
-        subCategoryKey: 301,
-        subCategoryName: '경제',
+        categoryKey: 301,
+        categoryName: '경제',
       },
       {
-        subCategoryKey: 302,
-        subCategoryName: '경영',
+        categoryKey: 302,
+        categoryName: '경영',
       },
       {
-        subCategoryKey: 303,
-        subCategoryName: '마케팅/세일즈',
+        categoryKey: 303,
+        categoryName: '마케팅/세일즈',
       },
       {
-        subCategoryKey: 304,
-        subCategoryName: '재테크/투자',
+        categoryKey: 304,
+        categoryName: '재테크/투자',
       },
       {
-        subCategoryKey: 305,
-        subCategoryName: '창업/취업',
+        categoryKey: 305,
+        categoryName: '창업/취업',
       },
     ],
   },
   {
-    mainCategoryKey: 400,
-    mainCategoryName: '자기계발',
+    categoryKey: 400,
+    categoryName: '자기계발',
     includedCategories: [
       {
-        subCategoryKey: 401,
-        subCategoryName: '대화/협상',
+        categoryKey: 401,
+        categoryName: '대화/협상',
       },
       {
-        subCategoryKey: 402,
-        subCategoryName: '성공/처세',
+        categoryKey: 402,
+        categoryName: '성공/처세',
       },
       {
-        subCategoryKey: 403,
-        subCategoryName: '시간관리',
+        categoryKey: 403,
+        categoryName: '시간관리',
       },
       {
-        subCategoryKey: 404,
-        subCategoryName: '인간관계',
+        categoryKey: 404,
+        categoryName: '인간관계',
       },
       {
-        subCategoryKey: 405,
-        subCategoryName: '자기능력계발',
+        categoryKey: 405,
+        categoryName: '자기능력계발',
       },
     ],
   },
   {
-    mainCategoryKey: 500,
-    mainCategoryName: '인문',
+    categoryKey: 500,
+    categoryName: '인문',
     includedCategories: [
       {
-        subCategoryKey: 501,
-        subCategoryName: '인문일반',
+        categoryKey: 501,
+        categoryName: '인문일반',
       },
       {
-        subCategoryKey: 502,
-        subCategoryName: '심리',
+        categoryKey: 502,
+        categoryName: '심리',
       },
       {
-        subCategoryKey: 503,
-        subCategoryName: '교육학',
+        categoryKey: 503,
+        categoryName: '교육학',
       },
       {
-        subCategoryKey: 504,
-        subCategoryName: '철학',
+        categoryKey: 504,
+        categoryName: '철학',
       },
       {
-        subCategoryKey: 505,
-        subCategoryName: '문학론',
+        categoryKey: 505,
+        categoryName: '문학론',
       },
       {
-        subCategoryKey: 506,
-        subCategoryName: '언어학/기호학',
+        categoryKey: 506,
+        categoryName: '언어학/기호학',
       },
       {
-        subCategoryKey: 506,
-        subCategoryName: '종교학',
+        categoryKey: 506,
+        categoryName: '종교학',
       },
       {
-        subCategoryKey: 507,
-        subCategoryName: '신화',
+        categoryKey: 507,
+        categoryName: '신화',
       },
     ],
   },
   {
-    mainCategoryKey: 600,
-    mainCategoryName: '역사/문화',
+    categoryKey: 600,
+    categoryName: '역사/문화',
     includedCategories: [
       {
-        subCategoryKey: 601,
-        subCategoryName: '역사/문화일반',
+        categoryKey: 601,
+        categoryName: '역사/문화일반',
       },
       {
-        subCategoryKey: 602,
-        subCategoryName: '세계사',
+        categoryKey: 602,
+        categoryName: '세계사',
       },
       {
-        subCategoryKey: 603,
-        subCategoryName: '서양사',
+        categoryKey: 603,
+        categoryName: '서양사',
       },
       {
-        subCategoryKey: 604,
-        subCategoryName: '동양사',
+        categoryKey: 604,
+        categoryName: '동양사',
       },
       {
-        subCategoryKey: 605,
-        subCategoryName: '한국사',
+        categoryKey: 605,
+        categoryName: '한국사',
       },
     ],
+  },
+];
+
+
+export const BOOK_TYPE_LIST = [
+  {
+    value: 'paper',
+    keyValue: '종이책'
   },
   {
-    mainCategoryKey: 700,
-    mainCategoryName: '사회',
-    includedCategories: [
-      {
-        subCategoryKey: 601,
-        subCategoryName: '인문일반',
-      },
-      {
-        subCategoryKey: 502,
-        subCategoryName: '심리',
-      },
-      {
-        subCategoryKey: 503,
-        subCategoryName: '교육학',
-      },
-      {
-        subCategoryKey: 504,
-        subCategoryName: '철학',
-      },
-      {
-        subCategoryKey: 505,
-        subCategoryName: '문학론',
-      },
-      {
-        subCategoryKey: 506,
-        subCategoryName: '언어학/기호학',
-      },
-      {
-        subCategoryKey: 506,
-        subCategoryName: '종교학',
-      },
-      {
-        subCategoryKey: 507,
-        subCategoryName: '신화',
-      },
-    ],
-  },
+    value: 'ebook',
+    keyValue: '전자책'
+  }
 ];
