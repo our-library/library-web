@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 import { useHistory } from 'react-router';
-import { Link } from 'react-router-dom';
 import SignUpEmailInput from './emailInput';
 import SignUpPasswordInput from './passwordInput';
 import SignUpNameInput from './nameInput';
@@ -9,6 +8,7 @@ import SignUpCheckboxInput from './checkboxInput';
 import { fetchLoginUser, registerUserRequest } from '../../../store/api/registerApi';
 import { ROUTE_PATH } from '../../../constants/path';
 import { KEY_CODE } from '../../../constants/keyCode';
+import Button from '../../common/button';
 
 function SignUp() {
   const history = useHistory();
@@ -75,19 +75,9 @@ function SignUp() {
           onKeyPress={handleEnterKeyPress}
         />
         <SignUpCheckboxInput isTermsValid={isTermsValid} setIsTermsValid={setIsTermsValid} />
-        <button
-          type="button"
-          disabled={isSignUpBtnDisable}
-          className="Btn-default Btn-sm"
-          onClick={submitUser}
-        >
+        <Button type="default" size="sm" disabled={isSignUpBtnDisable} handleClick={submitUser}>
           회원가입
-        </button>
-        <Link to="/forgetPassword">
-          <button type="button" className="TextBtn TextBtn--gray">
-            초대 코드를 가지고 계신가요?
-          </button>
-        </Link>
+        </Button>
       </form>
     </div>
   );

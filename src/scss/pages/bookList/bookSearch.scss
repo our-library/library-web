@@ -1,0 +1,49 @@
+.bookSearchContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 40px;
+  color: $global-subtext-color;
+  background-color: $global-base-color;
+}
+
+.bookSearchBar {
+  border: 1px solid $global-light-line-color;
+  border-radius: 50px;
+  padding: 12px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  transition: border .2s;
+
+  &:focus-within {
+    border: 1px solid $color-black;
+  }
+
+  input {
+    width: 100%;
+    outline: none;
+    font-size: 15px;
+    margin-left: 8px;
+
+    &::placeholder {
+      color: $global-subtext-color;
+    }
+  }
+}
+
+.famousSayingSec {
+  max-width: 40%;
+  color: $global-subtext-color;
+  text-align: right;
+
+  p {
+    font-size: 14px;
+  }
+}
+
+.searchResetIcon {
+  &:hover {
+    cursor: pointer;
+  }
+}

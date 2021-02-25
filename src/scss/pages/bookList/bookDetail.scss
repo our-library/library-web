@@ -1,0 +1,52 @@
+.bookDetailContainer {
+  width: 100%;
+}
+.bookDetailInfoSec {
+  background-color: $global-light-gray-base-color;
+  width: 100%;
+  padding: 40px 40px 0 40px;
+
+  .infoSec {
+    display: flex;
+    flex-direction: row;
+
+    .bookImg {
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-color: $global-subtext-color;
+      width: 116px;
+      height: 164px;
+      margin-right: 16px;
+    }
+
+    .tag {
+      padding: 2px 8px;
+      font-size: 13px;
+      background-color: $global-light-line-color;
+      color: $global-subtext-color;
+      border-radius: 50px;
+      font-weight: 600;
+    }
+
+    p {
+      color: $global-subtext-color;
+    }
+
+    .content {
+      flex-basis: 80%;
+    }
+  }
+}
+
+.registerBookSec {
+  padding: 40px;
+}
+
+.registerBtnWrap {
+  padding-bottom: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+

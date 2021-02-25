@@ -1,0 +1,28 @@
+.bookFilterIcon {
+  background-color: $color-white;
+  box-shadow: $card-shadow;
+  border-radius: $border-radius;
+  position: relative;
+
+  .icon {
+    padding: 8px;
+    cursor: pointer;
+  }
+}
+
+
+.bookFilterDetailSec {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background-color: $color-white;
+  box-shadow: $card-shadow;
+  border-radius: $border-radius;
+  padding: 12px;
+  width: 230px;
+  font-size: 14px;
+
+  p {
+    margin-bottom: 8px;
+  }
+}

@@ -1,5 +1,7 @@
 %Btn {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: $global-font-size;
   font-weight: 500;
   margin: 0 4px;
@@ -48,6 +50,7 @@
 
 .Btn-blue {
   @extend %Btn;
+  font-weight: 900;
   background-color: $global-primary2-light-color;
   color: $global-primary2-color;
 
@@ -81,29 +84,30 @@
   }
 }
 
-// ---------------------------
-// button size
-// ---------------------------
+//---------| button size |-----------
 .Btn-lg {
-  max-width: 35 * $unit;
-  padding: 18px $unit 20px;
+  max-width: 280px;
+  padding: 18px 8px 20px;
   width: 100%;
 }
 
 .Btn-md {
-  max-width: 27 * $unit;
-  padding: 18px $unit 20px;
-  width: 100%;
+  //max-width: 120px;
+  max-width: 100%;
+  padding: 14px 12px;
+  min-width: 100px;
 }
 
 .Btn-sm {
   font-size: 14px;
-  padding: $unit $unit * 3 $unit + 2px;
+  padding: 8px 16px 10px;
 }
 
 .Btn-full {
+  padding: 14px 12px;
   width: 100%;
 }
+
 
 @media (max-width: $tablet-break-point) {
   .Btn-lg {

@@ -1,0 +1,28 @@
+.LandingFooterContainer {
+  width: 100%;
+  background-color: $global-light-gray-base-color;
+  padding: 30px 0;
+}
+
+.LandingFooter {
+  width: 100%;
+  max-width: 1140px;
+  margin: 40px auto;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.supportInfo {
+  color: $global-subtext-color;
+}
+
+.footerLinkBtn {
+  font-weight: 700;
+  margin: 0 30px;
+  font-size: 15px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -10,6 +10,8 @@ import Inquiry from '../component/inquiry';
 import MemberManagement from '../component/memberManagement';
 import Setting from '../component/setting';
 import { ProtectedRoute } from './protectedRoute';
+import BookDetail from '../component/bookList/bookDetail';
+import SelectDepartment from '../component/registerEntry/selectDepartment';
 
 function ServiceRoute() {
   const {
@@ -20,10 +22,16 @@ function ServiceRoute() {
     SERVICE_MEMBER_MANAGEMENT,
     SERVICE_INQUIRY,
     SERVICE_SETTING,
+    SERVICE_BOOK_LIST_BOOK_ID,
+    SERVICE_SELECT_DEPARTMENT,
   } = ROUTE_PATH;
 
   return (
     <Switch>
+      <ProtectedRoute path={SERVICE_BOOK_LIST_BOOK_ID}>
+        <BookDetail />
+      </ProtectedRoute>
+
       <ProtectedRoute path={SERVICE_BOOK_LIST}>
         <BookList />
       </ProtectedRoute>
@@ -42,6 +50,11 @@ function ServiceRoute() {
       <ProtectedRoute path={SERVICE_SETTING}>
         <Setting />
       </ProtectedRoute>
+
+      <ProtectedRoute path={SERVICE_SELECT_DEPARTMENT}>
+        <SelectDepartment />
+      </ProtectedRoute>
+
       <Redirect from={SERVICE} to={SERVICE_BOOK_LIST} />
     </Switch>
   );

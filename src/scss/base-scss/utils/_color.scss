@@ -23,18 +23,6 @@ $color-gray850: #292929;
 $color-gray900: #212121;
 
 // 투명도 컬러
-$color-white-opacity0: rgba(255, 255, 255, 0);
-$color-white-opacity05: rgba(255, 255, 255, 0.05);
-$color-white-opacity10: rgba(255, 255, 255, 0.1);
-$color-white-opacity20: rgba(255, 255, 255, 0.2);
-$color-white-opacity30: rgba(255, 255, 255, 0.3);
-$color-white-opacity40: rgba(255, 255, 255, 0.4);
-$color-white-opacity50: rgba(255, 255, 255, 0.5);
-$color-white-opacity60: rgba(255, 255, 255, 0.6);
-$color-white-opacity70: rgba(255, 255, 255, 0.7);
-$color-white-opacity80: rgba(255, 255, 255, 0.8);
-$color-white-opacity90: rgba(255, 255, 255, 0.9);
-
 $color-black-opacity0: rgba(0, 0, 0, 0);
 $color-black-opacity05: rgba(0, 0, 0, 0.05);
 $color-black-opacity075: rgba(0, 0, 0, 0.075);
@@ -55,20 +43,11 @@ $color-black-opacity90: rgba(0, 0, 0, 0.9);
 // - 명도 기준
 // - light < (보통) < dark < deep < shadow < dark-shadow
 
-$color-ivory: #fff5da;
-$color-light-yellow: #ffeab2;
-$color-pastel-yellow: #ffd666;
-$color-yellow: #ffcd20;
-$color-dark-yellow: #ff9800;
-$color-carrot: #ff4c00;
 $color-red: #d00000;
-$color-shadow-yellow: #6f4000;
-$color-dark-shadow-yellow: #492100;
 
 $color-blue: #3d7ef1;
 $color-deep-blue: #062e69;
 $color-indigo: #37478e;
-
 
 $color-light-gray-blue: #9eb2c3;
 $color-gray-blue: #455065;
@@ -94,26 +73,21 @@ $color-deep-indigo: #37478e;
 $color-naver-green: #4ba43e;
 $color-google: #c7122e;
 
-
-
 // -----------------------------------
 //              디폴트 모드
 // -----------------------------------
-
 $global-base-color: $color-white;
+$global-light-gray-base-color: #FAFAFA;
 $global-light-line-color: #ECECEC;
 $global-line-color: $color-black;
 $global-text-color: $color-black;
 $global-subtext-color: $color-gray500;
-$global-default-hover-color: $color-cool-gray20;
+$global-default-hover-color: $color-gray50;
 
-$global-primary1-color: $color-green;
+$global-primary1-color: #00BD79;
 $global-primary1-light-color: $color-light-green;
 $global-primary2-color: $color-light-blue;
 $global-primary2-light-color: $color-light-skyblue;
 
-
-// -----------------------------------
-//              다크 모드
-// -----------------------------------
-$dark-base-color: $color-black-opacity70;
+$card-shadow: 0 4px 12px 0 $color-black-opacity05;
+$border-radius: 6px;

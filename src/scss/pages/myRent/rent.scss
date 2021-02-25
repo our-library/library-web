@@ -1,0 +1,108 @@
+.rentContainer {
+  width: 100%;
+  padding: 20px 0;
+
+  background-color: $global-light-gray-base-color;
+  height: 100%;
+}
+
+
+.rentCardGrid {
+  max-width: 680px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-auto-rows: minmax(60px, auto);
+  grid-row-gap: 12px;
+}
+
+.statusCard {
+  padding: 8px;
+  background-color: $global-base-color;
+  box-shadow: $card-shadow;
+  border-radius: 6px;
+  display: grid;
+  grid-template-columns: 3fr 1fr 7fr 4fr 3fr;
+  place-items: center center;
+  grid-column-gap: 8px;
+
+  .thumbnail {
+    width: 37px;
+    height: 47px;
+    background: center/cover no-repeat $global-subtext-color;
+  }
+
+  .period {
+    font-size: 13px;
+    color: $global-subtext-color;
+  }
+
+
+  .dateNumber {
+    font-size: 18px;
+    font-weight: 800;
+    color: $global-primary1-color;
+  }
+
+  .dateAlertNumber {
+    color: $color-red;
+  }
+
+  .dateNowNumber {
+    font-size: 18px;
+    font-weight: 800;
+  }
+
+  .title {
+    justify-self: start;
+    white-space: normal;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    line-height: 1.2;
+    font-weight: 700;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}
+
+.rentStatusTitleSec {
+  padding: 8px 0;
+  margin: 12px 0;
+  border-bottom: 1px solid $global-light-line-color;
+
+  .title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+}
+
+
+.bookRecordCard {
+  padding: 8px;
+  background-color: $global-base-color;
+  box-shadow: $card-shadow;
+  border-radius: 6px;
+  display: grid;
+  grid-template-columns: 1fr 8fr 3fr;
+  place-items: center center;
+  grid-column-gap: 8px;
+
+  .thumbnail {
+    width: 37px;
+    height: 47px;
+    background: center/cover no-repeat $global-subtext-color;
+  }
+
+  .period {
+    font-size: 13px;
+    color: $global-subtext-color;
+  }
+
+  .title {
+    justify-self: start;
+    font-weight: 700;
+  }
+}

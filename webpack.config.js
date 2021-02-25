@@ -5,11 +5,10 @@ require('@babel/polyfill');
 module.exports = {
   entry: ['@babel/polyfill', './src/index.jsx'],
   output: {
-    path: path.join(__dirname, '/dist'),
+    path: path.join(__dirname, '/build'),
     publicPath: '/',
     filename: 'bundle.js',
   },
-  mode: 'development',
   module: {
     rules: [
       {
@@ -21,10 +20,22 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              url: false,
+              modules: {
+                auto: (resourcePath) => resourcePath.endsWith('export.scss'),
+              },
+            },
+          },
+          'sass-loader',
+        ],
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|svg)$/,
         use: [
           {
             loader: 'file-loader',
@@ -34,10 +45,6 @@ module.exports = {
           },
         ],
       },
-      {
-        test: /\.svg$/,
-        use: 'raw-loader',
-      },
     ],
   },
   plugins: [
@@ -46,7 +53,7 @@ module.exports = {
     }),
   ],
   devServer: {
-    contentBase: path.join(__dirname, '/dist'),
+    contentBase: path.join(__dirname, '/build'),
     compress: true,
     port: 9000,
     historyApiFallback: true,

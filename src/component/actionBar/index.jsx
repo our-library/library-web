@@ -9,6 +9,7 @@ import { jobLists } from '../../constants/jobLists';
 import { MODAL_DATA } from '../../constants/modal';
 import { removeGroupCount } from '../../utils/handleUser';
 import { ROUTE_PATH } from '../../constants/path';
+import Button from '../common/button';
 
 function ActionBar() {
   const history = useHistory();
@@ -72,9 +73,8 @@ function ActionBar() {
               <strong>{userName}</strong>
             </p>
             <div className="profileDescription">
-              <small>
-                {userJobName} /{userDepartment}
-              </small>
+              <small>{userJobName}</small>
+              <small>{userDepartment}</small>
               <small>{userGroupName}</small>
             </div>
           </div>
@@ -101,9 +101,9 @@ function ActionBar() {
                 },
               }}
             >
-              <button type="button" className="Btn-sm Btn-transparent">
+              <Button classType="transparent" size="sm">
                 구성원 초대하기
-              </button>
+              </Button>
             </Link>
           </div>
           <ul className="serviceMenu">
@@ -122,9 +122,9 @@ function ActionBar() {
           </ul>
         </div>
         <div className="logoutSec">
-          <button type="button" className="Btn-sm Btn-transparent" onClick={logout}>
+          <Button classType="transparent" size="sm" handleClick={logout}>
             로그아웃
-          </button>
+          </Button>
         </div>
       </nav>
       <nav className="mobileActionBarContainer">

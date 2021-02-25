@@ -5,7 +5,7 @@ import JobNameInput from './jobNameInput';
 import { joinGroupRequest } from '../../store/api/groupApi';
 import { fetchUserName } from '../../store/api/usersApi';
 import { ROUTE_PATH } from '../../constants/path';
-import ErrorModal from '../modal/ErrorModal';
+import ErrorModal from '../modal/errorModal';
 import { ERROR_MODAL_DATA } from '../../constants/modal';
 
 function RegisterEntry() {

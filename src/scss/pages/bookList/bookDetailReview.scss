@@ -1,0 +1,117 @@
+.bookReviewContainer {
+  width: 100%;
+  max-width: 650px;
+  margin: 20px auto;
+}
+
+.reviewCard {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid $global-light-line-color;
+
+  &:last-of-type {
+    border-bottom: 0;
+  }
+
+  .profileImg {
+    min-width: 40px;
+    height: 40px;
+    border-radius: 16px;
+    background: center / contain no-repeat $global-subtext-color;
+  }
+}
+
+.reviewHeader {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 8px;
+
+  .dateTime {
+    color: $global-subtext-color;
+  }
+}
+
+.reviewContents {
+  width: 100%;
+  padding: 4px 12px;
+}
+
+.reviewText {
+  color: $global-subtext-color;
+}
+
+
+// 후기 작성
+.reviewAddSec {
+  padding: 20px;
+  border: 1px solid $global-light-line-color;
+
+  .addControlSec {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.reviewAddContentInput {
+  color: $global-text-color;
+  caret-color: $global-line-color;
+  outline: none;
+  width: 100%;
+  resize: none;
+  background-color: transparent;
+}
+
+// 나의 기록 작성
+.myReviewInfoSec {
+  color: $global-subtext-color;
+  margin-bottom: 20px;
+
+  p {
+    line-height: 1.4;
+  }
+}
+
+
+.moreBtnIcon {
+  padding: 6px;
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $global-light-gray-base-color;
+    border-radius: 8px;
+  }
+}
+
+.moreBtnSec {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  width: 100px;
+  z-index: 2;
+  background-color: $color-white;
+  box-shadow: $card-shadow;
+  border-radius: 4px;
+  border: 1px solid $global-light-line-color;
+
+  .moreBtnList {
+    padding: 8px;
+    border-bottom: 1px solid $global-light-line-color;
+
+    &:last-of-type {
+      border-bottom: 0;
+    }
+
+    &:hover {
+      cursor: pointer;
+      font-weight: 700;
+      background-color: $global-light-gray-base-color;
+    }
+  }
+}

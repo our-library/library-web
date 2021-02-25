@@ -1,41 +1,52 @@
-.TextBtn {
-  font-size: 17px;
-  font-weight: 500;
-  letter-spacing: -0.04em;
+%TextBtn {
+  //text-decoration: underline $global-primary1-color;
+  padding: 6px 12px;
+  border-radius: $border-radius;
+  font-weight: 800;
+
+  &:hover {
+    font-weight: 700;
+  }
+}
+
+.textBtn-primary {
+  @extend %TextBtn;
+  color: $global-primary1-color;
+  background-color: $global-primary1-light-color;
+
+  &:hover {
+    background-color: darken($global-primary1-light-color, 7%);
+  }
+
+  &:active {
+    background-color: darken($global-primary1-light-color, 12%);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.textBtn-primary2 {
+  @extend %TextBtn;
+  color: $global-primary2-color;
+  background-color: $global-primary2-light-color;
+
+  &:hover {
+    background-color: darken($global-primary2-light-color, 7%);
+  }
+
+  &:active {
+    background-color: darken($global-primary2-light-color, 12%);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.TextBtn-gray {
+  color: $global-subtext-color;
+  padding: 12px 0;
   text-decoration: underline;
-  transition: 0.1s;
-
-  small & {
-    font-size: 14px;
-  }
-}
-
-.TextBtn:hover {
-  transition: 0.1s;
-}
-
-.TextBtn--blue {
-  color: $global-base-color;
-
-  &:hover {
-    color: lighten($global-base-color, 20%);
-  }
-}
-
-.TextBtn--gray {
-  color: $color-gray500;
-
-  &:hover {
-    color: $color-gray600;
-  }
-}
-
-@media (max-width: $tablet-break-point) {
-  .TextBtn {
-    font-size: 15px;
-  }
-
-  .TextBtn--underline-mobile {
-    text-decoration: underline;
-  }
 }

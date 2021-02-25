@@ -14,4 +14,8 @@ export const ROUTE_PATH = {
   REGISTER: '/register',
   HOME: '/home',
   INFO: '/info',
+  SERVICE_MODAL_ID: '/service/modal/:id',
+  SERVICE_BOOK_LIST_MODAL_ID: '/service/book-list/:id',
+  SERVICE_BOOK_LIST_BOOK_ID: '/service/book-list/:bookId',
+  SERVICE_SELECT_DEPARTMENT: '/service/select-department',
 };
