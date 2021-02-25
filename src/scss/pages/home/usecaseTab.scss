@@ -1,0 +1,53 @@
+.usecaseTabWrap {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 1px solid $global-light-line-color;
+
+  button {
+    padding: 12px;
+    margin: 12px;
+    transition: all 0.2s;
+    position: relative;
+    font-size: 18px;
+
+    &:hover {
+      font-weight: 700;
+      background-color: #EFF0F2;
+      border-radius: 8px;
+    }
+  }
+}
+
+.usecaseTabUnderLine {
+  //width: 50px;
+  height: 4px;
+  bottom: -1px;
+  position: absolute;
+  background: #1D1D23;
+  transition: all .5s ease;
+}
+
+.tabActive {
+  font-weight: 700;
+
+  .count {
+    font-weight: 700;
+    color: $global-primary1-color;
+  }
+}
+
+.usecaseContainer {
+  padding: 40px 0;
+}
+
+@media (max-width: $mobile-break-point) {
+  .usecaseTabWrap {
+
+    button {
+      font-size: 14px;
+      margin: 8px;
+      padding: 8px;
+    }
+  }
+}
