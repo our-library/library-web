@@ -14,18 +14,19 @@
 
 
   .contentSec {
-    width: 100%;
-    align-self: flex-start;
+    width: 90%;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: row;
     p {
       color: $global-subtext-color;
     }
 
     .bookImg {
-      flex: 1;
-      max-width: 100px;
-      height: 146px;
+      margin-right: 12px;
+      width: 80px;
+      height: 116px;
       background-color: #9e9e9e;
       background-repeat: no-repeat;
       background-size: cover;
@@ -52,12 +53,14 @@
 
   .buttonSec {
     width: 140px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
 .bookSearchResultContainer {
-  height: 100vh;
+  height: 100%;
   background-color: $global-light-gray-base-color;
   width: 100%;
   padding: 20px;
@@ -65,7 +68,20 @@
 
 .bookSearchResultSec {
   display: flex;
-  flex-direction: row;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.noSearchResultSec {
+  color: $global-subtext-color;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
