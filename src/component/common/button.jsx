@@ -1,12 +1,12 @@
 import React from 'react';
 
 function Button(props) {
-  const { classType, size, handleClick, children, disabled } = props;
+  const { classType, size = 'md', handleClick, children, disabled } = props;
   return (
     <button
       type="button"
       className={`Btn-${classType} Btn-${size}`}
-      onClick={handleClick}
+      onMouseDown={handleClick}
       disabled={disabled}
     >
       {children}
